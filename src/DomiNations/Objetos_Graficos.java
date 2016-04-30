@@ -1,4 +1,4 @@
-package Mario;
+package DomiNations;
 import java.awt.*;
 import sprites.Animacion;
 /**Resumen de la clase

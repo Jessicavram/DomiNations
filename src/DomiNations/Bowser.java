@@ -1,5 +1,5 @@
 
-package Mario;
+package DomiNations;
 
 import Cargador.Cargar_Imagenes;
 import Cargador.Cargar_Sonidos;

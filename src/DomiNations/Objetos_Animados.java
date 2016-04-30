@@ -1,4 +1,4 @@
-package Mario;
+package DomiNations;
 /**Clase abstracta, que hereda de la clase objetos_graficos y de la cual heredaran todos los objetos animados del juego, es decir todos aquellos
  * que tienen movimineto, como el personaje de mario y los enemigos
  * @author Carlos Rangel y Daniel Nieto

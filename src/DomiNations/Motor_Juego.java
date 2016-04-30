@@ -1,4 +1,4 @@
-package Mario;
+package DomiNations;
 import java.awt.event.*;
 import javax.swing.Timer;
 /**Resumen de la clase

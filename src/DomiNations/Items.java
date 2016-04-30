@@ -2,12 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Mario;
+package DomiNations;
 
 import Cargador.Cargar_Imagenes;
 import Cargador.Cargar_Sonidos;
-import Mario.Objetos_Animados;
-import Mario.Objetos_Graficos;
+import DomiNations.Objetos_Animados;
+import DomiNations.Objetos_Graficos;
 import sprites.Animacion;
 import sprites.Hoja_Sprites;
 

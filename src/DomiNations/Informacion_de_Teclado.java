@@ -1,4 +1,4 @@
-package Mario;
+package DomiNations;
 /**Clase
  * @author Carlos Rangel y Daniel Nieto
  * @version Super Mario Bros 1.0

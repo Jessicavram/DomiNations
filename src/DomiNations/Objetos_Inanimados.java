@@ -1,4 +1,4 @@
-package Mario;
+package DomiNations;
 import Cargador.Cargar_Imagenes;
 import java.awt.Image;
 import sprites.*;

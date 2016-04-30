@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Mario;
+package DomiNations;
 import Cargador.Cargar_Imagenes;
 import Cargador.Cargar_Sonidos;
 import sprites.*;
