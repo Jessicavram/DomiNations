@@ -30,6 +30,22 @@ public abstract class Objetos_Animados extends Objetos_Graficos{
         vy = 0;      
     }
     /***/
+    public Objetos_Animados(int vida_max, int costo_comida, int costo_oro, int tiempo, int nro_aldeanos_requeridos) {
+        dirx = 1;
+        diry = 1;
+        currentAction = null;
+        vx = 0;
+        vy = 0; 
+        
+        this.vida_max=vida_max;
+        this.vida_actual = vida_max;
+        this.costo_comida=costo_comida;
+        this.costo_oro=costo_oro;
+        this.tiempo=tiempo;
+        this.nro_aldeanos_requeridos=nro_aldeanos_requeridos;
+        this.nivel=1;
+    }
+    /***/
     public int getDirx() {
         return dirx;
     }
@@ -85,6 +101,4 @@ public abstract class Objetos_Animados extends Objetos_Graficos{
     /*Detectar colisiones animados con animados**/
     public abstract void OnCollide_animada(Objetos_Animados objeto_colision, int lado);
     /**Obtiene la accion actual del objeto*/
-
-
 }

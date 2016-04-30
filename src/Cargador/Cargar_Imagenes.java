@@ -11,7 +11,7 @@ public class Cargar_Imagenes {
     /**Vector de imagenes en donde cargaremos todas las imagenes del juego*/
     protected ImageIcon vec_imagenes[];
     /**Constante que nos indica el total de imagenes a cargar, que seria la suma de cada una de las constantes*/
-    protected static final int TOTAL_IMAGENES=18;
+    protected static final int TOTAL_IMAGENES=22;
     /**Constante para conocer el nombre de la imagen que contiene la animacion de los enemigos*/
     public static final int ENEMIGOS=0;
     /**Constante para conocer el nombre de la imagen los objetos inanimados*/  
@@ -47,14 +47,22 @@ public class Cargar_Imagenes {
     /**Constante para identificar la imagen del boton de los creditos*/
     public static final int CREDITOS=16;
     /**Constante para identificar la imagen los creditos*/
-    public static final int CREDITOS_IMG=17;
+    public static final int CREDITOS_IMG=17;    
+    /**Fondo de la aldea principal*/
+    public static final int FONDO_ALDEA=18;
+    /**Imagen del cuartel*/
+    public static final int CUARTEL=19;
+    /**Imagen del centro*/
+    public static final int CENTRO=20;
+    /**Imagen de fondo para la presentacion incial del juego*/
+    public static final int FONDO_INICIAL=21;
     
     /**Constructor de la clase, privado para usar la instancia y solo poder crearse un objeto de la clase, es usado para cargar
     /* el vector de imagenes a travez de la dirreccion url de cada una de las imagenes con ayuda de las constantes */
     private Cargar_Imagenes() {
         URL direccion;
         String nombres_imagenes[] = new String[]{"Enemigos","Inanimados","Mario","Mundo_1","planta_carnivora","Castillo","Mario_inc","Nuevo_juego","Salir","estrella","Mundo_2","Inanimados_2","Instrucciones","instrucciones_static"
-        ,"bowser","fuego","creditos","creditos_img"};
+        ,"bowser","fuego","creditos","creditos_img","fondo_aldea","cuartel","centro","fondo1"};
         vec_imagenes = new ImageIcon[TOTAL_IMAGENES];
         for(int i=0;i<TOTAL_IMAGENES;i++){
             try {

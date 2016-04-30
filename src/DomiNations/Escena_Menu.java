@@ -24,7 +24,7 @@ class Escena_Menu extends JPanel {
         super();
         estado = 0;
         setLayout(null);
-        setPreferredSize(new Dimension(480, 300));
+        setPreferredSize(new Dimension(640, 360));
         setBackground(Color.BLACK);
         crear_escena();
     }
@@ -64,8 +64,8 @@ class Escena_Menu extends JPanel {
         salir_instrucciones.addMouseListener( new eventos() );
         add( salir_instrucciones );  
         
-        fondo = new JLabel( Cargar_Imagenes.obtener_instancia().obtener_imagen( Cargar_Imagenes.MARIO_INC ) );
-        fondo.setBounds( 0, 0, 480, 300);
+        fondo = new JLabel( Cargar_Imagenes.obtener_instancia().obtener_imagen( Cargar_Imagenes.FONDO_INICIAL ) );
+        fondo.setBounds( 0, 0, 640, 360);
         fondo.setVisible(true);
         add( fondo );  
         Cargar_Sonidos.obtener_instancia().Reproducir_pistas(Cargar_Sonidos.FONDO_MENU, false, true);
