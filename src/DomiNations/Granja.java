@@ -14,6 +14,13 @@ import sprites.Hoja_Sprites;
  * @author Carlos
  */
 public class Granja extends Objetos_Animados{
+    /**Capacidad de almacenamiento del recurso comida*/
+    int capacidad_comida;
+    /**Cantidad de comida producida*/
+    int comida;
+    /**Tiempo entre produccion de comida*/
+    int tiempo_por_produccion;
+    
     public Granja(){
         super(800,500,0,5,2);
         Hoja_Sprites map = new Hoja_Sprites();
@@ -26,6 +33,9 @@ public class Granja extends Objetos_Animados{
         //Crear la hoja de sprites
         animacion = new Animacion(map, "Construir1", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.GRANJA).getImage());
         
+        capacidad_comida=1000;
+        comida=100;
+        tiempo_por_produccion=6;
     }
     
 

@@ -1,6 +1,7 @@
 package DomiNations;
 import Cargador.Cargar_Imagenes;
 import Cargador.Cargar_Sonidos;
+import DomiNations.Lista_de_Requerimientos.Requerimientos;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -26,6 +27,8 @@ public class Escena extends JPanel implements MouseListener{
     ArrayList<Objetos_Graficos> vec_Bloques;
     /**Estado de la escena*/
     boolean estado=false;
+    /**Lista de requerimientos para crear o mejor item*/
+    Lista_de_Requerimientos Requerimiento;
 
     public boolean isEstado() {
         return estado;
@@ -45,6 +48,9 @@ public class Escena extends JPanel implements MouseListener{
         vec_objetos_fondo = new ArrayList<Objetos_Graficos>();
         vec_enemigos = new ArrayList<Objetos_Graficos>();
         vec_Bloques= new ArrayList<Objetos_Graficos>();
+        
+        //Crear la lista de requerimientos
+        Requerimiento = new Lista_de_Requerimientos();
     }
     
     @Override
@@ -224,6 +230,8 @@ public class Escena extends JPanel implements MouseListener{
         vec_Bloques.add(sol);
         
         //insertando cuartel
+        Requerimientos x= Requerimiento.buscar_requerimiento("Cuartel",0);
+        x.mostrar_condiciones();
         Cuartel cuartel = new Cuartel();
         cuartel.Seleccionar_Localizacion(170, 80);
         vec_Bloques.add(cuartel);
