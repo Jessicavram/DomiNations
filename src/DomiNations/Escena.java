@@ -232,13 +232,11 @@ public class Escena extends JPanel implements MouseListener{
         Mercado mer=new Mercado();
         mer.Seleccionar_Localizacion(120, 50);
         vec_Bloques.add(mer);
-        Motor_Fisico.getInstance().addDynamicObject(mer);
     
         //Bloque de monedas
         Items bloques= new Items(8);
         bloques.Seleccionar_Localizacion(3040, 120);
         vec_Bloques.add(bloques);
-        Motor_Fisico.getInstance().AnadirInanimado(bloques);
         
         //PISO NIVEL 1  
         obj= new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.INANIMADOS).getImage(), new Rectangulo(0,0 , 57, 31));

@@ -24,7 +24,7 @@ public class Mercado extends Objetos_Animados {
    public Mercado(){
    
        super(800,0,500,10,4);
-       map.Añadir_accion("ConstuirM",0,0,97,132, 10, true, 2);
+       map.Añadir_accion("ConstruirM",0,0,96,132, 10, true, 2);
        animacion = new Animacion(map, "ConstruirM", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.MERCADO).getImage());
        currentAction="ConstuirM";
        capacidad_almacenamiento_oro=2500;
@@ -37,12 +37,10 @@ public class Mercado extends Objetos_Animados {
    }
     @Override
     public void OnCollide_animada(Objetos_Animados objeto_colision, int lado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void OnCollide(Objetos_Graficos objeto_colision, int lado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
