@@ -13,27 +13,27 @@ import sprites.Hoja_Sprites;
  *
  * @author Tyson
  */
-public class Mercado extends Objetos_Animados {
+public class Almacen extends Objetos_Animados {
     
     /*capacidad total de almacenamiento de oro en el mercado*/
-    int capacidad_almacenamiento_oro;
+    int capacidad_almacenamiento_comida;
     /*capacidad actual de oro dentro del mercado*/
-    int capacidad_actual_oro;
+    int capacidad_actual_comida;
     /*Hoja de acciones posibles para el mercado*/
     Hoja_Sprites map= new Hoja_Sprites();
-   public Mercado(){
+   public Almacen(){
    
        super(800,0,500,10,4);
-       map.Añadir_accion("ConstruirM",0,0,96,132, 10, true, 2);
-       animacion = new Animacion(map, "ConstruirM", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.MERCADO).getImage());
-       currentAction="ConstuirM";  
-       capacidad_almacenamiento_oro=2500;
-       capacidad_actual_oro=capacidad_almacenamiento_oro;
+       map.Añadir_accion("ConstruirA",0,0,108,130, 10, true, 2);
+       animacion = new Animacion(map, "ConstruirA", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.ALMACEN).getImage());
+
+       capacidad_almacenamiento_comida=2500;
+       capacidad_actual_comida=capacidad_almacenamiento_comida;
    } 
    public void actualizar_nivel_2(){
        vida_max+=600;
        costo_comida+=1500;
-       capacidad_almacenamiento_oro+=7500;
+       capacidad_almacenamiento_comida+=7500;
    }
     @Override
     public void OnCollide_animada(Objetos_Animados objeto_colision, int lado) {

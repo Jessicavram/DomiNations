@@ -228,12 +228,25 @@ public class Escena extends JPanel implements MouseListener{
         cuartel.Seleccionar_Localizacion(170, 80);
         vec_Bloques.add(cuartel);
         //Insertando mercado
-        
         Mercado mer=new Mercado();
-        mer.Seleccionar_Localizacion(120, 50);
+        mer.Seleccionar_Localizacion(210, 300);
         vec_Bloques.add(mer);
-        Motor_Fisico.getInstance().addDynamicObject(mer);
-    
+        //Insertando torre
+        Torre tor= new Torre();
+        tor.Seleccionar_Localizacion(410, 80);
+        vec_Bloques.add(tor);
+        //Insertando guarnicion
+        Guarnicion guar=new Guarnicion();
+        guar.Seleccionar_Localizacion(410, 200);
+        vec_Bloques.add(guar);
+        //Insertando almacen
+        Almacen alm= new Almacen();
+        alm.Seleccionar_Localizacion(610, 200);
+        vec_Bloques.add(alm);
+        //Insertando Ccasa
+        Casa casa=new Casa();
+        casa.Seleccionar_Localizacion(510,200);
+        vec_Bloques.add(casa);
         //Bloque de monedas
         Items bloques= new Items(8);
         bloques.Seleccionar_Localizacion(3040, 120);
