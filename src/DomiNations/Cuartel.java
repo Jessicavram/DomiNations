@@ -28,6 +28,7 @@ public class Cuartel extends Objetos_Animados{
         map.Añadir_accion("Listo", 1296, 0, 1439, 117, 1, false, 0);
         //Crear la hoja de sprites
         animacion = new Animacion(map, "Construir", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.CUARTEL).getImage());
+  
         capacidad_ejercito=5;
         capacidad_actual=capacidad_ejercito;
     }
