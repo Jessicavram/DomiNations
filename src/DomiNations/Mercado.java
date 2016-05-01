@@ -37,12 +37,10 @@ public class Mercado extends Objetos_Animados {
    }
     @Override
     public void OnCollide_animada(Objetos_Animados objeto_colision, int lado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void OnCollide(Objetos_Graficos objeto_colision, int lado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

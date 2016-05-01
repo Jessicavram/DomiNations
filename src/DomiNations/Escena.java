@@ -1,6 +1,7 @@
 package DomiNations;
 import Cargador.Cargar_Imagenes;
 import Cargador.Cargar_Sonidos;
+import DomiNations.Lista_de_Requerimientos.Requerimientos;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -26,6 +27,8 @@ public class Escena extends JPanel implements MouseListener{
     ArrayList<Objetos_Graficos> vec_Bloques;
     /**Estado de la escena*/
     boolean estado=false;
+    /**Lista de requerimientos para crear o mejor item*/
+    Lista_de_Requerimientos Requerimiento;
 
     public boolean isEstado() {
         return estado;
@@ -45,6 +48,9 @@ public class Escena extends JPanel implements MouseListener{
         vec_objetos_fondo = new ArrayList<Objetos_Graficos>();
         vec_enemigos = new ArrayList<Objetos_Graficos>();
         vec_Bloques= new ArrayList<Objetos_Graficos>();
+        
+        //Crear la lista de requerimientos
+        Requerimiento = new Lista_de_Requerimientos();
     }
     
     @Override
@@ -224,6 +230,8 @@ public class Escena extends JPanel implements MouseListener{
         vec_Bloques.add(sol);
         
         //insertando cuartel
+        Requerimientos x= Requerimiento.buscar_requerimiento("Cuartel",0);
+        x.mostrar_condiciones();
         Cuartel cuartel = new Cuartel();
         cuartel.Seleccionar_Localizacion(170, 80);
         vec_Bloques.add(cuartel);
@@ -231,6 +239,7 @@ public class Escena extends JPanel implements MouseListener{
         Mercado mer=new Mercado();
         mer.Seleccionar_Localizacion(210, 300);
         vec_Bloques.add(mer);
+
         //Insertando torre
         Torre tor= new Torre();
         tor.Seleccionar_Localizacion(410, 80);
@@ -247,11 +256,17 @@ public class Escena extends JPanel implements MouseListener{
         Casa casa=new Casa();
         casa.Seleccionar_Localizacion(510,200);
         vec_Bloques.add(casa);
+        //Insertando Granja 
+        Granja granja = new  Granja();
+        granja.Seleccionar_Localizacion(250, 30);
+        vec_Bloques.add(granja);
         //Bloque de monedas
         Items bloques= new Items(8);
         bloques.Seleccionar_Localizacion(3040, 120);
         vec_Bloques.add(bloques);
         Motor_Fisico.getInstance().AnadirInanimado(bloques);
+
+
         
         //PISO NIVEL 1  
         obj= new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.INANIMADOS).getImage(), new Rectangulo(0,0 , 57, 31));
@@ -267,228 +282,7 @@ public class Escena extends JPanel implements MouseListener{
         obj= new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.INANIMADOS).getImage(), new Rectangulo(0,0 , 57, 31));
         obj.Seleccionar_Localizacion(104, 268);
         vec_objetos_fondo.add(obj);
-        Motor_Fisico.getInstance().AnadirInanimado(obj);
-        
-        obj= new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.INANIMADOS).getImage(), new Rectangulo(0,0 , 57, 31));
-        obj.Seleccionar_Localizacion(161, 268);
-        vec_objetos_fondo.add(obj);
-        Motor_Fisico.getInstance().AnadirInanimado(obj);
-        
-        obj= new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.INANIMADOS).getImage(), new Rectangulo(0,0 , 57, 31));
-        obj.Seleccionar_Localizacion(218, 268);
-        vec_objetos_fondo.add(obj);
-        Motor_Fisico.getInstance().AnadirInanimado(obj);
-        
-        obj= new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.INANIMADOS).getImage(), new Rectangulo(0,0 , 57, 31));
-        obj.Seleccionar_Localizacion(275, 268);
-        vec_objetos_fondo.add(obj);
-        Motor_Fisico.getInstance().AnadirInanimado(obj);
-        
-        obj= new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.INANIMADOS).getImage(), new Rectangulo(0,0 , 57, 31));
-        obj.Seleccionar_Localizacion(332, 268);
-        vec_objetos_fondo.add(obj);
-        Motor_Fisico.getInstance().AnadirInanimado(obj);
-
-        // 2 Nivel piso
-        obj= new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.INANIMADOS).getImage(), new Rectangulo(72,0 , 87, 65));
-        obj.Seleccionar_Localizacion(389, 234);
-        vec_objetos_fondo.add(obj);
-        Motor_Fisico.getInstance().AnadirInanimado(obj);
-        
-        obj= new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.INANIMADOS).getImage(), new Rectangulo(133,0 , 190, 65));
-        obj.Seleccionar_Localizacion(405, 234);
-        vec_objetos_fondo.add(obj);
-        Motor_Fisico.getInstance().AnadirInanimado(obj);
-        
-        obj= new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.INANIMADOS).getImage(), new Rectangulo(133,0 , 190, 65));
-        obj.Seleccionar_Localizacion(462, 234);
-        vec_objetos_fondo.add(obj);
-        Motor_Fisico.getInstance().AnadirInanimado(obj);
-        
-        obj= new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.INANIMADOS).getImage(), new Rectangulo(133,0 , 190, 65));
-        obj.Seleccionar_Localizacion(519, 234);
-        vec_objetos_fondo.add(obj);
-        Motor_Fisico.getInstance().AnadirInanimado(obj);
-        
-        obj= new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.INANIMADOS).getImage(), new Rectangulo(200,0 , 209, 65));
-        obj.Seleccionar_Localizacion(576, 234);
-        vec_objetos_fondo.add(obj);
-        Motor_Fisico.getInstance().AnadirInanimado(obj);
-        
-        //HUECO
-        
-        //Vuelve a nivel 1 del piso
-        
-        //Piedra
-        obj= new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.INANIMADOS_2).getImage(), new Rectangulo(168,49 , 188, 72));
-        obj.Seleccionar_Localizacion(617, 245);
-        vec_objetos_fondo.add(obj);
-        Motor_Fisico.getInstance().AnadirInanimado(obj);
-        //Piedra arriba
-        obj= new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.INANIMADOS_2).getImage(), new Rectangulo(168,49 , 188, 72));
-        obj.Seleccionar_Localizacion(617, 225);
-        vec_objetos_fondo.add(obj);
-        Motor_Fisico.getInstance().AnadirInanimado(obj);
-        
-        
-        obj= new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.INANIMADOS).getImage(), new Rectangulo(215,0 , 231, 31));
-        obj.Seleccionar_Localizacion(615, 268);
-        vec_objetos_fondo.add(obj);
-        Motor_Fisico.getInstance().AnadirInanimado(obj);
-        
-        obj= new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.INANIMADOS).getImage(), new Rectangulo(0,0 , 57, 31));
-        obj.Seleccionar_Localizacion(631, 268);
-        vec_objetos_fondo.add(obj);
-        Motor_Fisico.getInstance().AnadirInanimado(obj);
-        
-        obj= new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.INANIMADOS).getImage(), new Rectangulo(0,0 , 57, 31));
-        obj.Seleccionar_Localizacion(688, 268);
-        vec_objetos_fondo.add(obj);
-        Motor_Fisico.getInstance().AnadirInanimado(obj);
-        
-        obj= new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.INANIMADOS).getImage(), new Rectangulo(234,0 , 250, 31));
-        obj.Seleccionar_Localizacion(745, 268);
-        vec_objetos_fondo.add(obj);
-        Motor_Fisico.getInstance().AnadirInanimado(obj);
-        
-        //Piedra
-        obj= new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.INANIMADOS_2).getImage(), new Rectangulo(168,49 , 188, 72));
-        obj.Seleccionar_Localizacion(740, 245);
-        vec_objetos_fondo.add(obj);
-        Motor_Fisico.getInstance().AnadirInanimado(obj);
-        //Piedra arriba
-        obj= new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.INANIMADOS_2).getImage(), new Rectangulo(168,49 , 188, 72));
-        obj.Seleccionar_Localizacion(740, 225);
-        vec_objetos_fondo.add(obj);
-        Motor_Fisico.getInstance().AnadirInanimado(obj);
-        
-        
-        //Planta
-        Planta planta= new Planta();
-        planta.Modificar(1, 500, 160);
-        planta.Seleccionar_Localizacion(500, 167);
-        vec_enemigos.add(planta);
-        Motor_Fisico.getInstance().addDynamicObject(planta);
-        //Tubo 1
-        obj= new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.INANIMADOS).getImage(), new Rectangulo(182,158 , 212, 201));
-        obj.Seleccionar_Localizacion(493, 192);
-        vec_objetos_fondo.add(obj);
-        Motor_Fisico.getInstance().AnadirInanimado(obj);
-        
-        //Tomate
-        Tomate tomate= new Tomate();
-        tomate.Seleccionar_Localizacion(350, 240);
-        vec_enemigos.add(tomate);
-        Motor_Fisico.getInstance().addDynamicObject(tomate);
-        //Goomba 1
-        Goomba goomba= new Goomba();
-        goomba.Seleccionar_Localizacion(480, 200);
-        vec_enemigos.add(goomba);
-        Motor_Fisico.getInstance().addDynamicObject(goomba);
-        
-        Tortuga tortuga = new Tortuga();
-        tortuga.Modificar(-1, 700,245);
-        tortuga.Seleccionar_Localizacion(700, 245);
-        vec_enemigos.add( tortuga );
-        Motor_Fisico.getInstance().addDynamicObject(tortuga);
-        
-        //PlantaNIVEL 4
-        planta= new Planta();
-        planta.Modificar(1, 1350, 128);
-        planta.Seleccionar_Localizacion(1350, 108);
-        vec_enemigos.add(planta);
-        Motor_Fisico.getInstance().addDynamicObject(planta);
-        //Tubo 1
-        obj= new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.INANIMADOS).getImage(), new Rectangulo(182,158 , 212, 201));
-        obj.Seleccionar_Localizacion(1343, 140);
-        vec_objetos_fondo.add(obj);
-        Motor_Fisico.getInstance().AnadirInanimado(obj);
-        
-        //PlantaNIVEL 4
-        planta= new Planta();
-        planta.Modificar(1, 1650, 108);
-        planta.Seleccionar_Localizacion(1650, 108);
-        vec_enemigos.add(planta);
-        Motor_Fisico.getInstance().addDynamicObject(planta);
-        //Tubo 1
-        obj= new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.INANIMADOS).getImage(), new Rectangulo(182,158 , 212, 201));
-        obj.Seleccionar_Localizacion(1643, 140);
-        vec_objetos_fondo.add(obj);
-        Motor_Fisico.getInstance().AnadirInanimado(obj);
-        
-        tortuga = new Tortuga();
-        tortuga.Modificar(-1, 1630,115);
-        tortuga.Seleccionar_Localizacion(1630,115);
-        vec_enemigos.add( tortuga );
-        Motor_Fisico.getInstance().addDynamicObject(tortuga);
-        
-        tortuga = new Tortuga();
-        tortuga.Modificar(-1, 1370,115);
-        tortuga.Seleccionar_Localizacion(1370,115);
-        vec_enemigos.add( tortuga );
-        Motor_Fisico.getInstance().addDynamicObject(tortuga);
-        
-        
-        //Piedra 2 despues de bajada
-        obj= new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.INANIMADOS_2).getImage(), new Rectangulo(168,49 , 188, 72));
-        obj.Seleccionar_Localizacion(1000, 247);
-        vec_objetos_fondo.add(obj);
-        Motor_Fisico.getInstance().AnadirInanimado(obj);
-        
-        tortuga = new Tortuga();
-        tortuga.Modificar(-1, 1254, 190);
-        tortuga.Seleccionar_Localizacion(1254, 190);
-        vec_enemigos.add( tortuga );
-        Motor_Fisico.getInstance().addDynamicObject(tortuga);
-        
-        
-        //Piedra 3 despues de bajada
-        obj= new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.INANIMADOS_2).getImage(), new Rectangulo(168,49 , 188, 72));
-        obj.Seleccionar_Localizacion(2060, 247);
-        vec_objetos_fondo.add(obj);
-        Motor_Fisico.getInstance().AnadirInanimado(obj);
-        //Piedra arriba
-        obj= new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.INANIMADOS_2).getImage(), new Rectangulo(168,49 , 188, 72));
-        obj.Seleccionar_Localizacion(2060, 227);
-        vec_objetos_fondo.add(obj);
-        Motor_Fisico.getInstance().AnadirInanimado(obj);
-        
-        tomate= new Tomate();
-        tomate.Seleccionar_Localizacion(1748, 200);
-        vec_enemigos.add(tomate);
-        Motor_Fisico.getInstance().addDynamicObject(tomate);
-        
-        tomate= new Tomate();
-        tomate.Seleccionar_Localizacion(1820, 225);
-        vec_enemigos.add(tomate);
-        Motor_Fisico.getInstance().addDynamicObject(tomate);
-        
-        //PARTE FINAL
-        
-        goomba= new Goomba();
-        goomba.Seleccionar_Localizacion(2762, 230);
-        vec_enemigos.add(goomba);
-        Motor_Fisico.getInstance().addDynamicObject(goomba);
-        
-        goomba= new Goomba();
-        goomba.Seleccionar_Localizacion(2790, 230);
-        vec_enemigos.add(goomba);
-        Motor_Fisico.getInstance().addDynamicObject(goomba);
-        
-        //2388, 268
-        //Planta final
-        planta= new Planta();
-        planta.Modificar(1, 2388, 112);
-        planta.Seleccionar_Localizacion(2388, 112);
-        vec_enemigos.add(planta);
-        Motor_Fisico.getInstance().addDynamicObject(planta);
-        //Tubo 1
-        obj= new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.INANIMADOS).getImage(), new Rectangulo(182,158 , 212, 201));
-        obj.Seleccionar_Localizacion(2381, 225);
-        vec_objetos_fondo.add(obj);
-        Motor_Fisico.getInstance().AnadirInanimado(obj);
-        
-        
+        Motor_Fisico.getInstance().AnadirInanimado(obj);        
     }
     
     @Override
