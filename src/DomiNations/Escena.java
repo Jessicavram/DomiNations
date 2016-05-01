@@ -226,8 +226,13 @@ public class Escena extends JPanel implements MouseListener{
         }
         //Insertando soldado
         Soldado sol = new Soldado();
-        sol.Seleccionar_Localizacion(140, 100);
+        sol.Seleccionar_Localizacion(250, 300);
         vec_Bloques.add(sol);
+        
+//Insertando soldado
+        Soldado2 a= new Soldado2();
+        a.Seleccionar_Localizacion(300, 300);
+        vec_Bloques.add(a);
         
         //insertando cuartel
         Requerimientos x= Requerimiento.buscar_requerimiento("Cuartel",0);
