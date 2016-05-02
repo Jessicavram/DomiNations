@@ -1,0 +1,10 @@
+Solado 1 1*1
+Soldado2 1*1
+Mercado 3*3
+Guarnicion 3*4
+Granja 3*3
+Cuartel 3*3
+Centro 4*4
+Casa 2*2
+Almacen 3*3
+Torre 2*5
