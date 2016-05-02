@@ -254,24 +254,7 @@ public class Mario extends Objetos_Animados{
               animacion.Seleccionar_Accion(currentAction, true);
               
             }
-         }else if(objeto_colision instanceof Bowser &&( lado==Motor_Fisico.COL_BOTTOM || lado==Motor_Fisico.COL_LEFT || lado==Motor_Fisico.COL_RIGHT) ){                    
-                 if(estado==0){
-                        Cargar_Sonidos.obtener_instancia().Reproducir_pistas(Cargar_Sonidos.MUERTE, false, false);
-                        vidas--;
-                        murio=1;
-                    }else{
-                      estado--;
-                      if(estado==1)
-                      Cargar_Sonidos.obtener_instancia().Reproducir_pistas(Cargar_Sonidos.NO_HONGO, false, false);
-                       currentAction = "Mp"+currentAction.substring(2 , currentAction.length());
-                      if(estado==2)
-                      Cargar_Sonidos.obtener_instancia().Reproducir_pistas(Cargar_Sonidos.NO_HONGO, false, false);
-                      currentAction = "Mf"+currentAction.substring(2 , currentAction.length());
-                      animacion.Seleccionar_Accion(currentAction, true);
-                    }
-             }
-
-         else if( objeto_colision instanceof Goomba && lado==Motor_Fisico.COL_TOP ){
+         }else if( objeto_colision instanceof Goomba && lado==Motor_Fisico.COL_TOP ){
              setVy(-5);                 
          } 
          else if( (objeto_colision instanceof Tortuga || objeto_colision instanceof Tomate) && lado==Motor_Fisico.COL_TOP ){

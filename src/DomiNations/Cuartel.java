@@ -18,6 +18,8 @@ public class Cuartel extends Objetos_Animados{
     int capacidad_ejercito;
     /**Numero actual de guerreros dentro del cuartel*/
     int capacidad_actual;
+    /**Numero de soldados en cola para ser entrenados*/
+    int soldados_en_cola;
     /**Hoja de acciones posibles para el cuartel*/
     Hoja_Sprites map = new Hoja_Sprites();  
     
@@ -30,7 +32,7 @@ public class Cuartel extends Objetos_Animados{
         animacion = new Animacion(map, "Construir", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.CUARTEL).getImage());
   
         capacidad_ejercito=5;
-        capacidad_actual=capacidad_ejercito;
+        capacidad_actual=soldados_en_cola=0;
     }
     
     public void actualizar_nivel_2(){
