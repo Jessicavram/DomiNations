@@ -43,14 +43,14 @@ public class Matriz_Logica {
         }
     }
         /**Verifica la disponibilidad de espacios vacios para construir en el mapa
-     *@param posx pos x de esquina superior izquierda 
-     *@param posy pos y de esquina superior izquierda
+     *@param posx pos x de esquina inferior izquierda 
+     *@param posy pos y de esquina inferior izquierda
      *@param ancho ancho
      *@param alto alto */
     public int verificar_disponibilidad(int posx,int posy,int ancho,int alto){
         int ocupado=0;
         //validacion para que los edificios no se salgan del alto
-        if(posx+alto>18){
+        if(posx-alto<0){//(posx+alto>18){
             ocupado=1;
             System.out.println("Edificio se sale de los bordes de alto");
         }
@@ -73,18 +73,13 @@ public class Matriz_Logica {
         return ocupado;
     }    
      /**Coloca un edificio en el mapa logico 
-     *@param posx pos x de esquina superior izquierda 
-     *@param posy pos y de esquina superior izquierda
+     *@param posx pos x de esquina inferior izquierda 
+     *@param posy pos y de esquina inferior izquierda
      *@param ancho ancho
      *@param alto alto */
     public void colocar_edificio(int posx,int posy,int ancho,int alto){
-        int ocupado=0;
-        
-        for (int x=posx; x < posx+alto; x++) {
-            for (int y=posy; y < posy+ancho; y++) {
+        for (int x=posx; x < posx+alto; x++) 
+            for (int y=posy; y < posy+ancho; y++)
                 matriz_logica[x][y]='1';
-            }
-        }
-       
     }    
 }
