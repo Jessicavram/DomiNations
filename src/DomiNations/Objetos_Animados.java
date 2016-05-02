@@ -30,7 +30,7 @@ public abstract class Objetos_Animados extends Objetos_Graficos{
         vy = 0;      
     }
     /***/
-    public Objetos_Animados(int vida_max, int costo_comida, int costo_oro, int tiempo, int nro_aldeanos_requeridos) {
+    public Objetos_Animados(int vida_max, int ancho, int alto, int tiempo, int nro_aldeanos_requeridos) {
         dirx = 1;
         diry = 1;
         currentAction = null;
@@ -39,8 +39,8 @@ public abstract class Objetos_Animados extends Objetos_Graficos{
         
         this.vida_max=vida_max;
         this.vida_actual = vida_max;
-        this.costo_comida=costo_comida;
-        this.costo_oro=costo_oro;
+        this.ancho=ancho;
+        this.alto=alto;
         this.tiempo=tiempo;
         this.nro_aldeanos_requeridos=nro_aldeanos_requeridos;
         this.nivel=1;

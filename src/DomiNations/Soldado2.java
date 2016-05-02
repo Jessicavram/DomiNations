@@ -24,7 +24,7 @@ public class Soldado2 extends Objetos_Animados{
     Hoja_Sprites map = new Hoja_Sprites();  
     
     public Soldado2(){              
-        super(220, 25, 0, 5, 0);              
+        super(220, 1, 1, 5, 0);              
         //Definir las acciones en la hoja de sprites
         map.Añadir_accion("CaminarI", 25, 108, 49, 140, 2, true, 6);
         map.Añadir_accion("DispararI", 0, 108, 24, 140, 1, true, 1);

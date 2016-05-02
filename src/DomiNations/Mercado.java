@@ -23,7 +23,7 @@ public class Mercado extends Objetos_Animados {
     Hoja_Sprites map= new Hoja_Sprites();
    public Mercado(){
    
-       super(800,0,500,10,4);
+       super(800,3,3,10,4);
        map.Añadir_accion("ConstruirM",0,0,96,132, 10, true, 2);
        animacion = new Animacion(map, "ConstruirM", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.MERCADO).getImage());
        currentAction="ConstuirM";  
@@ -32,7 +32,7 @@ public class Mercado extends Objetos_Animados {
    } 
    public void actualizar_nivel_2(){
        vida_max+=600;
-       costo_comida+=1500;
+
        capacidad_almacenamiento_oro+=7500;
    }
     @Override

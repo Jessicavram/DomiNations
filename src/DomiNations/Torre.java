@@ -22,7 +22,7 @@ public class Torre extends Objetos_Animados{
     Hoja_Sprites map = new Hoja_Sprites();  
     
     public Torre(){              
-        super(1000, 500, 0, 10, 3);              
+        super(1000, 2, 5, 10, 3);              
         //Definir las acciones en la hoja de sprites
         map.Añadir_accion("ConstruirT", 0, 0, 50, 111, 10, true, 2);
                 //Crear la hoja de sprites

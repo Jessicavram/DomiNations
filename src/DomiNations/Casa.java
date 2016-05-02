@@ -28,7 +28,7 @@ public class Casa extends Objetos_Animados {
     Hoja_Sprites map= new Hoja_Sprites();
    public Casa(){
    
-       super(370,0,0,10,0);
+       super(370,2,2,10,0);
        map.Añadir_accion("ConstruirC",0,0,108,130, 10, true, 2);
        animacion = new Animacion(map, "ConstruirC", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.CASA).getImage());
 
@@ -37,12 +37,7 @@ public class Casa extends Objetos_Animados {
        capacidad_almacenamiento_oro=200;
        capacidad_actual_oro=capacidad_almacenamiento_oro;
    } 
-  public void actualizar_edad_piedra(){
-      costo_oro=500;
-  }
-  public void actualizar_edad_bronce(){
-      costo_oro+=200;
-  }
+
     @Override
     public void OnCollide_animada(Objetos_Animados objeto_colision, int lado) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

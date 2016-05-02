@@ -23,7 +23,7 @@ public class Almacen extends Objetos_Animados {
     Hoja_Sprites map= new Hoja_Sprites();
    public Almacen(){
    
-       super(800,0,500,10,4);
+       super(800,3,3,10,4);
        map.Añadir_accion("ConstruirA",0,0,108,130, 10, true, 2);
        animacion = new Animacion(map, "ConstruirA", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.ALMACEN).getImage());
 
@@ -32,7 +32,7 @@ public class Almacen extends Objetos_Animados {
    } 
    public void actualizar_nivel_2(){
        vida_max+=600;
-       costo_comida+=1500;
+    
        capacidad_almacenamiento_comida+=7500;
    }
     @Override

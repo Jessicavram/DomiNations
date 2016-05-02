@@ -19,9 +19,9 @@ public abstract class Objetos_Graficos {
     /**Vida Actual del item*/
     int vida_actual;
     /**Costo en comida del item*/
-    int costo_comida;
+    int ancho;
     /**Costo en oro del item*/
-    int costo_oro;
+    int alto;
     /*Tiempo que tarda en construir el item**/
     int tiempo;
     /**Numero de aldanos disponibles*/
@@ -38,8 +38,8 @@ public abstract class Objetos_Graficos {
         animacion = null;
         vida_max=0;
         vida_actual=0;
-        costo_comida=0;
-        costo_oro=0;
+        ancho=0;
+        alto=0;
         tiempo=0;
         nro_aldeanos_requeridos=0;
         nivel=1;
@@ -112,12 +112,12 @@ public abstract class Objetos_Graficos {
         return vida_actual;
     }
 
-    public int getCosto_comida() {
-        return costo_comida;
+    public int getAncho() {
+        return ancho;
     }
 
-    public int getCosto_oro() {
-        return costo_oro;
+    public int getAlto() {
+        return alto;
     }
 
     public int getTiempo() {
@@ -143,12 +143,12 @@ public abstract class Objetos_Graficos {
         this.vida_actual = vida_actual;
     }
 
-    public void setCosto_comida(int costo_comida) {
-        this.costo_comida = costo_comida;
+    public void setAncho(int anch) {
+        this.ancho = anch;
     }
 
-    public void setCosto_oro(int costo_oro) {
-        this.costo_oro = costo_oro;
+    public void setAlto(int alt) {
+        this.alto = alt;
     }
 
     public void setTiempo(int tiempo) {

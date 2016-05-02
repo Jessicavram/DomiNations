@@ -24,7 +24,7 @@ public class Guarnicion extends Objetos_Animados{
     Hoja_Sprites map = new Hoja_Sprites();  
     
     public Guarnicion(){              
-        super(1000, 0, 1200, 10, 4);              
+        super(1000, 3, 4, 10, 4);              
         //Definir las acciones en la hoja de sprites
         map.Añadir_accion("ConstruirG", 0, 0, 113, 188, 10, true, 2);
                 //Crear la hoja de sprites
@@ -37,7 +37,7 @@ public class Guarnicion extends Objetos_Animados{
     
     public void actualizar_nivel_2(){
         vida_max +=400;
-        costo_oro+=800;
+   
         asteros_por_oleada-=1;
         arqueros_por_oleada=4;
         nivel++;
