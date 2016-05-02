@@ -183,7 +183,7 @@ public class Escena extends JPanel implements MouseListener{
         granja.Seleccionar_Localizacion(250, 30);
         vec_item_estaticos.add(granja);
         
-        /*Probando la matriz logica
+        /*Probando la matriz logica*/
         Matriz_Logica m=new Matriz_Logica();
         m.imprimir();
         System.out.println(m.verificar_disponibilidad(16, 19, 3, 2));
