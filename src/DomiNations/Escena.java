@@ -25,29 +25,33 @@ public class Escena extends JPanel implements MouseListener{
     ArrayList<Objetos_Graficos> vec_item_estaticos;
     /**Vector para guardar los cuadros que interactuan con mario*/
     ArrayList<Objetos_Graficos> vec_item_con_movimiento;
+    /**Vector para guardar los botones*/
+    ArrayList<Objetos_Graficos> vec_botones;
+    
     /**Estado de la escena*/
-    boolean estado=false;
+    boolean Ventana_tienda=false;
     /**Lista de requerimientos para crear o mejor item*/
     Lista_de_Requerimientos Requerimiento;
-
+    
     public boolean isEstado() {
-        return estado;
+        return Ventana_tienda;
     }
 
     public void setEstado(boolean estado) {
-        this.estado = estado;
+        this.Ventana_tienda = estado;
     }
-    int cont = 0;
-  
+    public void pintar_menu(){
+    }
     /**Constructor*/
     public Escena(){
         super();
         addMouseListener(this);
-        setPreferredSize(new Dimension(767,592));
+        setPreferredSize(new Dimension(771,592));
         mario = new Mario();
         vec_objetos_fondo = new ArrayList<Objetos_Graficos>();
         vec_item_estaticos = new ArrayList<Objetos_Graficos>();
-        vec_item_con_movimiento= new ArrayList<Objetos_Graficos>();
+        vec_item_con_movimiento= new ArrayList<Objetos_Graficos>();        
+        vec_botones= new ArrayList<Objetos_Graficos>();
         
         //Crear la lista de requerimientos
         Requerimiento = new Lista_de_Requerimientos();
@@ -60,7 +64,8 @@ public class Escena extends JPanel implements MouseListener{
         g.fillRect(0, 0, getWidth(), getHeight());
         
         //Pintar el fondo
-        for(int i=0; i<vec_objetos_fondo.size();i++){
+         vec_objetos_fondo.get(0).Dibujar(g);
+        for(int i=0; i<vec_objetos_fondo.size() && Ventana_tienda;i++){
             vec_objetos_fondo.get(i).Dibujar(g);
         }
         //Pintar los item que no se mueven en la aldea
@@ -70,13 +75,18 @@ public class Escena extends JPanel implements MouseListener{
         for(int i=0;i<vec_item_con_movimiento.size();i++){            
             vec_item_con_movimiento.get(i).Dibujar(g);
         }
+        //pintan los item que tienen movimiento por la aldea 
+        if(!Ventana_tienda)vec_botones.get(0).Dibujar(g);
+        
+        for(int i=1;i<vec_botones.size() && Ventana_tienda;i++){ 
+                vec_botones.get(i).Dibujar(g);
+        }
         //Pintar el personaje
         mario.Dibujar(g);
         g.drawString( "Tiempo: "+(Motor_Juego.cont/50) , 0, 10);
     }
     /**Metodo que actializa la escena y donde se realizan acciones logicas*/
     public void update(double timePassed){
-        if(mario.vidas==0)estado=true;
             if(mario.murio==0){
             mario.Actualizar_Objeto_Grafico(timePassed);
             mario.Actualizar_PosicionX();
@@ -129,9 +139,45 @@ public class Escena extends JPanel implements MouseListener{
         //NIVEL 1
         
         //Imagen de Fondo
-        Objetos_Inanimados obj = new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.FONDO_ALDEA).getImage(), new Rectangulo(0, 0, 767, 592) );
+        Objetos_Inanimados obj = new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.FONDO_ALDEA).getImage(), new Rectangulo(0, 0, 767,592) );
         obj.Seleccionar_Localizacion(0,0);
         vec_objetos_fondo.add(obj);
+        
+        obj = new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.BOTONES).getImage(), new Rectangulo(0, 0, 771,126) );
+        obj.Seleccionar_Localizacion(0,466);
+        vec_objetos_fondo.add(obj);
+        
+        //agregar botones de precios por edificio
+        Boton boton = new Boton("Tienda");
+        boton.Seleccionar_Localizacion(692, 542);
+        vec_botones.add(boton);
+        
+        //Precio Centro
+        boton = new Boton("Centro0");
+        boton.Seleccionar_Localizacion(16, 550);
+        vec_botones.add(boton);
+        //Precio Torre
+        boton = new Boton("Torre0");
+        boton.Seleccionar_Localizacion(96, 550);
+        vec_botones.add(boton);
+        //Precio Mercado
+        boton = new Boton("Mercado0");
+        boton.Seleccionar_Localizacion(173, 550);
+        vec_botones.add(boton);
+        //Precio Guarnicion
+        boton = new Boton("Guarnicion0");
+        boton.Seleccionar_Localizacion(252, 550);
+        vec_botones.add(boton);
+        //Precio Almacen
+        boton = new Boton("Almacen0");
+        boton.Seleccionar_Localizacion(332, 550);
+        vec_botones.add(boton);
+        
+        //Precio Cuartel
+        boton = new Boton("Cuartel0");
+        boton.Seleccionar_Localizacion(415, 550);
+        vec_botones.add(boton);
+        
         
         //Vidas Mario
         if(mario.vidas>0){
@@ -155,29 +201,33 @@ public class Escena extends JPanel implements MouseListener{
         x.mostrar_condiciones();
         Cuartel cuartel = new Cuartel();
         cuartel.Seleccionar_Localizacion(170, 80);
-        vec_item_con_movimiento.add(cuartel);
+        vec_item_estaticos.add(cuartel);
+        
         //Insertando mercado
         Mercado mer=new Mercado();
         mer.Seleccionar_Localizacion(210, 300);
-        vec_item_estaticos.add(mer);
-        
+        vec_item_estaticos.add(mer);        
         
         //Insertando torre
         Torre tor= new Torre();
         tor.Seleccionar_Localizacion(410, 80);
         vec_item_estaticos.add(tor);
+        
         //Insertando guarnicion
         Guarnicion guar=new Guarnicion();
         guar.Seleccionar_Localizacion(410, 200);
         vec_item_estaticos.add(guar);
+        
         //Insertando almacen
         Almacen alm= new Almacen();
         alm.Seleccionar_Localizacion(610, 200);
         vec_item_estaticos.add(alm);
-        //Insertando Ccasa
+        
+        //Insertando Casa
         Casa casa=new Casa();
         casa.Seleccionar_Localizacion(510,200);
         vec_item_estaticos.add(casa);
+        
         //Insertando Granja 
         Granja granja = new  Granja();
         granja.Seleccionar_Localizacion(250, 30);
@@ -193,19 +243,61 @@ public class Escena extends JPanel implements MouseListener{
         System.out.println(m.verificar_disponibilidad(17, 21, 3, 2));
         //m.imprimir();
         /**************************************/
-        
-
-        
+       
         //PISO NIVEL 1  
         obj= new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.INANIMADOS).getImage(), new Rectangulo(0,0 , 57, 31));
         obj.Seleccionar_Localizacion(0, 268);
         vec_objetos_fondo.add(obj);
         Motor_Fisico.getInstance().AnadirInanimado(obj);      
+        
+        
     }
     
     @Override
     public void mouseClicked(MouseEvent e) {
-        Motor_Fisico.getInstance().mouse(e.getX(), e.getY());
+        //Motor_Fisico.getInstance().mouse(e.getX(), e.getY());
+        float pos_x = e.getX();
+        float pos_y = e.getY();
+        Objetos_Graficos dinamico;
+        
+        if(pos_x>692 && pos_y>542 && !Ventana_tienda){
+            System.out.println("Tienda");
+            Ventana_tienda=true;
+            pintar_menu();
+        }
+        
+        for(int i=0;i<vec_item_estaticos.size() && !Ventana_tienda;i++){
+            dinamico = vec_item_estaticos.get(i); 
+            if((pos_x > dinamico.x && pos_x < dinamico.x + dinamico.Obtener_Ancho()) && (pos_y > dinamico.y && pos_y < dinamico.y + dinamico.Obtener_Alto())){
+                if(dinamico instanceof Cuartel){
+                    System.out.println("Selecciono Cuartel");
+                }else if(dinamico instanceof Torre){
+                    System.out.println("Selecciono Torre");
+                }else if(dinamico instanceof Guarnicion){
+                    System.out.println("Selecciono Guarnicion");
+                }else if(dinamico instanceof Almacen){
+                    System.out.println("Selecciono Almacen");
+                }else if(dinamico instanceof Casa){
+                    System.out.println("Selecciono Casa");
+                }else if(dinamico instanceof Centro){
+                    System.out.println("Selecciono Centro");
+                }else if(dinamico instanceof Mercado){
+                    System.out.println("Selecciono Mercado");
+                }else if(dinamico instanceof Granja){
+                    System.out.println("Selecciono Granaja");
+                }
+            }
+        }
+        
+        for(int i=1;i<vec_botones.size() && Ventana_tienda;i++){
+            dinamico = vec_botones.get(i);
+            if((pos_x > dinamico.x && pos_x < dinamico.x + dinamico.Obtener_Ancho()) && (pos_y > dinamico.y && pos_y < dinamico.y + dinamico.Obtener_Alto())){
+                if(dinamico instanceof Boton){
+                    System.out.println("boton");
+                    Ventana_tienda=false;
+                }
+            }
+        }
     }
 
     @Override

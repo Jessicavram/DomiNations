@@ -12,7 +12,7 @@ public class Cargar_Imagenes {
     protected ImageIcon vec_imagenes[];
     /**Constante que nos indica el total de imagenes a cargar, que seria la suma de cada una de las constantes*/
 
-    protected static final int TOTAL_IMAGENES=29;
+    protected static final int TOTAL_IMAGENES=30;
 
     /**Constante para conocer el nombre de la imagen que contiene la animacion de los enemigos*/
     public static final int ENEMIGOS=0;
@@ -73,6 +73,9 @@ public class Cargar_Imagenes {
 
     /**Imagen del mercado**/
     public static final int GRANJA=28;
+    /**Imagen del mercado**/
+    public static final int BOTONES=29;
+            
 
     /**Constructor de la clase, privado para usar la instancia y solo poder crearse un objeto de la clase, es usado para cargar
     /* el vector de imagenes a travez de la dirreccion url de cada una de las imagenes con ayuda de las constantes */
@@ -80,7 +83,8 @@ public class Cargar_Imagenes {
         URL direccion;
         String nombres_imagenes[] = new String[]{"Enemigos","Inanimados","Mario","Mundo_1","planta_carnivora","Castillo","Mario_inc","Nuevo_juego","Salir","estrella","Mundo_2","Inanimados_2","Instrucciones","instrucciones_static"
 
-        ,"bowser","fuego","creditos","creditos_img","fondo_aldea","cuartel","centro","fondo1","soldado","mercado","torre","guarnicion","almacen","casa","granja"};
+        ,"bowser","fuego","creditos","creditos_img","fondo_aldea","cuartel","centro","fondo1","soldado",
+        "mercado","torre","guarnicion","almacen","casa","granja","boton"};
         vec_imagenes = new ImageIcon[TOTAL_IMAGENES];
         for(int i=0;i<TOTAL_IMAGENES;i++){
             try {

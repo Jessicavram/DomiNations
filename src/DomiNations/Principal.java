@@ -59,10 +59,10 @@ public class Principal extends JFrame {
                 break;                  
             }
             
-            if(escena.isEstado()){
+            /*if(escena.isEstado()){
                 escena_menu.setEstado(0);
                 escena.setEstado(false);
-            }
+            */
             
 
         }while(escena_menu.getEstado()!=3);
