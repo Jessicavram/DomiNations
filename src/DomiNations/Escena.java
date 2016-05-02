@@ -185,12 +185,13 @@ public class Escena extends JPanel implements MouseListener{
         
         /*Probando la matriz logica*/
         Matriz_Logica m=new Matriz_Logica();
-        m.imprimir();
+        //m.imprimir();
         System.out.println(m.verificar_disponibilidad(16, 19, 3, 2));
         if(m.verificar_disponibilidad(16, 19,3, 2)==0){
             m.colocar_edificio(16, 19, 3, 2);
         }
-        m.imprimir();
+        System.out.println(m.verificar_disponibilidad(17, 21, 3, 2));
+        //m.imprimir();
         /**************************************/
         
 

@@ -35,11 +35,16 @@ public class Soldado extends Objetos_Animados{
         dano=25;
         alcance=3;
         secuencia_ataque=2;
+        vx=1;
+        vy=1;
+        dirx=1;
+        diry=-1;
     }
     
     @Override
     public void Actualizar_Objeto_Grafico(double timePassed){
         Actualizar_PosicionX();
+        Actualizar_PosicionY();
         super.Actualizar_Objeto_Grafico(timePassed);
     }
     
