@@ -244,13 +244,8 @@ public class Escena extends JPanel implements MouseListener{
         Mercado mer=new Mercado();
         mer.Seleccionar_Localizacion(210, 300);
         vec_Bloques.add(mer);
-        Matriz_Logica m=new Matriz_Logica();
-        m.imprimir();
-        System.out.println(m.verificar_disponibilidad(0, 19, 3, 2));
-        if(m.verificar_disponibilidad(0, 19,3, 2)==0){
-            m.colocar_edificio(0, 19, 3, 2);
-        }
-        m.imprimir();
+        
+        
         //Insertando torre
         Torre tor= new Torre();
         tor.Seleccionar_Localizacion(410, 80);
@@ -271,6 +266,17 @@ public class Escena extends JPanel implements MouseListener{
         Granja granja = new  Granja();
         granja.Seleccionar_Localizacion(250, 30);
         vec_Bloques.add(granja);
+        
+          /*Probando la matriz logica*/
+        Matriz_Logica m=new Matriz_Logica();
+        m.imprimir();
+        System.out.println(m.verificar_disponibilidad(16, 19, 3, 2));
+        if(m.verificar_disponibilidad(16, 19,3, 2)==0){
+            m.colocar_edificio(16, 19, 3, 2);
+        }
+        m.imprimir();
+        /**************************************/
+        
         //Bloque de monedas
         Items bloques= new Items(8);
         bloques.Seleccionar_Localizacion(3040, 120);
