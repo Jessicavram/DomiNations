@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import sprites.Rectangulo;
 /**Clase para cargar todas las imagenes necesarias para el juego desde el paquete cargador.Imagenes sin necesidad de cargar desde el disco duro del equipo
@@ -33,6 +34,8 @@ public class Escena extends JPanel implements MouseListener{
     /**Lista de requerimientos para crear o mejor item*/
     Lista_de_Requerimientos Requerimiento;
     
+    LEF lef;
+    
     public boolean isEstado() {
         return Ventana_tienda;
     }
@@ -46,7 +49,7 @@ public class Escena extends JPanel implements MouseListener{
     public Escena(){
         super();
         addMouseListener(this);
-        setPreferredSize(new Dimension(771,592));
+        setPreferredSize(new Dimension(961,592));
         mario = new Mario();
         vec_objetos_fondo = new ArrayList<Objetos_Graficos>();
         vec_item_estaticos = new ArrayList<Objetos_Graficos>();
@@ -84,6 +87,9 @@ public class Escena extends JPanel implements MouseListener{
         //Pintar el personaje
         mario.Dibujar(g);
         g.drawString( "Tiempo: "+(Motor_Juego.cont/50) , 0, 10);
+        
+        lef = new LEF(1000,2500,5);
+        lef.dibujar(g);
     }
     /**Metodo que actializa la escena y donde se realizan acciones logicas*/
     public void update(double timePassed){
@@ -248,9 +254,9 @@ public class Escena extends JPanel implements MouseListener{
         obj= new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.INANIMADOS).getImage(), new Rectangulo(0,0 , 57, 31));
         obj.Seleccionar_Localizacion(0, 268);
         vec_objetos_fondo.add(obj);
-        Motor_Fisico.getInstance().AnadirInanimado(obj);      
+        Motor_Fisico.getInstance().AnadirInanimado(obj); 
         
-        
+       
     }
     
     @Override
