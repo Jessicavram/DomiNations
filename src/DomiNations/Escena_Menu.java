@@ -31,13 +31,13 @@ class Escena_Menu extends JPanel {
     
     private void crear_escena(){
         nuevo_juego = new JLabel( Cargar_Imagenes.obtener_instancia().obtener_imagen( Cargar_Imagenes.NUEVO_JUEGO ) );
-        nuevo_juego.setBounds( 287, 109,182, 50);
+        nuevo_juego.setBounds( 250, 240,150, 36);
         nuevo_juego.setVisible(true);
         nuevo_juego.addMouseListener( new eventos() );
         add( nuevo_juego );
         
         instrucciones = new JLabel( Cargar_Imagenes.obtener_instancia().obtener_imagen( Cargar_Imagenes.INSTRUCCIONES ) );
-        instrucciones.setBounds( 279, 161, 191, 51);
+        instrucciones.setBounds( 250, 280, 150, 36);
         instrucciones.setVisible(true);
         instrucciones.addMouseListener( new eventos() );
         add( instrucciones );
@@ -49,11 +49,11 @@ class Escena_Menu extends JPanel {
         
         creditos= new JLabel(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.CREDITOS));
         creditos.setBounds( 310, 213, 160, 36);
-        creditos.setVisible(true);
+        creditos.setVisible(false);
         add( creditos );
         
         salir = new JLabel( Cargar_Imagenes.obtener_instancia().obtener_imagen( Cargar_Imagenes.SALIR ) );
-        salir.setBounds( 316, 250, 157, 49);
+        salir.setBounds( 250, 320, 150, 36);
         salir.setVisible(true);
         salir.addMouseListener( new eventos() );
         add( salir );     
