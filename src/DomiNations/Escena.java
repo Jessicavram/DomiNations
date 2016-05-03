@@ -5,6 +5,7 @@ import DomiNations.Lista_de_Requerimientos.Requerimientos;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import sprites.Rectangulo;
@@ -12,7 +13,7 @@ import sprites.Rectangulo;
  * @author Carlos Rangel y Daniel Nieto
  * @version Super Mario Bros 1.0
  **/
-public class Escena extends JPanel implements MouseListener{
+public class Escena extends JPanel implements MouseListener,MouseMotionListener{
     /**Personajo Mario*/
     Mario mario;
     /**Escena actual*/
@@ -46,6 +47,7 @@ public class Escena extends JPanel implements MouseListener{
     public Escena(){
         super();
         addMouseListener(this);
+        addMouseMotionListener(this);
         setPreferredSize(new Dimension(771,592));
         mario = new Mario();
         vec_objetos_fondo = new ArrayList<Objetos_Graficos>();
@@ -60,8 +62,7 @@ public class Escena extends JPanel implements MouseListener{
     @Override
     public void paint(Graphics g){
         //Pintar el fondo de la aplicación
-        Point punto=MouseInfo.getPointerInfo().getLocation();
-      //  System.out.println("X="+punto.x+" Y="+punto.y);
+
        
         g.setColor( Color.BLACK );
         g.fillRect(0, 0, getWidth(), getHeight());
@@ -261,8 +262,8 @@ public class Escena extends JPanel implements MouseListener{
         //Motor_Fisico.getInstance().mouse(e.getX(), e.getY());
         float pos_x = e.getX();
         float pos_y = e.getY();
-        Point punto=MouseInfo.getPointerInfo().getLocation();
-        System.out.println("Posicion del evento "+e.getX()+"Posicioin del puntero "+punto.x);
+        Point punto=MouseInfo.getPointerInfo().getLocation();//este me da la posicion pero en toda la pantalla
+       // System.out.println("Posicion del evento "+e.getX()+"Posicioin del puntero "+punto.x);
         Objetos_Graficos dinamico;
         
         if(pos_x>692 && pos_y>542 && !Ventana_tienda){
@@ -317,12 +318,22 @@ public class Escena extends JPanel implements MouseListener{
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        System.out.println("El mouse esta sobre la pantalla en la posicion X= "+e.getX());
-         
+      //  System.out.println("El mouse esta sobre la pantalla en la posicion X= "+e.getX());
+      //Este evento solo detecta cuando el mouse entra a la escena    
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent me) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent me) {
+        System.out.println("la posicion actual del mouse es X= "+me.getX()+" Y="+me.getY());
     }
 
 }
