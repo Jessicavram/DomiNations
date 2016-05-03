@@ -5,6 +5,7 @@ import DomiNations.Lista_de_Requerimientos.Requerimientos;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,7 +14,7 @@ import sprites.Rectangulo;
  * @author Carlos Rangel y Daniel Nieto
  * @version Super Mario Bros 1.0
  **/
-public class Escena extends JPanel implements MouseListener{
+public class Escena extends JPanel implements MouseListener,MouseMotionListener{
     /**Personajo Mario*/
     Mario mario;
     /**Escena actual*/
@@ -49,6 +50,7 @@ public class Escena extends JPanel implements MouseListener{
     public Escena(){
         super();
         addMouseListener(this);
+        addMouseMotionListener(this);
         setPreferredSize(new Dimension(961,592));
         mario = new Mario();
         vec_objetos_fondo = new ArrayList<Objetos_Graficos>();
@@ -63,6 +65,8 @@ public class Escena extends JPanel implements MouseListener{
     @Override
     public void paint(Graphics g){
         //Pintar el fondo de la aplicación
+
+       
         g.setColor( Color.BLACK );
         g.fillRect(0, 0, getWidth(), getHeight());
         
@@ -239,6 +243,10 @@ public class Escena extends JPanel implements MouseListener{
         granja.Seleccionar_Localizacion(250, 30);
         vec_item_estaticos.add(granja);
         
+        //Insertando Recuadro de posicion
+        Recuadro cuadro =new Recuadro();
+        cuadro.Seleccionar_Localizacion(50, 50);
+        vec_item_estaticos.add(cuadro);
         /*Probando la matriz logica*/
         Matriz_Logica m=new Matriz_Logica();
         //m.imprimir();
@@ -264,6 +272,8 @@ public class Escena extends JPanel implements MouseListener{
         //Motor_Fisico.getInstance().mouse(e.getX(), e.getY());
         float pos_x = e.getX();
         float pos_y = e.getY();
+        Point punto=MouseInfo.getPointerInfo().getLocation();//este me da la posicion pero en toda la pantalla
+       // System.out.println("Posicion del evento "+e.getX()+"Posicioin del puntero "+punto.x);
         Objetos_Graficos dinamico;
         
         if(pos_x>692 && pos_y>542 && !Ventana_tienda){
@@ -318,10 +328,33 @@ public class Escena extends JPanel implements MouseListener{
 
     @Override
     public void mouseEntered(MouseEvent e) {
+      //  System.out.println("El mouse esta sobre la pantalla en la posicion X= "+e.getX());
+      //Este evento solo detecta cuando el mouse entra a la escena    
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent me) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent me) {
+       // System.out.println("la posicion actual del mouse es X= "+me.getX()+" Y="+me.getY());
+        //revisar el vector de objetos
+         Objetos_Graficos obj;
+        for(int i=0;i<vec_item_estaticos.size();i++){
+           obj=vec_item_estaticos.get(i);
+           if(obj instanceof Recuadro){
+               vec_item_estaticos.remove(i);
+           } 
+        }
+        Recuadro cuadro =new Recuadro();
+        cuadro.Seleccionar_Localizacion(me.getX(), me.getY());
+        vec_item_estaticos.add(cuadro);
     }
 
 }
