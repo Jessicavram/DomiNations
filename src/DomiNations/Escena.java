@@ -60,6 +60,9 @@ public class Escena extends JPanel implements MouseListener{
     @Override
     public void paint(Graphics g){
         //Pintar el fondo de la aplicación
+        Point punto=MouseInfo.getPointerInfo().getLocation();
+      //  System.out.println("X="+punto.x+" Y="+punto.y);
+       
         g.setColor( Color.BLACK );
         g.fillRect(0, 0, getWidth(), getHeight());
         
@@ -258,6 +261,8 @@ public class Escena extends JPanel implements MouseListener{
         //Motor_Fisico.getInstance().mouse(e.getX(), e.getY());
         float pos_x = e.getX();
         float pos_y = e.getY();
+        Point punto=MouseInfo.getPointerInfo().getLocation();
+        System.out.println("Posicion del evento "+e.getX()+"Posicioin del puntero "+punto.x);
         Objetos_Graficos dinamico;
         
         if(pos_x>692 && pos_y>542 && !Ventana_tienda){
@@ -312,6 +317,8 @@ public class Escena extends JPanel implements MouseListener{
 
     @Override
     public void mouseEntered(MouseEvent e) {
+        System.out.println("El mouse esta sobre la pantalla en la posicion X= "+e.getX());
+         
     }
 
     @Override
