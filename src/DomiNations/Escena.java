@@ -237,6 +237,10 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         granja.Seleccionar_Localizacion(250, 30);
         vec_item_estaticos.add(granja);
         
+        //Insertando Recuadro de posicion
+        Recuadro cuadro =new Recuadro();
+        cuadro.Seleccionar_Localizacion(50, 50);
+        vec_item_estaticos.add(cuadro);
         /*Probando la matriz logica*/
         Matriz_Logica m=new Matriz_Logica();
         //m.imprimir();
@@ -333,7 +337,18 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
 
     @Override
     public void mouseMoved(MouseEvent me) {
-        System.out.println("la posicion actual del mouse es X= "+me.getX()+" Y="+me.getY());
+       // System.out.println("la posicion actual del mouse es X= "+me.getX()+" Y="+me.getY());
+        //revisar el vector de objetos
+         Objetos_Graficos obj;
+        for(int i=0;i<vec_item_estaticos.size();i++){
+           obj=vec_item_estaticos.get(i);
+           if(obj instanceof Recuadro){
+               vec_item_estaticos.remove(i);
+           } 
+        }
+        Recuadro cuadro =new Recuadro();
+        cuadro.Seleccionar_Localizacion(me.getX(), me.getY());
+        vec_item_estaticos.add(cuadro);
     }
 
 }
