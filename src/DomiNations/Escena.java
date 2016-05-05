@@ -55,7 +55,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         super();
         addMouseListener(this);
         addMouseMotionListener(this);
-        setPreferredSize(new Dimension(961,592));
+        setPreferredSize(new Dimension(771,592));
         mario = new Mario();
         vec_objetos_fondo = new ArrayList<Objetos_Graficos>();
         vec_item_estaticos = new ArrayList<Objetos_Graficos>();
