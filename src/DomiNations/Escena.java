@@ -39,7 +39,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
     /**Lista de requerimientos para crear o mejor item*/
     Lista_de_Requerimientos Requerimiento;
     
-    LEF lef;
+    public static Estadisticas e;
     
     public boolean isEstado() {
         return Ventana_tienda;
@@ -96,8 +96,6 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         mario.Dibujar(g);
         g.drawString( "Tiempo: "+(Motor_Juego.cont/50) , 0, 10);
         
-        lef = new LEF(1000,2500,5);
-        lef.dibujar(g);
     }
     /**Metodo que actializa la escena y donde se realizan acciones logicas*/
     public void update(double timePassed){
@@ -256,7 +254,9 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         vec_objetos_fondo.add(obj);
         Motor_Fisico.getInstance().AnadirInanimado(obj); 
         
+       //
        
+       e = new Estadisticas(1500,1000,7);
     }
     
     @Override

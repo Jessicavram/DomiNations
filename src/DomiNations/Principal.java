@@ -49,12 +49,16 @@ public class Principal extends JFrame {
                     Cargar_Sonidos.obtener_instancia().detener_pista(Cargar_Sonidos.MUNDO_1);
                     frame_juego.setVisible(false);
                     frame_menu.setVisible(true);
+                    escena.e.setVisible(false);
                     motor_de_juego.Detener();   
                     break;
                 case 1:
                     Cargar_Sonidos.obtener_instancia().detener_pista(Cargar_Sonidos.FONDO_MENU);
                     frame_menu.setVisible(false);
                     frame_juego.setVisible(true);
+                    escena.e.x=frame_juego.getX()+frame_juego.getWidth()+20;
+                    escena.e.y=frame_juego.getY()+20;
+                    escena.e.mostrar();
                     motor_de_juego.Iniciar();
                 break;                  
             }
