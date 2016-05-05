@@ -59,7 +59,7 @@ class Escena_Menu extends JPanel {
         add( salir );     
         
         salir_instrucciones = new JButton( Cargar_Imagenes.obtener_instancia().obtener_imagen( Cargar_Imagenes.SALIR ) );
-        salir_instrucciones.setBounds( 402, 0, 157, 49);
+        salir_instrucciones.setBounds( 402, 0, 150, 36);
         salir_instrucciones.setVisible(false);
         salir_instrucciones.addMouseListener( new eventos() );
         add( salir_instrucciones );  

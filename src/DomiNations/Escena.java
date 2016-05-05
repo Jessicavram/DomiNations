@@ -29,9 +29,13 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
     ArrayList<Objetos_Graficos> vec_item_con_movimiento;
     /**Vector para guardar los botones*/
     ArrayList<Objetos_Graficos> vec_botones;
+    /** guarda el elemento seleccionado para construir en la aldea*/
+     String elemento="";
+     boolean edoElemento=false;
     
     /**Estado de la escena*/
     boolean Ventana_tienda=false;
+    boolean agregar_elemento=false;
     /**Lista de requerimientos para crear o mejor item*/
     Lista_de_Requerimientos Requerimiento;
     
@@ -173,6 +177,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         //Precio Mercado
         boton = new Boton("Mercado0");
         boton.Seleccionar_Localizacion(173, 550);
+        
         vec_botones.add(boton);
         //Precio Guarnicion
         boton = new Boton("Guarnicion0");
@@ -214,26 +219,13 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         vec_item_estaticos.add(cuartel);
         
         //Insertando mercado
-        Mercado mer=new Mercado();
+        
+        /*Mercado mer=new Mercado();
         mer.Seleccionar_Localizacion(210, 300);
         vec_item_estaticos.add(mer);        
+       */ 
         
-        //Insertando torre
-        Torre tor= new Torre();
-        tor.Seleccionar_Localizacion(410, 80);
-        vec_item_estaticos.add(tor);
-        
-        //Insertando guarnicion
-        Guarnicion guar=new Guarnicion();
-        guar.Seleccionar_Localizacion(410, 200);
-        vec_item_estaticos.add(guar);
-        
-        //Insertando almacen
-        Almacen alm= new Almacen();
-        alm.Seleccionar_Localizacion(610, 200);
-        vec_item_estaticos.add(alm);
-        
-        //Insertando Casa
+          //Insertando Casa
         Casa casa=new Casa();
         casa.Seleccionar_Localizacion(510,200);
         vec_item_estaticos.add(casa);
@@ -273,8 +265,13 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         float pos_x = e.getX();
         float pos_y = e.getY();
         Point punto=MouseInfo.getPointerInfo().getLocation();//este me da la posicion pero en toda la pantalla
-       // System.out.println("Posicion del evento "+e.getX()+"Posicioin del puntero "+punto.x);
+        //System.out.println("Posicion del evento "+e.getX()+"Posicioin del puntero "+punto.x);
+        // System.out.println("Posicion del evento "+e.getY()+"Posicioin del puntero "+punto.y);
+        //System.out.println("X"+pos_x+" "+"Y"+pos_y);
         Objetos_Graficos dinamico;
+        Boton b=new Boton();
+       
+        
         
         if(pos_x>692 && pos_y>542 && !Ventana_tienda){
             System.out.println("Tienda");
@@ -307,13 +304,68 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         
         for(int i=1;i<vec_botones.size() && Ventana_tienda;i++){
             dinamico = vec_botones.get(i);
+            b=(Boton)vec_botones.get(i);
             if((pos_x > dinamico.x && pos_x < dinamico.x + dinamico.Obtener_Ancho()) && (pos_y > dinamico.y && pos_y < dinamico.y + dinamico.Obtener_Alto())){
                 if(dinamico instanceof Boton){
-                    System.out.println("boton");
+                    elemento=b.Nombre;
+                    System.out.println(b.Nombre);
+                    agregar_elemento=true;
                     Ventana_tienda=false;
                 }
             }
         }
+        //Agregando elementos a la aldea
+        if(agregar_elemento==true){
+            
+         AgregarElementosAldea(e.getX(),e.getY());
+        
+        
+        }
+        
+        
+        
+    }
+    
+    public void AgregarElementosAldea(float x,float y){
+        
+        
+        if(elemento.compareTo("Tienda")==0){
+       
+        }
+        if(elemento.compareTo("O100")==0){
+       
+        }
+        if(elemento.compareTo("Cuartel0")==0){
+       
+        }
+        if(elemento.compareTo("Almacen0")==0){
+                //Insertando almacen
+           Almacen alm= new Almacen();
+           alm.Seleccionar_Localizacion((int)x,(int)y);
+           vec_item_estaticos.add(alm);
+       
+        }
+        if(elemento.compareTo("Torre0")==0){
+             //Insertando torre
+            Torre tor= new Torre();
+            tor.Seleccionar_Localizacion((int)x,(int)y);
+            vec_item_estaticos.add(tor);
+       
+        }
+        if(elemento.compareTo("Mercado0")==0){
+            Mercado mer=new Mercado();
+            mer.Seleccionar_Localizacion((int)x,(int)y);
+            vec_item_estaticos.add(mer);  
+       
+        }
+        if(elemento.compareTo("Guarnicion0")==0){
+            //Insertando guarnicion
+            Guarnicion guar=new Guarnicion();
+            guar.Seleccionar_Localizacion((int)x,(int)y);
+            vec_item_estaticos.add(guar);
+        
+        }
+        
     }
 
     @Override
@@ -356,5 +408,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         cuadro.Seleccionar_Localizacion(me.getX(), me.getY());
         vec_item_estaticos.add(cuadro);
     }
+    
+    
 
 }
