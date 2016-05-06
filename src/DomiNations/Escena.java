@@ -413,7 +413,9 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 e.setOro(aldea.total_oro);
                 aldea.total_comida-=r.costo_comida;
                 e.setComida(aldea.total_comida);
+                
                 e.show();    
+                
             }
        
         }
