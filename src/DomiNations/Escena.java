@@ -107,27 +107,23 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             
             //actualizar los item que no se mueven en la aldea
             for(int i=0;i<vec_item_estaticos.size();i++){
+                /*Eliminar lo que se requiera eliminar del vector 
                 if(vec_item_estaticos.get(i).getY()>=310 || vec_item_estaticos.get(i).getX()<=-300 || vec_item_estaticos.get(i).borrar){
                     //eliminar los enemigos que se caigan
                     Motor_Fisico.getInstance().borrar_animado(vec_item_estaticos.get(i) );
                     vec_item_estaticos.remove(i);
-                }else
+                }else*/
                     vec_item_estaticos.get(i).Actualizar_Objeto_Grafico(timePassed);
             }
             //actualizar los item que se mueven en la aldea
             for(int i=0;i<vec_item_con_movimiento.size();i++){
+                /*Eliminar lo que se requiera eliminar del vector
                 if(vec_item_con_movimiento.get(i).getY()>=310 || vec_item_con_movimiento.get(i).getX()<=-16 || vec_item_con_movimiento.get(i).borrar){
                     Motor_Fisico.getInstance().borrar_animado(vec_item_con_movimiento.get(i) );
                     vec_item_con_movimiento.remove(i);
-                }else
+                }else*/
                     vec_item_con_movimiento.get(i).Actualizar_Objeto_Grafico(timePassed);
             }
-            //matar a mario por caerse
-                if(mario.y>=310){
-                    Cargar_Sonidos.obtener_instancia().Reproducir_pistas(Cargar_Sonidos.MUERTE, false, false);
-                    mario.murio=1;  
-                    mario.vidas--;
-                }  
         }
     }
     
@@ -326,15 +322,6 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 }
             }
         }
-        //Agregando elementos a la aldea
-        if(pos_x>692 && pos_y>542 && !Ventana_tienda){
-            System.out.println("Tienda");
-            Ventana_tienda=true;
-            pintar_menu();
-        }
-        
-        
-        
     }
     
     public void AgregarElementosAldea(float x,float y){
@@ -467,6 +454,8 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
 
     @Override
     public void mouseMoved(MouseEvent me) {
+       float pos_x = me.getX();
++        float pos_y = me.getY();
        // System.out.println("la posicion actual del mouse es X= "+me.getX()+" Y="+me.getY());
         //revisar el vector de objetos
          Objetos_Graficos obj;
@@ -479,6 +468,15 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         Recuadro cuadro =new Recuadro();
         cuadro.Seleccionar_Localizacion(me.getX(), me.getY());
         vec_item_estaticos.add(cuadro);
+        
+        //Agregando elementos a la aldea
+        if(pos_x>692 && pos_y>542 && !Ventana_tienda){
+            System.out.println("Tienda");
+            Ventana_tienda=true;
+            pintar_menu();
+        }
+        if(Ventana_tienda && pos_y<465)
++            Ventana_tienda=false;
     }
     
     
