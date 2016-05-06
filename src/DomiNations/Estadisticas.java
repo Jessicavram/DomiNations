@@ -81,27 +81,12 @@ public class Estadisticas extends JWindow
         titulo2.setVisible(true);
         
         texto = new JTextArea();
-        texto.setAutoscrolls(true);
-        texto.setText("Descripcion       | Tiempo");
-        texto.setBounds(5,230,190,50);
-        
-        
-        texto.append("\nhola");
-        texto.append("\nhola");
-        texto.append("\nhola");
-        texto.append("\nhola");
-        texto.append("\nhola");
-        texto.append("\nhola");
-        
-        texto.append("\nhola");
-        
-        
-        texto.append("\nhola");
-        
-        
-        
+        texto.setText("     Descripcion   |    Tiempo");
+        texto.append("\n________________________");
+        texto.setBounds(5,230,190,320);
         
         scroll = new JScrollPane(texto);
+        scroll.setBounds(5,230,190,320);
         scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         
         panel.add(et1);
@@ -110,7 +95,6 @@ public class Estadisticas extends JWindow
         panel.add(titulo1);
         panel.add(titulo2);
         panel.add(scroll);
-        panel.add(texto);
         
         this.add(panel);
         

@@ -13,4 +13,19 @@ public class LEF
 {
     String descripcion, tiempo, posicion;
     
+    public LEF()
+    {
+        
+    }
+    
+    public String getLinea()
+    {   
+        return descripcion+"  |  "+tiempo;
+    }
+    
+    public String getPos()
+    {
+        return posicion;
+    }
+    
 }
