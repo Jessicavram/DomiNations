@@ -107,7 +107,7 @@ public class Lista_de_Requerimientos {
         Requerimientos obj = null;
         for(int i=0;i<PreCondiciones.size();i++){
             obj = PreCondiciones.get(i);
-            if(obj.Nombre_Requerimiento.equalsIgnoreCase(nom_item) && obj.nivel == nivel)
+            if(obj.Nombre_item.equalsIgnoreCase(nom_item) && obj.nivel == nivel)
                 return obj;
         }   
         return obj;

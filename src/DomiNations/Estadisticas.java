@@ -44,8 +44,9 @@ public class Estadisticas extends JWindow
     {
         this.setBounds(x,y,220,600);
         this.getContentPane().setBackground(Color.BLACK);
+        this.setEnabled(true);
         
-        JPanel panel = new JPanel();
+        panel = new JPanel();
         panel.setBounds(10,10,200,580);
         panel.setBackground(Color.DARK_GRAY);
         panel.setLayout(null);
@@ -106,18 +107,21 @@ public class Estadisticas extends JWindow
     {
         oro=o;
         et1.setText("Oro: "+oro);
+        panel.repaint();
     }
     
     public void setAldeanos(int a)
     {
         aldeano=a;
-        et2.setText("Aledeano: "+aldeano);
+        et3.setText("Aledeano: "+aldeano);
+        panel.repaint();
     }
     
     public void setComida(int c)
     {
         comida=c;
-        et3.setText("Comida: "+comida);
+        et2.setText("Comida: "+comida);
+        panel.repaint();
     }
     
     

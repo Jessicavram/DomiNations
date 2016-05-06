@@ -32,6 +32,8 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
     /** guarda el elemento seleccionado para construir en la aldea*/
      String elemento="";
      boolean edoElemento=false;
+     
+    Aldea aldea; 
     
     /**Estado de la escena*/
     boolean Ventana_tienda=false;
@@ -148,6 +150,14 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         mario.Seleccionar_Localizacion(0,250);
         Motor_Fisico.getInstance().addDynamicObject(mario);   
 
+        //aldea
+        
+        aldea = new Aldea();
+        aldea.total_oro=2000;
+        aldea.total_comida=1500;
+        aldea.nro_aldeanos=7;
+        aldea.nro_aldeanos_disponibles=7;
+
         //NIVEL 1
         
         //Imagen de Fondo
@@ -256,7 +266,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         
        //
        
-       e = new Estadisticas(1500,1000,7);
+       e = new Estadisticas(aldea.total_oro,aldea.total_comida,aldea.nro_aldeanos);
     }
     
     @Override
@@ -272,12 +282,6 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         Boton b=new Boton();
        
         
-        
-        if(pos_x>692 && pos_y>542 && !Ventana_tienda){
-            System.out.println("Tienda");
-            Ventana_tienda=true;
-            pintar_menu();
-        }
         
         for(int i=0;i<vec_item_estaticos.size() && !Ventana_tienda;i++){
             dinamico = vec_item_estaticos.get(i); 
@@ -302,6 +306,14 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             }
         }
         
+        if(agregar_elemento==true){
+            
+         AgregarElementosAldea(e.getX(),e.getY());
+         agregar_elemento=false;
+        
+        
+        }
+        
         for(int i=1;i<vec_botones.size() && Ventana_tienda;i++){
             dinamico = vec_botones.get(i);
             b=(Boton)vec_botones.get(i);
@@ -315,11 +327,10 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             }
         }
         //Agregando elementos a la aldea
-        if(agregar_elemento==true){
-            
-         AgregarElementosAldea(e.getX(),e.getY());
-        
-        
+        if(pos_x>692 && pos_y>542 && !Ventana_tienda){
+            System.out.println("Tienda");
+            Ventana_tienda=true;
+            pintar_menu();
         }
         
         
@@ -335,34 +346,93 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         if(elemento.compareTo("O100")==0){
        
         }
-        if(elemento.compareTo("Cuartel0")==0){
-       
+        if(elemento.compareTo("Cuartel0")==0)
+        {
+           Cuartel cua= new Cuartel();
+           Requerimientos r = Requerimiento.buscar_requerimiento("Cuartel",0);
+           r.mostrar_condiciones();
+           if(aldea.total_comida>=r.costo_comida && aldea.total_oro>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
+           {
+                cua.Seleccionar_Localizacion((int)x,(int)y);
+                vec_item_estaticos.add(cua);
+                
+                aldea.total_oro-=r.costo_oro;
+                e.setOro(aldea.total_oro);
+                aldea.total_comida-=r.costo_comida;
+                e.setComida(aldea.total_comida);
+                e.show();
+           }
         }
         if(elemento.compareTo("Almacen0")==0){
                 //Insertando almacen
            Almacen alm= new Almacen();
-           alm.Seleccionar_Localizacion((int)x,(int)y);
-           vec_item_estaticos.add(alm);
+           Requerimientos r = Requerimiento.buscar_requerimiento("Almacen",0);
+           r.mostrar_condiciones();
+           if(aldea.total_comida>=r.costo_comida && aldea.total_oro>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
+            {
+                alm.Seleccionar_Localizacion((int)x,(int)y);
+                vec_item_estaticos.add(alm);
+                
+                aldea.total_oro-=r.costo_oro;
+                e.setOro(aldea.total_oro);
+                aldea.total_comida-=r.costo_comida;
+                e.setComida(aldea.total_comida);
+                e.show();
+            }
        
         }
         if(elemento.compareTo("Torre0")==0){
              //Insertando torre
             Torre tor= new Torre();
-            tor.Seleccionar_Localizacion((int)x,(int)y);
-            vec_item_estaticos.add(tor);
+            Requerimientos r = Requerimiento.buscar_requerimiento("Torre",0);
+            r.mostrar_condiciones();
+            if(aldea.total_comida>=r.costo_comida && aldea.total_oro>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
+            {
+                tor.Seleccionar_Localizacion((int)x,(int)y);
+                vec_item_estaticos.add(tor);
+                
+                aldea.total_oro-=r.costo_oro;
+                e.setOro(aldea.total_oro);
+                aldea.total_comida-=r.costo_comida;
+                e.setComida(aldea.total_comida);
+                e.show();
+            }
+            
        
         }
         if(elemento.compareTo("Mercado0")==0){
             Mercado mer=new Mercado();
-            mer.Seleccionar_Localizacion((int)x,(int)y);
-            vec_item_estaticos.add(mer);  
+            Requerimientos r = Requerimiento.buscar_requerimiento("Mercado",0);
+            r.mostrar_condiciones();
+            if(aldea.total_comida>=r.costo_comida && aldea.total_oro>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
+            {
+                mer.Seleccionar_Localizacion((int)x,(int)y);
+                vec_item_estaticos.add(mer);
+                
+                aldea.total_oro-=r.costo_oro;
+                e.setOro(aldea.total_oro);
+                aldea.total_comida-=r.costo_comida;
+                e.setComida(aldea.total_comida);
+                e.show();    
+            }
        
         }
         if(elemento.compareTo("Guarnicion0")==0){
             //Insertando guarnicion
             Guarnicion guar=new Guarnicion();
-            guar.Seleccionar_Localizacion((int)x,(int)y);
-            vec_item_estaticos.add(guar);
+            Requerimientos r = Requerimiento.buscar_requerimiento("Guarnicion",0);
+            r.mostrar_condiciones();
+            if(aldea.total_comida>=r.costo_comida && aldea.total_oro>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
+            {
+                guar.Seleccionar_Localizacion((int)x,(int)y);
+                vec_item_estaticos.add(guar);
+                
+                aldea.total_oro-=r.costo_oro;
+                e.setOro(aldea.total_oro);
+                aldea.total_comida-=r.costo_comida;
+                e.setComida(aldea.total_comida);
+                e.show();
+            }
         
         }
         
@@ -390,7 +460,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
 
     @Override
     public void mouseDragged(MouseEvent me) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
