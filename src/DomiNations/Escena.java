@@ -19,6 +19,14 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
     Mario mario;
     /**Escena actual*/
     int escena_actual=1;
+    /**coordenada del pixel en x donde empieza el espacio de construccion*/
+    int x_inicial=115;
+    /**coordenada del pixel en y donde empieza el espacio de construccion*/
+    int y_inicial=70;
+    /**coordenada del pixel en x donde termina el espacio de construccion*/
+    int x_final=665;
+    /**coordenada del pixel en y donde termina el espacio de construccion*/
+    int y_final=525;
     /**Termino la escena*/
     boolean ter_esc=false;
     /**Arreglo para objetos de fondo*/
@@ -41,6 +49,9 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
     /**Lista de requerimientos para crear o mejor item*/
     Lista_de_Requerimientos Requerimiento;
     
+//MAtriz logica de la aldea para concoer por donde pueden caminar los aldeanos
+    Matriz_Logica matriz_logica;
+    
     public static Estadisticas e;
     
     public boolean isEstado() {
@@ -62,10 +73,10 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         vec_objetos_fondo = new ArrayList<Objetos_Graficos>();
         vec_item_estaticos = new ArrayList<Objetos_Graficos>();
         vec_item_con_movimiento= new ArrayList<Objetos_Graficos>();        
-        vec_botones= new ArrayList<Objetos_Graficos>();
-        
+        vec_botones= new ArrayList<Objetos_Graficos>();        
         //Crear la lista de requerimientos
         Requerimiento = new Lista_de_Requerimientos();
+        matriz_logica=new Matriz_Logica();
     }
     
     @Override
@@ -243,16 +254,16 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         Recuadro cuadro =new Recuadro();
         cuadro.Seleccionar_Localizacion(50, 50);
         vec_item_estaticos.add(cuadro);
-        /*Probando la matriz logica*/
+         
+        /*Probando la matriz logica*
         Matriz_Logica m=new Matriz_Logica();
-        //m.imprimir();
+        m.imprimir();
         System.out.println(m.verificar_disponibilidad(16, 19, 3, 2));
         if(m.verificar_disponibilidad(16, 19,3, 2)==0){
             m.colocar_edificio(16, 19, 3, 2);
         }
-        System.out.println(m.verificar_disponibilidad(17, 21, 3, 2));
-        //m.imprimir();
-        /**************************************/
+        m.imprimir();
+        **************************************/
        
         //PISO NIVEL 1  
         obj= new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.INANIMADOS).getImage(), new Rectangulo(0,0 , 57, 31));
@@ -454,11 +465,16 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
 
     @Override
     public void mouseMoved(MouseEvent me) {
-       float pos_x = me.getX();
+        
+        float pos_x = me.getX();
         float pos_y = me.getY();
-       // System.out.println("la posicion actual del mouse es X= "+me.getX()+" Y="+me.getY());
+        
+        matriz_logica.coordenaX_a_Columna(me.getX(), x_inicial);
+        
+        
+        // System.out.println("la posicion actual del mouse es X= "+me.getX()+" Y="+me.getY());
         //revisar el vector de objetos
-         Objetos_Graficos obj;
+        Objetos_Graficos obj;
         for(int i=0;i<vec_item_estaticos.size();i++){
            obj=vec_item_estaticos.get(i);
            if(obj instanceof Recuadro){
@@ -466,9 +482,10 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
            } 
         }
         Recuadro cuadro =new Recuadro();
-        cuadro.Seleccionar_Localizacion(me.getX(), me.getY());
+        //cuadro.Seleccionar_Localizacion(me.getX(), me.getY());
+        cuadro.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna(me.getX(), x_inicial)*25, y_inicial+matriz_logica.coordenadaY_a_Fila(me.getY(), y_inicial)*25);
         vec_item_estaticos.add(cuadro);
-        
+
         //Agregando elementos a la aldea
         if(pos_x>692 && pos_y>542 && !Ventana_tienda){
             System.out.println("Tienda");
