@@ -22,7 +22,7 @@ public class Granja extends Objetos_Animados{
     int tiempo_por_produccion;
     
     public Granja(){
-        super(800,2,3,5,2);
+        super(800,3,2,5,2);
         Hoja_Sprites map = new Hoja_Sprites();
         //Definir las acciones en la hoja de sprites
         map.Añadir_accion("Construir1", 0, 0, 74, 65, 10, false, 10);

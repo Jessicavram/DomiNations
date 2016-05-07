@@ -97,7 +97,8 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
            r.mostrar_condiciones();
            if(aldea.total_comida>=r.costo_comida && aldea.total_oro>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
            {
-                cua.Seleccionar_Localizacion((int)x,(int)y);
+                //cua.Seleccionar_Localizacion((int)x,(int)y);
+                cua.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna((int)x, x_inicial)*25, (y_inicial+matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)*25)-(cua.Obtener_Alto()-(cua.alto*25)));
                 vec_item_estaticos.add(cua);
                 
                 aldea.total_oro-=r.costo_oro;
@@ -114,7 +115,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
            r.mostrar_condiciones();
            if(aldea.total_comida>=r.costo_comida && aldea.total_oro>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
             {
-                alm.Seleccionar_Localizacion((int)x,(int)y);
+                alm.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna((int)x, x_inicial)*25, (y_inicial+matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)*25)-(alm.Obtener_Alto()-(alm.alto*25)));
                 vec_item_estaticos.add(alm);
                 
                 aldea.total_oro-=r.costo_oro;
@@ -132,7 +133,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             r.mostrar_condiciones();
             if(aldea.total_comida>=r.costo_comida && aldea.total_oro>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
             {
-                tor.Seleccionar_Localizacion((int)x,(int)y);
+                tor.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna((int)x, x_inicial)*25, (y_inicial+matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)*25)-(tor.Obtener_Alto()-(tor.alto*25)));
                 vec_item_estaticos.add(tor);
                 
                 aldea.total_oro-=r.costo_oro;
@@ -150,7 +151,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             r.mostrar_condiciones();
             if(aldea.total_comida>=r.costo_comida && aldea.total_oro>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
             {
-                mer.Seleccionar_Localizacion((int)x,(int)y);
+                mer.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna((int)x, x_inicial)*25, (y_inicial+matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)*25)-(mer.Obtener_Alto()-(mer.alto*25)));
                 vec_item_estaticos.add(mer);
                 
                 aldea.total_oro-=r.costo_oro;
@@ -170,7 +171,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             r.mostrar_condiciones();
             if(aldea.total_comida>=r.costo_comida && aldea.total_oro>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
             {
-                guar.Seleccionar_Localizacion((int)x,(int)y);
+                guar.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna((int)x, x_inicial)*25, (y_inicial+matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)*25)-(guar.Obtener_Alto()-(guar.alto*25)));
                 vec_item_estaticos.add(guar);
                 
                 aldea.total_oro-=r.costo_oro;
