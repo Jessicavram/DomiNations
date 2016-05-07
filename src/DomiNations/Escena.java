@@ -100,11 +100,17 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 //cua.Seleccionar_Localizacion((int)x,(int)y);
                 cua.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna((int)x, x_inicial)*25, (y_inicial+matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)*25)-(cua.Obtener_Alto()-(cua.alto*25)));
                 vec_item_estaticos.add(cua);
+                matriz_logica.colocar_edificio(matriz_logica.coordenadaY_a_Fila((int)y, y_inicial),matriz_logica.coordenaX_a_Columna((int)x, x_inicial),item.ancho,item.alto);
                 
                 aldea.total_oro-=r.costo_oro;
                 e.setOro(aldea.total_oro);
                 aldea.total_comida-=r.costo_comida;
                 e.setComida(aldea.total_comida);
+                aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
+                e.setAldeanos(aldea.nro_aldeanos_disponibles);
+                LEF lef =new LEF(elemento,cua.tiempo,2);
+                e.listaLEF.add(lef);
+                e.Agregar_evento_al_text_area(lef);
                 e.show();
            }
         }
@@ -117,11 +123,17 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             {
                 alm.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna((int)x, x_inicial)*25, (y_inicial+matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)*25)-(alm.Obtener_Alto()-(alm.alto*25)));
                 vec_item_estaticos.add(alm);
+                matriz_logica.colocar_edificio(matriz_logica.coordenadaY_a_Fila((int)y, y_inicial),matriz_logica.coordenaX_a_Columna((int)x, x_inicial),item.ancho,item.alto);
                 
                 aldea.total_oro-=r.costo_oro;
                 e.setOro(aldea.total_oro);
                 aldea.total_comida-=r.costo_comida;
                 e.setComida(aldea.total_comida);
+                aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
+                e.setAldeanos(aldea.nro_aldeanos_disponibles);
+                LEF lef =new LEF(elemento,alm.tiempo,2);
+                e.listaLEF.add(lef);
+                e.Agregar_evento_al_text_area(lef);
                 e.show();
             }
        
@@ -135,11 +147,17 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             {
                 tor.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna((int)x, x_inicial)*25, (y_inicial+matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)*25)-(tor.Obtener_Alto()-(tor.alto*25)));
                 vec_item_estaticos.add(tor);
+                matriz_logica.colocar_edificio(matriz_logica.coordenadaY_a_Fila((int)y, y_inicial),matriz_logica.coordenaX_a_Columna((int)x, x_inicial),item.ancho,item.alto);
                 
                 aldea.total_oro-=r.costo_oro;
                 e.setOro(aldea.total_oro);
                 aldea.total_comida-=r.costo_comida;
                 e.setComida(aldea.total_comida);
+                aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
+                e.setAldeanos(aldea.nro_aldeanos_disponibles);
+                LEF lef =new LEF(elemento,tor.tiempo,2);
+                e.listaLEF.add(lef);
+                e.Agregar_evento_al_text_area(lef);
                 e.show();
             }
             
@@ -153,12 +171,17 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             {
                 mer.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna((int)x, x_inicial)*25, (y_inicial+matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)*25)-(mer.Obtener_Alto()-(mer.alto*25)));
                 vec_item_estaticos.add(mer);
+                matriz_logica.colocar_edificio(matriz_logica.coordenadaY_a_Fila((int)y, y_inicial),matriz_logica.coordenaX_a_Columna((int)x, x_inicial),item.ancho,item.alto);
                 
                 aldea.total_oro-=r.costo_oro;
                 e.setOro(aldea.total_oro);
                 aldea.total_comida-=r.costo_comida;
                 e.setComida(aldea.total_comida);
-                
+                aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
+                e.setAldeanos(aldea.nro_aldeanos_disponibles);
+                LEF lef =new LEF(elemento,mer.tiempo,2);
+                e.listaLEF.add(lef);
+                e.Agregar_evento_al_text_area(lef);
                 e.show();    
                 
             }
@@ -173,11 +196,17 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             {
                 guar.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna((int)x, x_inicial)*25, (y_inicial+matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)*25)-(guar.Obtener_Alto()-(guar.alto*25)));
                 vec_item_estaticos.add(guar);
+                matriz_logica.colocar_edificio(matriz_logica.coordenadaY_a_Fila((int)y, y_inicial),matriz_logica.coordenaX_a_Columna((int)x, x_inicial),item.ancho,item.alto);
                 
                 aldea.total_oro-=r.costo_oro;
                 e.setOro(aldea.total_oro);
                 aldea.total_comida-=r.costo_comida;
                 e.setComida(aldea.total_comida);
+                aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
+                e.setAldeanos(aldea.nro_aldeanos_disponibles);
+                LEF lef =new LEF(elemento,guar.tiempo,2);
+                e.listaLEF.add(lef);
+                e.Agregar_evento_al_text_area(lef);
                 e.show();
             }
         
@@ -357,14 +386,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         Soldado2 a= new Soldado2();
         a.Seleccionar_Localizacion(300, 300);
         vec_item_con_movimiento.add(a);
-        
-        //insertando cuartel
-        Requerimientos x= Requerimiento.buscar_requerimiento("Cuartel",0);
-        x.mostrar_condiciones();
-        Cuartel cuartel = new Cuartel();
-        cuartel.Seleccionar_Localizacion(170, 80);
-        vec_item_estaticos.add(cuartel);
-        
+   
         //Insertando mercado
         
         /*Mercado mer=new Mercado();
@@ -494,6 +516,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         float pos_x = me.getX();
         float pos_y = me.getY();
         Objetos_Graficos obj;
+        Recuadro cuadro;
         for(int i=0;i<vec_item_estaticos.size();i++){
             obj=vec_item_estaticos.get(i);
             if(obj instanceof Recuadro){
@@ -501,7 +524,10 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             } 
          }
         if((me.getX()>x_inicial && me.getX()<x_final) && (me.getY()>y_inicial && me.getY()<y_final) && agregar_elemento){
-            Recuadro cuadro =new Recuadro(item.ancho,item.alto);
+            if(matriz_logica.verificar_disponibilidad(matriz_logica.coordenadaY_a_Fila(me.getY(), y_inicial),matriz_logica.coordenaX_a_Columna(me.getX(), x_inicial),item.ancho,item.alto)==0)
+                cuadro =new Recuadro(item.ancho,item.alto,true);
+            else
+                cuadro =new Recuadro(item.ancho,item.alto,false);
             cuadro.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna(me.getX(), x_inicial)*25, y_inicial+matriz_logica.coordenadaY_a_Fila(me.getY(), y_inicial)*25);
             vec_item_estaticos.add(cuadro);
         }

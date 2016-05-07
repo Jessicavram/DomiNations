@@ -123,6 +123,9 @@ public class Estadisticas extends JWindow
         et2.setText("Comida: "+comida);
         panel.repaint();
     }
+    public void Agregar_evento_al_text_area(LEF aux){
+        texto.append("\n"+aux.descripcion+"  |  "+aux.tiempo);
+    }
     
     
 }

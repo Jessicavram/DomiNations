@@ -11,11 +11,18 @@ package DomiNations;
  */
 public class LEF 
 {
-    String descripcion, tiempo, posicion;
+    String descripcion;
+    int tiempo, posicion;
     
     public LEF()
     {
         
+    }
+
+    public LEF(String descripcion,int tiempo, int posicion) {
+        this.descripcion = descripcion;
+        this.tiempo = tiempo;
+        this.posicion = posicion;
     }
     
     public String getLinea()
@@ -23,7 +30,7 @@ public class LEF
         return descripcion+"  |  "+tiempo;
     }
     
-    public String getPos()
+    public int getPos()
     {
         return posicion;
     }
