@@ -26,7 +26,7 @@ public class Granja extends Objetos_Animados{
         Hoja_Sprites map = new Hoja_Sprites();
         //Definir las acciones en la hoja de sprites
         map.Añadir_accion("Construir1", 0, 0, 74, 65, 10, false, 10);
-+        map.Añadir_accion("Listo1", 675, 0, 750, 210, 1, false, 0);
+        map.Añadir_accion("Listo1", 675, 0, 750, 210, 1, false, 0);
         
         //Crear la hoja de sprites
         animacion = new Animacion(map, "Construir1", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.GRANJA).getImage());

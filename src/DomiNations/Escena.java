@@ -455,7 +455,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
     @Override
     public void mouseMoved(MouseEvent me) {
        float pos_x = me.getX();
-+        float pos_y = me.getY();
+        float pos_y = me.getY();
        // System.out.println("la posicion actual del mouse es X= "+me.getX()+" Y="+me.getY());
         //revisar el vector de objetos
          Objetos_Graficos obj;
@@ -476,7 +476,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             pintar_menu();
         }
         if(Ventana_tienda && pos_y<465)
-+            Ventana_tienda=false;
+            Ventana_tienda=false;
     }
     
     
