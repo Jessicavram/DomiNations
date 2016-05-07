@@ -39,7 +39,7 @@ public class Principal extends JFrame {
         do{
             if( escena.mario.vidas==0 ){
                         escena.mario = new Mario();
-                        escena.crearNivel1();
+                        escena.Crear_Aldea();
                         escena_menu.setEstado(0);
                         Informacion_de_Teclado.setInstancia(null);
             }
@@ -78,7 +78,7 @@ public class Principal extends JFrame {
     private void Iniciar_Componentes(){
         escena = new Escena();
         getContentPane().add(escena);
-        escena.crearNivel1();
+        escena.Crear_Aldea();
         motor_de_juego = new Motor_Juego(escena);
     }
     public Principal(boolean x){

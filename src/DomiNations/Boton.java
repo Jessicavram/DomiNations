@@ -34,7 +34,7 @@ public class Boton extends Objetos_Animados{
         if(Nombre.compareTo("Almacen0")==0){
             map.Añadir_accion(Nombre, 44, 149, 88, 169, 1, true, 1);
         }
-        if(Nombre.compareTo("Almacen0")==0){
+        if(Nombre.compareTo("Centro0")==0){
             map.Añadir_accion(Nombre, 315, 149, 359, 169, 1, true, 1);
         }
         if(Nombre.compareTo("Torre0")==0){

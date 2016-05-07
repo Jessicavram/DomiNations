@@ -28,7 +28,7 @@ public class Casa extends Objetos_Animados {
     Hoja_Sprites map= new Hoja_Sprites();
    public Casa(){
    
-       super(370,2,2,10,0);
+       super(370,2,2,10,1);
        map.Añadir_accion("ConstruirC",0,0,50,70, 10, true, 10);
        animacion = new Animacion(map, "ConstruirC", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.CASA).getImage());
 

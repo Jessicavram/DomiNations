@@ -23,7 +23,7 @@ public class Almacen extends Objetos_Animados {
     Hoja_Sprites map= new Hoja_Sprites();
    public Almacen(){
    
-       super(800,3,3,10,4);
+       super(800,3,3,10,3);
        map.Añadir_accion("ConstruirA",0,20,74,129, 10, true, 5);
        animacion = new Animacion(map, "ConstruirA", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.ALMACEN).getImage());
 

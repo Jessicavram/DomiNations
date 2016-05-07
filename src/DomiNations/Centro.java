@@ -20,7 +20,7 @@ public class Centro extends Objetos_Animados{
     int capacidad_comida;
     
     public Centro(){
-        super(1000,4,4,5,4);
+        super(1000,6,5,5,4);
         Hoja_Sprites map = new Hoja_Sprites();
         //Definir las acciones en la hoja de sprites
         map.Añadir_accion("Construir1", 0,0,125,150, 10, false, 2);

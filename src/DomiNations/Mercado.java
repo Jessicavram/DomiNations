@@ -23,8 +23,8 @@ public class Mercado extends Objetos_Animados {
     Hoja_Sprites map= new Hoja_Sprites();
    public Mercado(){
    
-       super(800,3,3,10,4);
-        map.Añadir_accion("ConstruirT", 0, 0, 24,50, 10, true, 10);
+       super(800,3,3,10,3);
+       map.Añadir_accion("ConstruirM", 0, 0, 74,93, 10, true, 5);
        animacion = new Animacion(map, "ConstruirM", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.MERCADO).getImage());
        currentAction="ConstuirM";  
        capacidad_almacenamiento_oro=2500;

@@ -24,7 +24,7 @@ public class Cuartel extends Objetos_Animados{
     Hoja_Sprites map = new Hoja_Sprites();  
     
     public Cuartel(){              
-        super(1000, 3, 3, 10, 4);              
+        super(1000, 2, 3, 10, 4);              
         //Definir las acciones en la hoja de sprites
         map.Añadir_accion("Construir", 0,0,75,67, 10, true, 5);
         map.Añadir_accion("Listo", 1296, 0, 1439, 117, 1, false, 0);
