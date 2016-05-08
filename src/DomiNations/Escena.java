@@ -108,10 +108,10 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 e.setComida(aldea.total_comida);
                 aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
                 e.setAldeanos(aldea.nro_aldeanos_disponibles);
-                LEF lef =new LEF(elemento,cua.tiempo,2);
-                e.listaLEF.add(lef);
-                e.Agregar_evento_al_text_area(lef);
-                e.show();
+                 
+                e.insertar_LEF(new LEF("Cuartel",Motor_Juego.cont+cua.tiempo*50,e.pos));
+
+                e.panel.repaint();
            }
         }
         if(elemento.compareTo("Almacen0")==0){
@@ -131,10 +131,10 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 e.setComida(aldea.total_comida);
                 aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
                 e.setAldeanos(aldea.nro_aldeanos_disponibles);
-                LEF lef =new LEF(elemento,alm.tiempo,2);
-                e.listaLEF.add(lef);
-                e.Agregar_evento_al_text_area(lef);
-                e.show();
+                
+                e.insertar_LEF(new LEF("Cuartel",Motor_Juego.cont+alm.tiempo*50,e.pos));
+                
+                e.panel.repaint();
             }
        
         }
@@ -155,10 +155,10 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 e.setComida(aldea.total_comida);
                 aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
                 e.setAldeanos(aldea.nro_aldeanos_disponibles);
-                LEF lef =new LEF(elemento,tor.tiempo,2);
-                e.listaLEF.add(lef);
-                e.Agregar_evento_al_text_area(lef);
-                e.show();
+                
+                e.insertar_LEF(new LEF("Cuartel",Motor_Juego.cont+tor.tiempo*50,e.pos));
+                
+                e.panel.repaint();
             }
             
        
@@ -179,10 +179,10 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 e.setComida(aldea.total_comida);
                 aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
                 e.setAldeanos(aldea.nro_aldeanos_disponibles);
-                LEF lef =new LEF(elemento,mer.tiempo,2);
-                e.listaLEF.add(lef);
-                e.Agregar_evento_al_text_area(lef);
-                e.show();    
+                
+                e.insertar_LEF(new LEF("Cuartel",Motor_Juego.cont+mer.tiempo*50,e.pos));
+                
+                 e.panel.repaint();   
                 
             }
        
@@ -204,10 +204,10 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 e.setComida(aldea.total_comida);
                 aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
                 e.setAldeanos(aldea.nro_aldeanos_disponibles);
-                LEF lef =new LEF(elemento,guar.tiempo,2);
-                e.listaLEF.add(lef);
-                e.Agregar_evento_al_text_area(lef);
-                e.show();
+                
+                e.insertar_LEF(new LEF("Cuartel",Motor_Juego.cont+guar.tiempo*50,e.pos));
+                
+                e.panel.repaint();
             }
         
         }
@@ -293,7 +293,9 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 vec_botones.get(i).Dibujar(g);
         }
         //Pintar el personaje
-        mario.Dibujar(g);
+        g.setColor(Color.BLACK);
+        g.fillRect(0,0,80,15);
+        g.setColor(Color.RED);
         g.drawString( "Tiempo: "+(Motor_Juego.cont/50) , 0, 10);
         
     }
@@ -424,7 +426,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         
        //
        
-       e = new Estadisticas(aldea.total_oro,aldea.total_comida,aldea.nro_aldeanos);
+       e = new Estadisticas(aldea.total_oro,aldea.total_comida,aldea.nro_aldeanos);    
     }
     
     @Override

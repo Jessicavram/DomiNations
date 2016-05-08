@@ -24,10 +24,10 @@ public class LEF
         this.tiempo = tiempo;
         this.posicion = posicion;
     }
-    
+     
     public String getLinea()
     {   
-        return descripcion+"  |  "+tiempo;
+        return "\n "+tiempo/50+"      | "+descripcion;
     }
     
     public int getPos()

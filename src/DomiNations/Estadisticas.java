@@ -31,6 +31,7 @@ public class Estadisticas extends JWindow
     ArrayList<LEF> listaLEF = new ArrayList<LEF>();
     JTextArea texto;
     JScrollPane scroll;
+    int pos;
     
     public Estadisticas(int o, int c, int a)
     {
@@ -38,56 +39,59 @@ public class Estadisticas extends JWindow
         oro=o;
         comida=c;
         aldeano=a;       
-    }      
+    }    
     
     public void mostrar()
     {
-        this.setBounds(x,y,220,600);
+        this.setBounds(x,y,240,600);
         this.getContentPane().setBackground(Color.BLACK);
         this.setEnabled(true);
         
         panel = new JPanel();
-        panel.setBounds(10,10,200,580);
+        panel.setBounds(10,10,220,580);
         panel.setBackground(Color.DARK_GRAY);
         panel.setLayout(null);
         
         et1 = new JLabel("Oro: "+oro);
         et1.setFont(new Font("Arial",Font.BOLD, 16));
-        et1.setBounds(5,45,190,40);
+        et1.setBounds(5,45,210,40);
         et1.setForeground(Color.WHITE);
         et1.setVisible(true);
         
         et2 = new JLabel("Comida: "+comida);
         et2.setFont(new Font("Arial",Font.BOLD, 16));
-        et2.setBounds(5,85,190,40);
+        et2.setBounds(5,85,210,40);
         et2.setForeground(Color.WHITE);
         et2.setVisible(true);
         
         et3 = new JLabel("Aldeanos: "+aldeano);
         et3.setFont(new Font("Arial",Font.BOLD, 16));
-        et3.setBounds(5,125,190,40);
+        et3.setBounds(5,125,210,40);
         et3.setForeground(Color.WHITE);
         et3.setVisible(true);
         
         titulo1 = new JLabel("Estadísticas");
         titulo1.setFont(new Font("Arial",Font.BOLD, 18));
-        titulo1.setBounds(45,10,110,40);
+        titulo1.setBounds(55,10,110,40);
         titulo1.setForeground(Color.ORANGE);
         titulo1.setVisible(true);
         
         titulo2 = new JLabel("LEF");
         titulo2.setFont(new Font("Arial",Font.BOLD, 18));
-        titulo2.setBounds(80,175,40,40);
+        titulo2.setBounds(90,175,40,40);
         titulo2.setForeground(Color.ORANGE);
         titulo2.setVisible(true);
         
         texto = new JTextArea();
-        texto.setText("     Descripcion   |    Tiempo");
-        texto.append("\n________________________");
-        texto.setBounds(5,230,190,320);
+        texto.setFont(new Font("Arial",Font.BOLD,12));
+        texto.setForeground(Color.DARK_GRAY);
+        texto.setText(" Tiempo |        Descripcion");
+        texto.append("\n___________________________");
+        mostrar_LEF();
+        texto.setBounds(5,230,210,320);
         
         scroll = new JScrollPane(texto);
-        scroll.setBounds(5,230,190,320);
+        scroll.setBounds(5,230,210,320);
         scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         
         panel.add(et1);
@@ -102,26 +106,39 @@ public class Estadisticas extends JWindow
         this.setLayout(null);
         this.setVisible(true);
     }
+    
+    
+    public void insertar_LEF(LEF obj)
+    {
+        listaLEF.add(obj);
+        pos++;
+    }
+    
+    public void mostrar_LEF()
+    { 
+        for (LEF l : listaLEF)
+        {
+            texto.append(l.getLinea());
+        }
+    }
 
     public void setOro(int o)
     {
         oro=o;
         et1.setText("Oro: "+oro);
-        panel.repaint();
     }
     
     public void setAldeanos(int a)
     {
         aldeano=a;
         et3.setText("Aledeano: "+aldeano);
-        panel.repaint();
     }
     
     public void setComida(int c)
     {
         comida=c;
         et2.setText("Comida: "+comida);
-        panel.repaint();
+
     }
     public void Agregar_evento_al_text_area(LEF aux){
         texto.append("\n"+aux.descripcion+"  |  "+aux.tiempo);
