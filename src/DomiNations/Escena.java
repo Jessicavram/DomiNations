@@ -83,7 +83,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
     
     public void AgregarElementosAldea(float x,float y){
         
-        
+            int t_construc=0;
         if(elemento.compareTo("Tienda")==0){
        
         }
@@ -109,8 +109,9 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
                 e.setAldeanos(aldea.nro_aldeanos_disponibles);
                  
-                e.insertar_LEF(new LEF("Cuartel",Motor_Juego.cont+cua.tiempo*50,e.pos));
-
+                 t_construc=(Motor_Juego.cont/50)+cua.tiempo;
+                System.out.println("Tiempo Actual "+Motor_Juego.cont/50+" Tiempo de construccion "+t_construc);        
+                e.insertar_LEF(new LEF("Cuartel",t_construc,e.pos));
                 e.panel.repaint();
            }
         }
@@ -132,8 +133,9 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
                 e.setAldeanos(aldea.nro_aldeanos_disponibles);
                 
-                e.insertar_LEF(new LEF("Cuartel",Motor_Juego.cont+alm.tiempo*50,e.pos));
-                
+                 t_construc=(Motor_Juego.cont/50)+alm.tiempo;
+                System.out.println("Tiempo Actual "+Motor_Juego.cont/50+" Tiempo de construccion "+t_construc);        
+                e.insertar_LEF(new LEF("Almacen",t_construc,e.pos));
                 e.panel.repaint();
             }
        
@@ -156,8 +158,9 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
                 e.setAldeanos(aldea.nro_aldeanos_disponibles);
                 
-                e.insertar_LEF(new LEF("Cuartel",Motor_Juego.cont+tor.tiempo*50,e.pos));
-                
+                 t_construc=(Motor_Juego.cont/50)+tor.tiempo;
+                System.out.println("Tiempo Actual "+Motor_Juego.cont/50+" Tiempo de construccion "+t_construc);        
+                e.insertar_LEF(new LEF("Torre",t_construc,e.pos));
                 e.panel.repaint();
             }
             
@@ -180,8 +183,10 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
                 e.setAldeanos(aldea.nro_aldeanos_disponibles);
                 
-                e.insertar_LEF(new LEF("Cuartel",Motor_Juego.cont+mer.tiempo*50,e.pos));
-                
+                t_construc=(Motor_Juego.cont/50)+mer.tiempo;
+                System.out.println("Tiempo Actual "+Motor_Juego.cont/50+" Tiempo de construccion "+t_construc);        
+                e.insertar_LEF(new LEF("Mercado",t_construc,e.pos));
+              
                  e.panel.repaint();   
                 
             }
@@ -205,8 +210,14 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
                 e.setAldeanos(aldea.nro_aldeanos_disponibles);
                 
-                e.insertar_LEF(new LEF("Cuartel",Motor_Juego.cont+guar.tiempo*50,e.pos));
                 
+            
+                t_construc=(Motor_Juego.cont/50)+guar.tiempo;
+                System.out.println("Tiempo Actual "+Motor_Juego.cont/50+" Tiempo de construccion "+t_construc);
+                e.insertar_LEF(new LEF("Guarnicion",t_construc,e.pos));
+                
+               // System.out.println(e.listaLEF.get(e.pos-1).descripcion+" "+e.listaLEF.get(e.pos-1).tiempo+" "+e.listaLEF.get(e.pos-1).posicion);
+                //System.out.println(e.listaLEF.get(e.pos-1).getLinea());
                 e.panel.repaint();
             }
         
@@ -349,10 +360,10 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         //aldea
         
         aldea = new Aldea();
-        aldea.total_oro=2000;
-        aldea.total_comida=1500;
-        aldea.nro_aldeanos=7;
-        aldea.nro_aldeanos_disponibles=7;
+        aldea.total_oro=7000;
+        aldea.total_comida=5000;
+        aldea.nro_aldeanos=20;
+        aldea.nro_aldeanos_disponibles=20;
 
         //NIVEL 1
         
