@@ -27,7 +27,7 @@ public class LEF
      
     public String getLinea()
     {   
-        return "\n "+tiempo/50+"      | "+descripcion;
+        return "\n "+tiempo+"      | "+descripcion;
     }
     
     public int getPos()

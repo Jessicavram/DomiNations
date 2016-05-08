@@ -52,12 +52,12 @@ public class Matriz_Logica {
         //validacion para que los edificios no se salgan del alto
         if(fila+alto>18){
               ocupado=1;
-              System.out.println("Edificio se sale de los bordes de alto");
+           //   System.out.println("Edificio se sale de los bordes de alto");
           }
         //validacion para que los edificios no se salgan del ancho
         if(columna+ancho>22){
             ocupado=1;
-            System.out.println("Edificio se sale de los bordes de ancho ");
+            //System.out.println("Edificio se sale de los bordes de ancho ");
         }
         if(ocupado==0){
             for (int x=fila; x < fila+alto; x++) {

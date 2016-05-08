@@ -110,6 +110,7 @@ public class Estadisticas extends JWindow
     
     public void insertar_LEF(LEF obj)
     {
+        System.out.println(obj.descripcion+" "+obj.tiempo+" "+obj.posicion);
         listaLEF.add(obj);
         pos++;
     }

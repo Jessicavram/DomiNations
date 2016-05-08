@@ -46,6 +46,24 @@ public class Boton extends Objetos_Animados{
         if(Nombre.compareTo("Guarnicion0")==0){
             map.Añadir_accion(Nombre, 133, 130,177, 150, 1, true, 1);
         }
+        if(Nombre.compareTo("NO-Cuartel0")==0){
+            map.Añadir_accion(Nombre, 44, 279, 88, 299, 1, true, 1);
+        }
+        if(Nombre.compareTo("NO-Almacen0")==0){
+            map.Añadir_accion(Nombre, 44, 279, 88, 299, 1, true, 1);
+        }
+        if(Nombre.compareTo("NO-Centro0")==0){
+            map.Añadir_accion(Nombre, 315, 279, 359,299, 1, true, 1);
+        }
+        if(Nombre.compareTo("NO-Torre0")==0){
+            map.Añadir_accion(Nombre, 269, 259,313, 279, 1, true, 1);
+        }
+        if(Nombre.compareTo("NO-Mercado0")==0){
+            map.Añadir_accion(Nombre, 269, 259,313, 279, 1, true, 1);
+        }
+        if(Nombre.compareTo("NO-Guarnicion0")==0){
+            map.Añadir_accion(Nombre, 133, 259,177, 279, 1, true, 1);
+        }
               
         //Crear la hoja de sprites
         animacion = new Animacion(map, nombre, Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.BOTONES).getImage());

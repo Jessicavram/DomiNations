@@ -83,7 +83,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
     
     public void AgregarElementosAldea(float x,float y){
         
-        
+            int t_construc=0;
         if(elemento.compareTo("Tienda")==0){
        
         }
@@ -109,8 +109,9 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
                 e.setAldeanos(aldea.nro_aldeanos_disponibles);
                  
-                e.insertar_LEF(new LEF("Cuartel",Motor_Juego.cont+cua.tiempo*50,e.pos));
-
+                 t_construc=(Motor_Juego.cont/50)+cua.tiempo;
+                System.out.println("Tiempo Actual "+Motor_Juego.cont/50+" Tiempo de construccion "+t_construc);        
+                e.insertar_LEF(new LEF("Cuartel",t_construc,e.pos));
                 e.panel.repaint();
            }
         }
@@ -132,8 +133,9 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
                 e.setAldeanos(aldea.nro_aldeanos_disponibles);
                 
-                e.insertar_LEF(new LEF("Cuartel",Motor_Juego.cont+alm.tiempo*50,e.pos));
-                
+                 t_construc=(Motor_Juego.cont/50)+alm.tiempo;
+                System.out.println("Tiempo Actual "+Motor_Juego.cont/50+" Tiempo de construccion "+t_construc);        
+                e.insertar_LEF(new LEF("Almacen",t_construc,e.pos));
                 e.panel.repaint();
             }
        
@@ -156,8 +158,9 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
                 e.setAldeanos(aldea.nro_aldeanos_disponibles);
                 
-                e.insertar_LEF(new LEF("Cuartel",Motor_Juego.cont+tor.tiempo*50,e.pos));
-                
+                 t_construc=(Motor_Juego.cont/50)+tor.tiempo;
+                System.out.println("Tiempo Actual "+Motor_Juego.cont/50+" Tiempo de construccion "+t_construc);        
+                e.insertar_LEF(new LEF("Torre",t_construc,e.pos));
                 e.panel.repaint();
             }
             
@@ -180,8 +183,10 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
                 e.setAldeanos(aldea.nro_aldeanos_disponibles);
                 
-                e.insertar_LEF(new LEF("Cuartel",Motor_Juego.cont+mer.tiempo*50,e.pos));
-                
+                t_construc=(Motor_Juego.cont/50)+mer.tiempo;
+                System.out.println("Tiempo Actual "+Motor_Juego.cont/50+" Tiempo de construccion "+t_construc);        
+                e.insertar_LEF(new LEF("Mercado",t_construc,e.pos));
+              
                  e.panel.repaint();   
                 
             }
@@ -205,8 +210,14 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
                 e.setAldeanos(aldea.nro_aldeanos_disponibles);
                 
-                e.insertar_LEF(new LEF("Cuartel",Motor_Juego.cont+guar.tiempo*50,e.pos));
                 
+            
+                t_construc=(Motor_Juego.cont/50)+guar.tiempo;
+                System.out.println("Tiempo Actual "+Motor_Juego.cont/50+" Tiempo de construccion "+t_construc);
+                e.insertar_LEF(new LEF("Guarnicion",t_construc,e.pos));
+                
+               // System.out.println(e.listaLEF.get(e.pos-1).descripcion+" "+e.listaLEF.get(e.pos-1).tiempo+" "+e.listaLEF.get(e.pos-1).posicion);
+                //System.out.println(e.listaLEF.get(e.pos-1).getLinea());
                 e.panel.repaint();
             }
         
@@ -214,35 +225,77 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         
     }
     
-    public void crear_tienda(){
+    public void crear_tienda(){        
+        borrar_tienda();    
         //Precio Centro
-        Boton boton = new Boton("Centro0");
+        Requerimientos r;
+        Boton boton;
+        Centro Centro=new Centro();
+        r = Requerimiento.buscar_requerimiento("Centro",0);
+        if(aldea.total_comida>=r.costo_comida && aldea.total_oro>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
+            boton = new Boton("Centro0");
+        else
+            boton = new Boton("NO-Centro0");
         boton.Seleccionar_Localizacion(16, 550);
         vec_botones.add(boton);
+        
         //Precio Torre
-        boton = new Boton("Torre0");
+        Torre tor=new Torre();
+        r = Requerimiento.buscar_requerimiento("Torre",0);
+        if(aldea.total_comida>=r.costo_comida && aldea.total_oro>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
+            boton = new Boton("Torre0");
+        else
+            boton = new Boton("NO-Torre0");
         boton.Seleccionar_Localizacion(96, 550);
         vec_botones.add(boton);
-        //Precio Mercado
-        boton = new Boton("Mercado0");
+        
+//Precio Mercado
+        Mercado mer=new Mercado();
+        r = Requerimiento.buscar_requerimiento("Mercado",0);
+        if(aldea.total_comida>=r.costo_comida && aldea.total_oro>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
+            boton = new Boton("Mercado0");
+        else
+            boton = new Boton("NO-Mercado0");
         boton.Seleccionar_Localizacion(173, 550);
         
         vec_botones.add(boton);
+        
         //Precio Guarnicion
-        boton = new Boton("Guarnicion0");
+        Guarnicion guar=new Guarnicion();
+        r = Requerimiento.buscar_requerimiento("Guarnicion",0);
+        if(aldea.total_comida>=r.costo_comida && aldea.total_oro>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
+               boton = new Boton("Guarnicion0");
+        else
+                boton = new Boton("NO-Guarnicion0");
         boton.Seleccionar_Localizacion(252, 550);
         vec_botones.add(boton);
-        //Precio Almacen
-        boton = new Boton("Almacen0");
+        
+        //Precio Almacen        
+        Almacen alm= new Almacen();
+        r = Requerimiento.buscar_requerimiento("Almacen",0);
+        if(aldea.total_comida>=r.costo_comida && aldea.total_oro>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
+            boton = new Boton("Almacen0");
+        else 
+            boton = new Boton("NO-Almacen0");
         boton.Seleccionar_Localizacion(332, 550);
         vec_botones.add(boton);
         
         //Precio Cuartel
-        boton = new Boton("Cuartel0");
+        Cuartel cua=new Cuartel();
+        r = Requerimiento.buscar_requerimiento("Cuartel",cua.nivel);
+        if(aldea.total_comida>=r.costo_comida && aldea.total_oro>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
+            boton = new Boton("Cuartel0");
+        else
+            boton = new Boton("NO-Cuartel0");
         boton.Seleccionar_Localizacion(415, 550);
         vec_botones.add(boton);
     }
-    
+    public void borrar_tienda(){
+        vec_botones.clear();
+        Boton boton = new Boton("Tienda");
+        boton.Seleccionar_Localizacion(692, 542);
+        vec_botones.add(boton);
+    }
     public Objetos_Graficos Tipo_Item(String nombre){
         String clase= nombre.substring(0, nombre.length()-1);
         if(clase.compareTo("Almacen")==0)
@@ -349,10 +402,10 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         //aldea
         
         aldea = new Aldea();
-        aldea.total_oro=2000;
-        aldea.total_comida=1500;
-        aldea.nro_aldeanos=7;
-        aldea.nro_aldeanos_disponibles=7;
+        aldea.total_oro=7000;
+        aldea.total_comida=5000;
+        aldea.nro_aldeanos=20;
+        aldea.nro_aldeanos_disponibles=20;
 
         //NIVEL 1
         
@@ -369,8 +422,6 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         Boton boton = new Boton("Tienda");
         boton.Seleccionar_Localizacion(692, 542);
         vec_botones.add(boton);
-        
-        crear_tienda();
         
         //Vidas Mario
         if(mario.vidas>0){
@@ -451,14 +502,8 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         //Motor_Fisico.getInstance().mouse(e.getX(), e.getY());
         float pos_x = e.getX();
         float pos_y = e.getY();
-        Point punto=MouseInfo.getPointerInfo().getLocation();//este me da la posicion pero en toda la pantalla
-        //System.out.println("Posicion del evento "+e.getX()+"Posicioin del puntero "+punto.x);
-        // System.out.println("Posicion del evento "+e.getY()+"Posicioin del puntero "+punto.y);
-        //System.out.println("X"+pos_x+" "+"Y"+pos_y);
         Objetos_Graficos dinamico;
-        Boton b=new Boton();
-       
-        
+        Boton b=new Boton();      
         
         for(int i=0;i<vec_item_estaticos.size() && !Ventana_tienda;i++){
             dinamico = vec_item_estaticos.get(i); 
@@ -491,15 +536,14 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         for(int i=1;i<vec_botones.size() && Ventana_tienda;i++){
             dinamico = vec_botones.get(i);
             b=(Boton)vec_botones.get(i);
-            if((pos_x > dinamico.x && pos_x < dinamico.x + dinamico.Obtener_Ancho()) && (pos_y > dinamico.y && pos_y < dinamico.y + dinamico.Obtener_Alto())){
-                if(dinamico instanceof Boton){
-                    elemento=b.Nombre;  
-                    item = Tipo_Item(elemento);
-                    System.out.println(b.Nombre);
-                    agregar_elemento=true;
-                    Ventana_tienda=false;
-                    
-                }
+            if(!b.Nombre.substring(0,2).equals("NO") && (pos_x > dinamico.x && pos_x < dinamico.x + dinamico.Obtener_Ancho()) && (pos_y > dinamico.y && pos_y < dinamico.y + dinamico.Obtener_Alto())){
+                //if(dinamico instanceof Boton){
+                elemento=b.Nombre;  
+                item = Tipo_Item(elemento);
+                System.out.println(b.Nombre);
+                agregar_elemento=true;
+                Ventana_tienda=false;                    
+                //}
             }
         }
     }
@@ -552,12 +596,13 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         }
         //Agregando elementos a la aldea
         if(pos_x>692 && pos_y>542 && !Ventana_tienda){
-            System.out.println("Tienda");
             Ventana_tienda=true;
-            pintar_menu();
+            crear_tienda();
         }
-        if(Ventana_tienda && pos_y<465)
+        if(Ventana_tienda && pos_y<465){
+            borrar_tienda();
             Ventana_tienda=false;
+        }
     }
     
     
