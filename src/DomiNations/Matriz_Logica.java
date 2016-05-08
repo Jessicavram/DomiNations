@@ -43,43 +43,57 @@ public class Matriz_Logica {
         }
     }
         /**Verifica la disponibilidad de espacios vacios para construir en el mapa
-     *@param posx pos x de esquina inferior izquierda 
-     *@param posy pos y de esquina inferior izquierda
+     *@param fila pos x de esquina superior izquierda 
+     *@param columna pos y de esquina superior izquierda
      *@param ancho ancho
      *@param alto alto */
-    public int verificar_disponibilidad(int posx,int posy,int ancho,int alto){
+    public int verificar_disponibilidad(int fila,int columna,int ancho,int alto){
         int ocupado=0;
         //validacion para que los edificios no se salgan del alto
-        if(posx-alto<0){//(posx+alto>18){
-            ocupado=1;
-            System.out.println("Edificio se sale de los bordes de alto");
-        }
+        if(fila+alto>18){
+              ocupado=1;
+              System.out.println("Edificio se sale de los bordes de alto");
+          }
         //validacion para que los edificios no se salgan del ancho
-        if(posy+ancho>22){
+        if(columna+ancho>22){
             ocupado=1;
             System.out.println("Edificio se sale de los bordes de ancho ");
         }
         if(ocupado==0){
-            for (int x=posx; x < posx+alto; x++) {
-                for (int y=posy; y < posy+ancho; y++) {
-                
+            for (int x=fila; x < fila+alto; x++) {
+                for (int y=columna; y < columna+ancho; y++) {                 
                     if(matriz_logica[x][y]=='1'){
-                    //hay un obstaculo posicion ocupada para el edificio
+                     //hay un obstaculo posicion ocupada para el edificio
                         ocupado=1;
                     }   
                 }
             }
         }
         return ocupado;
-    }    
+      }
      /**Coloca un edificio en el mapa logico 
-     *@param posx pos x de esquina inferior izquierda 
-     *@param posy pos y de esquina inferior izquierda
+     *@param fila pos x de esquina inferior izquierda 
+     *@param columna pos y de esquina inferior izquierda
      *@param ancho ancho
      *@param alto alto */
-    public void colocar_edificio(int posx,int posy,int ancho,int alto){
-        for (int x=posx; x < posx+alto; x++) 
-            for (int y=posy; y < posy+ancho; y++)
+    
+    public void colocar_edificio(int fila,int columna,int ancho,int alto){
+        for (int x=fila; x < fila+alto; x++) 
+            for (int y=columna; y < columna+ancho; y++)
                 matriz_logica[x][y]='1';
-    }    
+    }
+    /**Transforma un coordena yx de punto, a una posicion de fila en la matriz logica 
+     *@param pos_x coordenada en xx del punto 
+     *@param x_inicio valor a descontar hasta donde comienza la matiz logica en la imagen */
+    public int coordenaX_a_Columna(int pos_x, int x_inicio){
+        //System.out.println("C:"+(int)(pos_x - x_inicio)/25);    
+        return (pos_x - x_inicio)/25;
+    }
+    /**Transforma un coordena yx de punto, a una posicion de fila en la matriz logica 
+     *@param pos_y coordenada en y del punto 
+     *@param y_inicio valor a descontar hasta donde comienza la matiz logica en la imagen */
+    public int coordenadaY_a_Fila(int pos_y, int y_inicio){
+        //System.out.println("F:"+(int)(pos_y - y_inicio)/25);
+            return (pos_y - y_inicio)/25;
+    }
 }

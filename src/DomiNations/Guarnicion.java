@@ -24,9 +24,10 @@ public class Guarnicion extends Objetos_Animados{
     Hoja_Sprites map = new Hoja_Sprites();  
     
     public Guarnicion(){              
-        super(1000, 3, 4, 10, 4);              
+        super(1000, 2, 2, 10, 3);              
         //Definir las acciones en la hoja de sprites
-        map.Añadir_accion("ConstruirG", 0, 0, 113, 188, 10, true, 2);
+        map.Añadir_accion("ConstruirG", 0, 0, 50, 65, 10, true, 10);
+        map.Añadir_accion("ListoG", 458, 0, 510, 65, 10, true, 10);
                 //Crear la hoja de sprites
         animacion = new Animacion(map, "ConstruirG", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.GUARNICION).getImage());
         //currentAction="Construir_Torre";

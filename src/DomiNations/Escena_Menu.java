@@ -31,13 +31,13 @@ class Escena_Menu extends JPanel {
     
     private void crear_escena(){
         nuevo_juego = new JLabel( Cargar_Imagenes.obtener_instancia().obtener_imagen( Cargar_Imagenes.NUEVO_JUEGO ) );
-        nuevo_juego.setBounds( 287, 109,182, 50);
+        nuevo_juego.setBounds( 250, 240,150, 36);
         nuevo_juego.setVisible(true);
         nuevo_juego.addMouseListener( new eventos() );
         add( nuevo_juego );
         
         instrucciones = new JLabel( Cargar_Imagenes.obtener_instancia().obtener_imagen( Cargar_Imagenes.INSTRUCCIONES ) );
-        instrucciones.setBounds( 279, 161, 191, 51);
+        instrucciones.setBounds( 250, 280, 150, 36);
         instrucciones.setVisible(true);
         instrucciones.addMouseListener( new eventos() );
         add( instrucciones );
@@ -49,17 +49,17 @@ class Escena_Menu extends JPanel {
         
         creditos= new JLabel(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.CREDITOS));
         creditos.setBounds( 310, 213, 160, 36);
-        creditos.setVisible(true);
+        creditos.setVisible(false);
         add( creditos );
         
         salir = new JLabel( Cargar_Imagenes.obtener_instancia().obtener_imagen( Cargar_Imagenes.SALIR ) );
-        salir.setBounds( 316, 250, 157, 49);
+        salir.setBounds( 250, 320, 150, 36);
         salir.setVisible(true);
         salir.addMouseListener( new eventos() );
         add( salir );     
         
         salir_instrucciones = new JButton( Cargar_Imagenes.obtener_instancia().obtener_imagen( Cargar_Imagenes.SALIR ) );
-        salir_instrucciones.setBounds( 402, 0, 157, 49);
+        salir_instrucciones.setBounds( 402, 0, 150, 36);
         salir_instrucciones.setVisible(false);
         salir_instrucciones.addMouseListener( new eventos() );
         add( salir_instrucciones );  
@@ -68,7 +68,7 @@ class Escena_Menu extends JPanel {
         fondo.setBounds( 0, 0, 640, 360);
         fondo.setVisible(true);
         add( fondo );  
-        Cargar_Sonidos.obtener_instancia().Reproducir_pistas(Cargar_Sonidos.FONDO_MENU, false, true);
+        //Cargar_Sonidos.obtener_instancia().Reproducir_pistas(Cargar_Sonidos.FONDO_MENU, false, true);
         
         creditos_imagen= new JLabel(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.CREDITOS_IMG));
         creditos_imagen.setBounds( 0, 0, 480, 300);
@@ -97,7 +97,7 @@ class Escena_Menu extends JPanel {
             if( e.getSource() instanceof JLabel )
             if( ((JLabel)e.getSource()).getIcon() == Cargar_Imagenes.obtener_instancia().obtener_imagen( Cargar_Imagenes.NUEVO_JUEGO)){
                 estado = 1;   
-            Cargar_Sonidos.obtener_instancia().Reproducir_pistas(Cargar_Sonidos.MUNDO_1, false, true);
+            //Cargar_Sonidos.obtener_instancia().Reproducir_pistas(Cargar_Sonidos.MUNDO_1, false, true);
             }else if( ((JLabel)e.getSource()).getIcon() == Cargar_Imagenes.obtener_instancia().obtener_imagen( Cargar_Imagenes.INSTRUCCIONES)){
                estado = 2; 
                Cargar_Sonidos.obtener_instancia().Reproducir_pistas(Cargar_Sonidos.FONDO_MENU, false, true);
