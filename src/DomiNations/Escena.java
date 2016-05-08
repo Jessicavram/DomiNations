@@ -460,8 +460,25 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         granja.Seleccionar_Localizacion(250, 30);
         vec_item_estaticos.add(granja);
         
+        //Insertando Varios Arboles 
+        Arbol arb[]=new Arbol[5];
+        for(int i=0;i<5;i++){
+           
+         arb[i]=new Arbol();
+         arb[i].Seleccionar_Localizacion(110+i*67, 90);
+         vec_item_estaticos.add(arb[i]); 
+        }
         
-         
+        //insertando Mina
+        
+        Mina min =new Mina();
+        
+        min.Seleccionar_Localizacion(140, 20);
+        vec_item_estaticos.add(min); 
+        
+        
+        
+        
         /*Probando la matriz logica*
         Matriz_Logica m=new Matriz_Logica();
         m.imprimir();
