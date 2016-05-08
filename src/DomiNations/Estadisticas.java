@@ -122,7 +122,20 @@ public class Estadisticas extends JWindow
             texto.append(l.getLinea());
         }
     }
-
+    public void Consultar_LEF(int tiempo){
+        for (LEF l : listaLEF)
+        {
+           if(l.tiempo==tiempo ){
+               if(l.evento_ocurrio==0){
+               System.out.println("Ocurrio el evento "+l.descripcion);
+               l.evento_ocurrio=1;
+               break;
+               
+               }
+           }
+        }
+     
+    }
     public void setOro(int o)
     {
         oro=o;

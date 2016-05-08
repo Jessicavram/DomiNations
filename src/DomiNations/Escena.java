@@ -378,6 +378,9 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                     vec_item_con_movimiento.get(i).Actualizar_Objeto_Grafico(timePassed);
             }
         }
+            //Consultar en la LEF los eventos futuros 
+           e.Consultar_LEF(Motor_Juego.cont/50);
+            
     }
     
     public void moveScreen(float dx){
