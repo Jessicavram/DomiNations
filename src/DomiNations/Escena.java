@@ -410,9 +410,9 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         vec_botones.add(boton);
     }
     public void actualizar_cuartel_entrenar(Cuartel cuartel, Graphics g){        
-        g.drawString( ""+(cuartel.nro_soldado1_cola+cuartel.nro_soldado2_cola),397,499);
-        g.drawString( ""+cuartel.nro_soldado1_cola,302,553);
-        g.drawString( ""+cuartel.nro_soldado2_cola,366,553);  
+        g.drawString( ""+(cuartel.nro_soldado1_cola+cuartel.nro_soldado2_cola),395,499);
+        g.drawString( ""+cuartel.nro_soldado1_cola,300,553);
+        g.drawString( ""+cuartel.nro_soldado2_cola,364,553);  
     }
     public Objetos_Graficos Tipo_Item(String nombre){
         String clase= nombre.substring(0, nombre.length()-1);
@@ -693,16 +693,24 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         for(int i=2;i<vec_botones.size() && (Ventana_tienda || Ventana_cuartel);i++){
             dinamico = vec_botones.get(i);
             b=(Boton)vec_botones.get(i);
-            if(b.Nombre.equals("X-Cuartel") && (pos_x > dinamico.x && pos_x < dinamico.x + dinamico.Obtener_Ancho()) && (pos_y > dinamico.y && pos_y < dinamico.y + dinamico.Obtener_Alto()))
-            {   Ventana_cuartel=false;
-                borrar_tienda();
-                cuartel_aux=null;
-            }else if(!b.Nombre.substring(0,2).equals("NO") && (pos_x > dinamico.x && pos_x < dinamico.x + dinamico.Obtener_Ancho()) && (pos_y > dinamico.y && pos_y < dinamico.y + dinamico.Obtener_Alto())){
-                elemento=b.Nombre;  
-                item = Tipo_Item(elemento);
-                System.out.println(b.Nombre);
-                agregar_elemento=true;
-                Ventana_tienda=false; 
+            if((pos_x > dinamico.x && pos_x < dinamico.x + dinamico.Obtener_Ancho()) && (pos_y > dinamico.y && pos_y < dinamico.y + dinamico.Obtener_Alto()))
+            {    if(b.Nombre.equals("X-Cuartel"))
+                {   Ventana_cuartel=false;
+                    borrar_tienda();
+                    cuartel_aux=null;
+                }else if(!b.Nombre.substring(0,2).equals("NO") && b.Nombre.substring(0,7).equals("Soldado")){
+                        if (b.Nombre.equals("Soldado1")) {
+                            cuartel_aux.nro_soldado1_cola++;
+                        }else
+                            cuartel_aux.nro_soldado2_cola++;                
+                }
+                else if(!b.Nombre.substring(0,2).equals("NO")){
+                    elemento=b.Nombre;  
+                    item = Tipo_Item(elemento);
+                    System.out.println(b.Nombre);
+                    agregar_elemento=true;
+                    Ventana_tienda=false; 
+                }
             }
         }
     }
