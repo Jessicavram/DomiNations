@@ -47,6 +47,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
     
     /**Estado de la escena*/
     boolean Ventana_tienda=false;
+    boolean Ventana_cuartel=false;
     boolean agregar_elemento=false;
     /**Lista de requerimientos para crear o mejor item*/
     Lista_de_Requerimientos Requerimiento;
@@ -281,7 +282,10 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
     }
     
     public void crear_tienda(){        
-        borrar_tienda();    
+        borrar_tienda();
+        Objetos_Inanimados obj = new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.BOTONES).getImage(), new Rectangulo(0, 0, 771,126) );
+        obj.Seleccionar_Localizacion(0,466);
+        vec_botones.add(obj);
         //Precio Centro
         Requerimientos r;
         Boton boton;
@@ -369,10 +373,41 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         vec_botones.clear();
         Boton boton = new Boton("Tienda");
         boton.Seleccionar_Localizacion(692, 542);
-        vec_botones.add(boton);
-        Objetos_Inanimados obj = new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.BOTONES).getImage(), new Rectangulo(0, 0, 771,126) );
+        vec_botones.add(boton);        
+    }
+    public void crear_cuartel_entrenar(Cuartel cuartel){
+        borrar_tienda();  
+        Requerimientos r;
+        Boton boton;
+        
+        Objetos_Inanimados obj = new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.ENTRENAR).getImage(), new Rectangulo(0, 0, 771,126) );
         obj.Seleccionar_Localizacion(0,466);
         vec_botones.add(obj);
+        
+        boton = new Boton("X-Cuartel");
+        boton.Seleccionar_Localizacion(720, 480);
+        vec_botones.add(boton);
+        
+        
+        //Precio Soldado
+        Soldado sol1=new Soldado();
+        r = Requerimiento.buscar_requerimiento("Soldado1",0);
+        if(aldea.total_comida>=r.costo_comida && aldea.total_oro>=r.costo_oro && cuartel.capacidad_actual<cuartel.capacidad_ejercito)
+            boton = new Boton("Soldado1");
+        else
+            boton = new Boton("NO-Soldado1");
+        boton.Seleccionar_Localizacion(91, 546);
+        vec_botones.add(boton);
+        
+        //Precio Soldado
+        Soldado2 sol2=new Soldado2();
+        r = Requerimiento.buscar_requerimiento("Soldado2",0);
+        if(aldea.total_comida>=r.costo_comida && aldea.total_oro>=r.costo_oro && cuartel.capacidad_actual<cuartel.capacidad_ejercito)
+            boton = new Boton("Soldado2");
+        else
+            boton = new Boton("NO-Soldado2");
+        boton.Seleccionar_Localizacion(153, 546);
+        vec_botones.add(boton);
     }
     public Objetos_Graficos Tipo_Item(String nombre){
         String clase= nombre.substring(0, nombre.length()-1);
@@ -420,7 +455,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         //pintan los item que tienen movimiento por la aldea 
         if(!Ventana_tienda)vec_botones.get(0).Dibujar(g);
         
-        for(int i=1;i<vec_botones.size() && Ventana_tienda;i++){ 
+        for(int i=1;i<vec_botones.size() && (Ventana_tienda || Ventana_cuartel);i++){ 
                 vec_botones.get(i).Dibujar(g);
         }
         //Pintar el personaje
@@ -628,6 +663,8 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             if((pos_x > dinamico.x && pos_x < dinamico.x + dinamico.Obtener_Ancho()) && (pos_y > dinamico.y && pos_y < dinamico.y + dinamico.Obtener_Alto())){
                 if(dinamico instanceof Cuartel){
                     System.out.println("Selecciono Cuartel");
+                    crear_cuartel_entrenar((Cuartel)dinamico);
+                    Ventana_cuartel=true;
                 }else if(dinamico instanceof Torre){
                     System.out.println("Selecciono Torre");
                 }else if(dinamico instanceof Guarnicion){
@@ -651,17 +688,18 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             agregar_elemento=false;        
         }
         
-        for(int i=2;i<vec_botones.size() && Ventana_tienda;i++){
+        for(int i=2;i<vec_botones.size() && (Ventana_tienda || Ventana_cuartel);i++){
             dinamico = vec_botones.get(i);
             b=(Boton)vec_botones.get(i);
-            if(!b.Nombre.substring(0,2).equals("NO") && (pos_x > dinamico.x && pos_x < dinamico.x + dinamico.Obtener_Ancho()) && (pos_y > dinamico.y && pos_y < dinamico.y + dinamico.Obtener_Alto())){
-                //if(dinamico instanceof Boton){
+            if(b.Nombre.equals("X-Cuartel") && (pos_x > dinamico.x && pos_x < dinamico.x + dinamico.Obtener_Ancho()) && (pos_y > dinamico.y && pos_y < dinamico.y + dinamico.Obtener_Alto()))
+            {   Ventana_cuartel=false;
+                borrar_tienda();
+            }else if(!b.Nombre.substring(0,2).equals("NO") && (pos_x > dinamico.x && pos_x < dinamico.x + dinamico.Obtener_Ancho()) && (pos_y > dinamico.y && pos_y < dinamico.y + dinamico.Obtener_Alto())){
                 elemento=b.Nombre;  
                 item = Tipo_Item(elemento);
                 System.out.println(b.Nombre);
                 agregar_elemento=true;
-                Ventana_tienda=false;                    
-                //}
+                Ventana_tienda=false; 
             }
         }
     }

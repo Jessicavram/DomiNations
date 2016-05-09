@@ -12,7 +12,7 @@ public class Cargar_Imagenes {
     protected ImageIcon vec_imagenes[];
     /**Constante que nos indica el total de imagenes a cargar, que seria la suma de cada una de las constantes*/
 
-    protected static final int TOTAL_IMAGENES=34;
+    protected static final int TOTAL_IMAGENES=35;
 
     /**Constante para conocer el nombre de la imagen que contiene la animacion de los enemigos*/
     public static final int ENEMIGOS=0;
@@ -83,6 +83,8 @@ public class Cargar_Imagenes {
     public static final int MINA=32;
     /**Aldeano*/
      public static final int ALDEANO=33;
+    /**Imagen con el fondo de cuartel*/
+    public static final int ENTRENAR=34;
     /**Constructor de la clase, privado para usar la instancia y solo poder crearse un objeto de la clase, es usado para cargar
     /* el vector de imagenes a travez de la dirreccion url de cada una de las imagenes con ayuda de las constantes */
     private Cargar_Imagenes() {
@@ -90,7 +92,8 @@ public class Cargar_Imagenes {
         String nombres_imagenes[] = new String[]{"Enemigos","Inanimados","Mario","Mundo_1","planta_carnivora","Castillo","Mario_inc","Nuevo_juego","Salir","estrella","Mundo_2","Inanimados_2","Instrucciones","instrucciones_static"
 
         ,"bowser","fuego","creditos","creditos_img","fondo_aldea","cuartel","centro","fondo1","soldado",
-        "mercado","torre","guarnicion","almacen","casa","granja","boton","recuadro","arboles","mina","aldeano"};
+        "mercado","torre","guarnicion","almacen","casa","granja","boton","recuadro","arboles","mina","aldeano",
+        "Cuartel_Entrenar"};
         vec_imagenes = new ImageIcon[TOTAL_IMAGENES];
         for(int i=0;i<TOTAL_IMAGENES;i++){
             try {
