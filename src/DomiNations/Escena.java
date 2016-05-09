@@ -49,8 +49,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
     boolean Ventana_tienda=false;
     boolean Ventana_cuartel=false;
     boolean agregar_elemento=false;
-    
-    Cuartel cuartel_aux=null;
+    int posicion_Cuartel=-1;
     /**Lista de requerimientos para crear o mejor item*/
     Lista_de_Requerimientos Requerimiento;
     
@@ -282,7 +281,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
     }
     
     public void crear_tienda(){        
-        borrar_tienda();
+        borrar_botones();
         Objetos_Inanimados obj = new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.BOTONES).getImage(), new Rectangulo(0, 0, 771,126) );
         obj.Seleccionar_Localizacion(0,466);
         vec_botones.add(obj);
@@ -369,14 +368,43 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         boton.Seleccionar_Localizacion(575, 550);
         vec_botones.add(boton);
     }
-    public void borrar_tienda(){
+    public void borrar_botones(){
         vec_botones.clear();
         Boton boton = new Boton("Tienda");
         boton.Seleccionar_Localizacion(692, 542);
         vec_botones.add(boton);        
     }
+    
+    /**Revisa el vector de estaticos si hay algun cuartel verifica si tiene soldades en adiestramiento de ser asi disminuye su tiempo en una unidad*/
+    public void actualizar_tiempos_cuartel(){
+        Cuartel cuartel;
+        Objetos_Graficos estatico;
+        for (int i = 0; i < vec_item_estaticos.size(); i++) {
+            estatico = vec_item_estaticos.get(i);
+            if(estatico instanceof Cuartel){
+                cuartel = (Cuartel)estatico;
+                if (cuartel.tiempo_entrenamiento>0) {
+                    System.out.println("Tiempo: "+cuartel.tiempo_entrenamiento);
+                    if((cuartel.tiempo_entrenamiento-(cuartel.soldados_en_cola*5)+1)==1){
+                        if(cuartel.soldados_en_cola>0)
+                            cuartel.soldados_en_cola--;
+                        cuartel.capacidad_actual++;
+                        if(cuartel.nro_soldado1_cola>0){
+                            cuartel.nro_soldado1_cola--;
+                            cuartel.nro_soldado1++;
+                        }else if(cuartel.nro_soldado2_cola>0){
+                            cuartel.nro_soldado2_cola--;
+                            cuartel.nro_soldado2++;
+                        }
+                    }
+                    cuartel.tiempo_entrenamiento--;
+                    vec_item_estaticos.set(i, cuartel);                   
+                }                
+            }
+        }
+    }
     public void crear_cuartel_entrenar(Cuartel cuartel){
-        borrar_tienda();  
+        borrar_botones();  
         Requerimientos r;
         Boton boton;
         
@@ -392,7 +420,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         //Precio Soldado
         Soldado sol1=new Soldado();
         r = Requerimiento.buscar_requerimiento("Soldado1",0);
-        if(aldea.total_comida>=r.costo_comida && aldea.total_oro>=r.costo_oro && cuartel.capacidad_actual<cuartel.capacidad_ejercito)
+        if(aldea.comida_Actual>=r.costo_comida && aldea.oro_Actual>=r.costo_oro && (cuartel.capacidad_actual<cuartel.capacidad_ejercito && cuartel.soldados_en_cola<(cuartel.capacidad_ejercito-1)))
             boton = new Boton("Soldado1");
         else
             boton = new Boton("NO-Soldado1");
@@ -402,17 +430,19 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         //Precio Soldado
         Soldado2 sol2=new Soldado2();
         r = Requerimiento.buscar_requerimiento("Soldado2",0);
-        if(aldea.total_comida>=r.costo_comida && aldea.total_oro>=r.costo_oro && cuartel.capacidad_actual<cuartel.capacidad_ejercito)
+        if(aldea.comida_Actual>=r.costo_comida && aldea.oro_Actual>=r.costo_oro && (cuartel.capacidad_actual<cuartel.capacidad_ejercito && cuartel.soldados_en_cola<(cuartel.capacidad_ejercito-1)))
             boton = new Boton("Soldado2");
         else
             boton = new Boton("NO-Soldado2");
         boton.Seleccionar_Localizacion(153, 546);
         vec_botones.add(boton);
     }
-    public void actualizar_cuartel_entrenar(Cuartel cuartel, Graphics g){        
-        g.drawString( ""+(cuartel.nro_soldado1_cola+cuartel.nro_soldado2_cola),395,499);
+    public void actualizar_cuartel_entrenar(Objetos_Graficos aux, Graphics g){        
+        Cuartel cuartel= (Cuartel)(aux);
+        g.drawString( ""+cuartel.soldados_en_cola,395,499);
         g.drawString( ""+cuartel.nro_soldado1_cola,300,553);
-        g.drawString( ""+cuartel.nro_soldado2_cola,364,553);  
+        g.drawString( ""+cuartel.nro_soldado2_cola,364,553);
+        g.drawString( ""+cuartel.tiempo_entrenamiento,400,553);        
     }
     public Objetos_Graficos Tipo_Item(String nombre){
         String clase= nombre.substring(0, nombre.length()-1);
@@ -436,6 +466,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         }
         return null;
     }
+    
     
     @Override
     public void paint(Graphics g){
@@ -468,9 +499,10 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         g.fillRect(0,0,80,15);
         g.setColor(Color.RED);
         g.drawString( "Tiempo: "+(Motor_Juego.cont/50) , 0, 10);
-        if(Ventana_cuartel)
-            actualizar_cuartel_entrenar(cuartel_aux, g);
         
+        if(Ventana_cuartel){
+            actualizar_cuartel_entrenar(vec_item_estaticos.get(posicion_Cuartel), g);
+        }
     }
     /**Metodo que actializa la escena y donde se realizan acciones logicas*/
     public void update(double timePassed){                       
@@ -494,7 +526,10 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 vec_item_con_movimiento.get(i).Actualizar_Objeto_Grafico(timePassed);
         }
       //Consultar en la LEF los eventos futuros 
-       e.Consultar_LEF(Motor_Juego.cont/50);            
+       e.Consultar_LEF(Motor_Juego.cont/50); 
+       if (Motor_Juego.cont%50==0){
+           actualizar_tiempos_cuartel();
+       }
     }
     
     public void moveScreen(float dx){
@@ -652,10 +687,10 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
     }
     
     @Override
-    public void mouseClicked(MouseEvent e) {
+    public void mouseClicked(MouseEvent evento) {
         //Motor_Fisico.getInstance().mouse(e.getX(), e.getY());
-        float pos_x = e.getX();
-        float pos_y = e.getY();
+        float pos_x = evento.getX();
+        float pos_y = evento.getY();
         Objetos_Graficos dinamico;
         Boton b=new Boton();      
         
@@ -663,10 +698,9 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             dinamico = vec_item_estaticos.get(i); 
             if((pos_x > dinamico.x && pos_x < dinamico.x + dinamico.Obtener_Ancho()) && (pos_y > dinamico.y && pos_y < dinamico.y + dinamico.Obtener_Alto())){
                 if(dinamico instanceof Cuartel){
-                    System.out.println("Selecciono Cuartel");
                     crear_cuartel_entrenar((Cuartel)dinamico);
                     Ventana_cuartel=true;
-                    cuartel_aux=(Cuartel)dinamico;
+                    posicion_Cuartel=i;
                 }else if(dinamico instanceof Torre){
                     System.out.println("Selecciono Torre");
                 }else if(dinamico instanceof Guarnicion){
@@ -686,7 +720,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         }
         
         if(agregar_elemento==true){            
-            AgregarElementosAldea(e.getX(),e.getY());
+            AgregarElementosAldea(evento.getX(),evento.getY());
             agregar_elemento=false;        
         }
         
@@ -696,13 +730,35 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             if((pos_x > dinamico.x && pos_x < dinamico.x + dinamico.Obtener_Ancho()) && (pos_y > dinamico.y && pos_y < dinamico.y + dinamico.Obtener_Alto()))
             {    if(b.Nombre.equals("X-Cuartel"))
                 {   Ventana_cuartel=false;
-                    borrar_tienda();
-                    cuartel_aux=null;
-                }else if(!b.Nombre.substring(0,2).equals("NO") && b.Nombre.substring(0,7).equals("Soldado")){
+                    borrar_botones();
+                }else if(!b.Nombre.substring(0,2).equals("NO") && b.Nombre.length()>7 && b.Nombre.substring(0,7).equals("Soldado")){
+                    Cuartel aux = (Cuartel)vec_item_estaticos.get(posicion_Cuartel);    
+                    Requerimientos r;                    
                         if (b.Nombre.equals("Soldado1")) {
-                            cuartel_aux.nro_soldado1_cola++;
-                        }else
-                            cuartel_aux.nro_soldado2_cola++;                
+                            aux.nro_soldado1_cola++;                            
+                            Soldado sol1 = new Soldado();
+                            aux.tiempo_entrenamiento+=sol1.tiempo;
+                            r = Requerimiento.buscar_requerimiento("Soldado1",0);
+                            aldea.comida_Actual-=r.costo_comida;
+                            e.setComida(aldea.comida_Actual);
+                            e.insertar_LEF(new LEF("Soldado",((Motor_Juego.cont/50)+aux.tiempo_entrenamiento),e.pos));
+                            e.panel.repaint();
+                        }else{
+                            aux.nro_soldado2_cola++;
+                            Soldado2 sol2 = new Soldado2();
+                            aux.tiempo_entrenamiento+=sol2.tiempo;
+                            r = Requerimiento.buscar_requerimiento("Soldado2",0);
+                            aldea.comida_Actual-=r.costo_comida;
+                            e.setComida(aldea.comida_Actual);
+                            e.insertar_LEF(new LEF("Artillero",((Motor_Juego.cont/50)+aux.tiempo_entrenamiento),e.pos));
+                            e.panel.repaint();
+                        }
+                        aux.soldados_en_cola= (aux.nro_soldado1_cola+aux.nro_soldado2_cola==0 ? 0 : (aux.nro_soldado1_cola+aux.nro_soldado2_cola-1));
+                        //aux.capacidad_actual=aux.nro_soldado2_cola+aux.nro_soldado1_cola;
+                        System.out.println("*** CT:"+aux.capacidad_ejercito+" CA:"+aux.capacidad_actual+" COLA:"+aux.soldados_en_cola);
+                        vec_item_estaticos.set(posicion_Cuartel, aux);
+                        borrar_botones();
+                        crear_cuartel_entrenar(aux);
                 }
                 else if(!b.Nombre.substring(0,2).equals("NO")){
                     elemento=b.Nombre;  
@@ -767,7 +823,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             crear_tienda();
         }
         if(Ventana_tienda && pos_y<465){
-            borrar_tienda();
+            borrar_botones();
             Ventana_tienda=false;
         }
     }
