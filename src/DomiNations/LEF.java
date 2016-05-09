@@ -13,6 +13,7 @@ public class LEF
 {
     String descripcion;
     int tiempo, posicion;
+    int evento_ocurrio=0;
     
     public LEF()
     {
