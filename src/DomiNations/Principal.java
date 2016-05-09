@@ -18,7 +18,7 @@ public class Principal extends JFrame {
     
     /**Constructor*/
     public Principal(){
-        super("Super Mario Bros 1.0");
+        super("DomiNations 1.0");
        
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
@@ -82,7 +82,7 @@ public class Principal extends JFrame {
         motor_de_juego = new Motor_Juego(escena);
     }
     public Principal(boolean x){
-            super("Super Mario Bros 1.0");
+            super("Dominations 1.0");
             escena_menu = new Escena_Menu();
             setDefaultCloseOperation(EXIT_ON_CLOSE);
             setResizable(false);

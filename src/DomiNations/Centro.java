@@ -23,10 +23,8 @@ public class Centro extends Objetos_Animados{
         super(1000,5,6,5,4);
         Hoja_Sprites map = new Hoja_Sprites();
         //Definir las acciones en la hoja de sprites
-        map.Añadir_accion("Construir1", 0,0,125,150, 10, false, 2);
-        map.Añadir_accion("Listo1", 1710, 0, 1900, 210, 1, false, 0);
-        map.Añadir_accion("Construir2", 0, 210, 189, 420, 10, false, 2);
-        map.Añadir_accion("Listo2", 1710, 210, 1900, 420, 1, false, 0);
+        map.Añadir_accion("Construir1", 0,0,124,150, 9, false, 2);
+        map.Añadir_accion("Listo1", 1500, 0, 1624,150, 1, false, 0);
         
         //Crear la hoja de sprites
         animacion = new Animacion(map, "Construir1", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.CENTRO).getImage());
