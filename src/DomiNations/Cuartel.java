@@ -26,8 +26,9 @@ public class Cuartel extends Objetos_Animados{
     public Cuartel(){              
         super(1000, 3, 2, 10, 4); 
         //Definir las acciones en la hoja de sprites
-        map.Añadir_accion("Construir", 0,0,75,67, 10, true, 5);
-        map.Añadir_accion("Listo", 1296, 0, 1439, 117, 1, false, 0);
+        //Son 10 imagenes pero coloco 9 porque como no repite el coloca la imagen 9+1
+        map.Añadir_accion("Construir1", 0,0,75,67, 9, false, 1);
+        map.Añadir_accion("Listo1", 1296, 0, 1439, 117, 1, false, 0);
         //Crear la hoja de sprites
         animacion = new Animacion(map, "Construir", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.CUARTEL).getImage());
   

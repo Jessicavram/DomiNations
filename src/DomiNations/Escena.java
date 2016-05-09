@@ -225,7 +225,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 e.panel.repaint();
             }
         
-        }else if (elemento.compareTo("Casa0")==0) {
+        }else if (elemento.compareTo("Casa")==0) {
             Casa casa = new Casa();
             Requerimientos r = Requerimiento.buscar_requerimiento("Casa",0);
             if(aldea.total_comida>=r.costo_comida && aldea.total_oro>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
@@ -332,6 +332,26 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             boton = new Boton("NO-Cuartel0");
         boton.Seleccionar_Localizacion(415, 550);
         vec_botones.add(boton);
+        
+        //Precio Casa
+        Casa casa=new Casa();
+        r = Requerimiento.buscar_requerimiento("Casa",cua.nivel);
+        if(aldea.total_comida>=r.costo_comida && aldea.total_oro>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
+            boton = new Boton("Casa");
+        else
+            boton = new Boton("NO-Casa");
+        boton.Seleccionar_Localizacion(495, 550);
+        vec_botones.add(boton);
+        
+        //Precio Granja
+       Granja granja =new Granja();
+        r = Requerimiento.buscar_requerimiento("Granja0",cua.nivel);
+        if(aldea.total_comida>=r.costo_comida && aldea.total_oro>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
+            boton = new Boton("Granja0");
+        else
+            boton = new Boton("NO-Granja0");
+        boton.Seleccionar_Localizacion(575, 550);
+        vec_botones.add(boton);
     }
     public void borrar_tienda(){
         vec_botones.clear();
@@ -346,7 +366,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         String clase= nombre.substring(0, nombre.length()-1);
         if(clase.compareTo("Almacen")==0)
             return new Almacen();
-        else if (clase.compareTo("Casa")==0) {
+        else if (clase.compareTo("Cas")==0) {
             return new Casa();
         }else if (clase.compareTo("Centro")==0) {
             return new Centro();

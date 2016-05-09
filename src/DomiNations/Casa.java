@@ -29,13 +29,12 @@ public class Casa extends Objetos_Animados {
    public Casa(){
    
        super(370,2,2,10,1);
-       map.Añadir_accion("ConstruirC",0,0,50,70, 10, true, 10);
+       //Son 10 imagenes pero coloco 9 porque como no repite el coloca la imagen 9+1
+       map.Añadir_accion("ConstruirC",0,0,50,70, 9, false, 1);
        animacion = new Animacion(map, "ConstruirC", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.CASA).getImage());
 
        capacidad_almacenamiento_comida=200;
-       capacidad_actual_comida=capacidad_almacenamiento_comida;
        capacidad_almacenamiento_oro=200;
-       capacidad_actual_oro=capacidad_almacenamiento_oro;
    } 
 
     @Override

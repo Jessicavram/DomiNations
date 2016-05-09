@@ -24,7 +24,8 @@ public class Torre extends Objetos_Animados{
     public Torre(){              
         super(1000, 1, 1, 10, 3);              
         //Definir las acciones en la hoja de sprites
-        map.Añadir_accion("ConstruirT", 0, 0, 24, 50, 10, true, 2);
+        //Son 10 imagenes pero coloco 9 porque como no repite el coloca la imagen 9+1
+        map.Añadir_accion("ConstruirT", 0, 0, 24, 50, 9, false, 1);
                 //Crear la hoja de sprites
         animacion = new Animacion(map, "ConstruirT", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.TORRE).getImage());
         //currentAction="Construir_Torre";

@@ -24,11 +24,10 @@ public class Mercado extends Objetos_Animados {
    public Mercado(){
    
        super(800,3,3,10,3);
-       map.Añadir_accion("ConstruirM", 0, 0, 74,93, 10, true, 5);
+       map.Añadir_accion("ConstruirM", 0, 0, 74,93, 9, false, 1);
        animacion = new Animacion(map, "ConstruirM", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.MERCADO).getImage());
        currentAction="ConstuirM";  
        capacidad_almacenamiento_oro=2500;
-       capacidad_actual_oro=capacidad_almacenamiento_oro;
    } 
    public void actualizar_nivel_2(){
        vida_max+=600;

@@ -25,7 +25,8 @@ public class Granja extends Objetos_Animados{
         super(800,3,2,5,2);
         Hoja_Sprites map = new Hoja_Sprites();
         //Definir las acciones en la hoja de sprites
-        map.Añadir_accion("Construir1", 0, 0, 74, 65, 10, false, 10);
+        //Son 10 imagenes pero coloco 9 porque como no repite el coloca la imagen 9+1
+        map.Añadir_accion("Construir1", 0, 0, 74, 65, 9, false, 1);
         map.Añadir_accion("Listo1", 675, 0, 750, 210, 1, false, 0);
         
         //Crear la hoja de sprites

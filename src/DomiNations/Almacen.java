@@ -24,11 +24,11 @@ public class Almacen extends Objetos_Animados {
    public Almacen(){
    
        super(800,3,3,10,3);
-       map.Añadir_accion("ConstruirA",0,20,74,129, 10, true, 5);
+       //Son 10 imagenes pero coloco 9 porque como no repite el coloca la imagen 9+1
+       map.Añadir_accion("ConstruirA",0,20,74,129, 9, false, 1);
        animacion = new Animacion(map, "ConstruirA", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.ALMACEN).getImage());
 
        capacidad_almacenamiento_comida=2500;
-       capacidad_actual_comida=capacidad_almacenamiento_comida;
    } 
    public void actualizar_nivel_2(){
        vida_max+=600;

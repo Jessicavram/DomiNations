@@ -25,13 +25,13 @@ public class Boton extends Objetos_Animados{
         if(Nombre.compareTo("Tienda")==0){
             map.Añadir_accion(Nombre, 0, 0, 75, 50, 1, true, 1); 
         }
-        if(Nombre.compareTo("O100")==0){
-            map.Añadir_accion(Nombre, 0, 149, 44, 169, 1, true, 1);
-        }
         if(Nombre.compareTo("Cuartel0")==0){
             map.Añadir_accion(Nombre, 44, 149, 88, 169, 1, true, 1);
         }
         if(Nombre.compareTo("Almacen0")==0){
+            map.Añadir_accion(Nombre, 44, 149, 88, 169, 1, true, 1);
+        }
+        if(Nombre.compareTo("Granja0")==0){
             map.Añadir_accion(Nombre, 44, 149, 88, 169, 1, true, 1);
         }
         if(Nombre.compareTo("Centro0")==0){
@@ -43,6 +43,9 @@ public class Boton extends Objetos_Animados{
         if(Nombre.compareTo("Mercado0")==0){
             map.Añadir_accion(Nombre, 269, 130,313, 150, 1, true, 1);
         }
+        if(Nombre.compareTo("Casa")==0){
+            map.Añadir_accion(Nombre, 269, 130,313, 150, 1, true, 1);
+        }
         if(Nombre.compareTo("Guarnicion0")==0){
             map.Añadir_accion(Nombre, 133, 130,177, 150, 1, true, 1);
         }
@@ -52,6 +55,9 @@ public class Boton extends Objetos_Animados{
         if(Nombre.compareTo("NO-Almacen0")==0){
             map.Añadir_accion(Nombre, 44, 279, 88, 299, 1, true, 1);
         }
+        if(Nombre.compareTo("NO-Granja0")==0){
+            map.Añadir_accion(Nombre, 44, 279, 88, 299, 1, true, 1);
+        }
         if(Nombre.compareTo("NO-Centro0")==0){
             map.Añadir_accion(Nombre, 315, 279, 359,299, 1, true, 1);
         }
@@ -59,6 +65,9 @@ public class Boton extends Objetos_Animados{
             map.Añadir_accion(Nombre, 269, 259,313, 279, 1, true, 1);
         }
         if(Nombre.compareTo("NO-Mercado0")==0){
+            map.Añadir_accion(Nombre, 269, 259,313, 279, 1, true, 1);
+        }
+        if(Nombre.compareTo("NO-Casa")==0){
             map.Añadir_accion(Nombre, 269, 259,313, 279, 1, true, 1);
         }
         if(Nombre.compareTo("NO-Guarnicion0")==0){
