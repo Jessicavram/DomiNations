@@ -384,8 +384,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             if(estatico instanceof Cuartel){
                 cuartel = (Cuartel)estatico;
                 if (cuartel.tiempo_entrenamiento>0) {
-                    System.out.println("Tiempo: "+cuartel.tiempo_entrenamiento);
-                    if((cuartel.tiempo_entrenamiento-(cuartel.soldados_en_cola*5)+1)==1){
+                    if((cuartel.tiempo_entrenamiento-(cuartel.soldados_en_cola*5)-1)==0){
                         if(cuartel.soldados_en_cola>0)
                             cuartel.soldados_en_cola--;
                         cuartel.capacidad_actual++;
@@ -420,7 +419,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         //Precio Soldado
         Soldado sol1=new Soldado();
         r = Requerimiento.buscar_requerimiento("Soldado1",0);
-        if(aldea.comida_Actual>=r.costo_comida && aldea.oro_Actual>=r.costo_oro && (cuartel.capacidad_actual<cuartel.capacidad_ejercito && cuartel.soldados_en_cola<(cuartel.capacidad_ejercito-1)))
+        if(aldea.comida_Actual>=r.costo_comida && aldea.oro_Actual>=r.costo_oro && ((cuartel.capacidad_actual+cuartel.soldados_en_cola+1)<cuartel.capacidad_ejercito))
             boton = new Boton("Soldado1");
         else
             boton = new Boton("NO-Soldado1");
@@ -430,7 +429,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         //Precio Soldado
         Soldado2 sol2=new Soldado2();
         r = Requerimiento.buscar_requerimiento("Soldado2",0);
-        if(aldea.comida_Actual>=r.costo_comida && aldea.oro_Actual>=r.costo_oro && (cuartel.capacidad_actual<cuartel.capacidad_ejercito && cuartel.soldados_en_cola<(cuartel.capacidad_ejercito-1)))
+        if(aldea.comida_Actual>=r.costo_comida && aldea.oro_Actual>=r.costo_oro && ((cuartel.capacidad_actual+cuartel.soldados_en_cola+1)<cuartel.capacidad_ejercito))
             boton = new Boton("Soldado2");
         else
             boton = new Boton("NO-Soldado2");
@@ -754,8 +753,6 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                             e.panel.repaint();
                         }
                         aux.soldados_en_cola= (aux.nro_soldado1_cola+aux.nro_soldado2_cola==0 ? 0 : (aux.nro_soldado1_cola+aux.nro_soldado2_cola-1));
-                        //aux.capacidad_actual=aux.nro_soldado2_cola+aux.nro_soldado1_cola;
-                        System.out.println("*** CT:"+aux.capacidad_ejercito+" CA:"+aux.capacidad_actual+" COLA:"+aux.soldados_en_cola);
                         vec_item_estaticos.set(posicion_Cuartel, aux);
                         borrar_botones();
                         crear_cuartel_entrenar(aux);
