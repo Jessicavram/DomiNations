@@ -20,6 +20,14 @@ public class Cuartel extends Objetos_Animados{
     int capacidad_actual;
     /**Numero de soldados en cola para ser entrenados*/
     int soldados_en_cola;
+    /**Numero de soldados1*/
+    int nro_soldado1;
+    /**Numero de soldados1 por entrenar*/
+    int nro_soldado2;
+    /**Numero de soldados2*/
+    int nro_soldado1_cola;
+    /**Numero de soldados2 por entrenar*/
+    int nro_soldado2_cola;
     /**Hoja de acciones posibles para el cuartel*/
     Hoja_Sprites map = new Hoja_Sprites();  
     
@@ -31,7 +39,7 @@ public class Cuartel extends Objetos_Animados{
         map.Añadir_accion("Listo1", 1296, 0, 1439, 117, 1, false, 0);
         //Crear la hoja de sprites
         animacion = new Animacion(map, "Construir1", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.CUARTEL).getImage());
-  
+        nro_soldado1=nro_soldado1_cola=nro_soldado2=nro_soldado2_cola=0;
         capacidad_ejercito=5;
         capacidad_actual=soldados_en_cola=0;
     }

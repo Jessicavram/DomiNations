@@ -49,6 +49,8 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
     boolean Ventana_tienda=false;
     boolean Ventana_cuartel=false;
     boolean agregar_elemento=false;
+    
+    Cuartel cuartel_aux=null;
     /**Lista de requerimientos para crear o mejor item*/
     Lista_de_Requerimientos Requerimiento;
     
@@ -63,8 +65,6 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
 
     public void setEstado(boolean estado) {
         this.Ventana_tienda = estado;
-    }
-    public void pintar_menu(){
     }
     /**Constructor*/
     public Escena(){
@@ -409,6 +409,11 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         boton.Seleccionar_Localizacion(153, 546);
         vec_botones.add(boton);
     }
+    public void actualizar_cuartel_entrenar(Cuartel cuartel, Graphics g){        
+        g.drawString( ""+(cuartel.nro_soldado1_cola+cuartel.nro_soldado2_cola),397,499);
+        g.drawString( ""+cuartel.nro_soldado1_cola,302,553);
+        g.drawString( ""+cuartel.nro_soldado2_cola,366,553);  
+    }
     public Objetos_Graficos Tipo_Item(String nombre){
         String clase= nombre.substring(0, nombre.length()-1);
         if(clase.compareTo("Almacen")==0)
@@ -463,37 +468,33 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         g.fillRect(0,0,80,15);
         g.setColor(Color.RED);
         g.drawString( "Tiempo: "+(Motor_Juego.cont/50) , 0, 10);
+        if(Ventana_cuartel)
+            actualizar_cuartel_entrenar(cuartel_aux, g);
         
     }
     /**Metodo que actializa la escena y donde se realizan acciones logicas*/
-    public void update(double timePassed){
-            if(mario.murio==0){
-            mario.Actualizar_Objeto_Grafico(timePassed);
-            mario.Actualizar_PosicionX();
-            
-            //actualizar los item que no se mueven en la aldea
-            for(int i=0;i<vec_item_estaticos.size();i++){
-                /*Eliminar lo que se requiera eliminar del vector 
-                if(vec_item_estaticos.get(i).getY()>=310 || vec_item_estaticos.get(i).getX()<=-300 || vec_item_estaticos.get(i).borrar){
-                    //eliminar los enemigos que se caigan
-                    Motor_Fisico.getInstance().borrar_animado(vec_item_estaticos.get(i) );
-                    vec_item_estaticos.remove(i);
-                }else*/
-                    vec_item_estaticos.get(i).Actualizar_Objeto_Grafico(timePassed);
-            }
-            //actualizar los item que se mueven en la aldea
-            for(int i=0;i<vec_item_con_movimiento.size();i++){
-                /*Eliminar lo que se requiera eliminar del vector
-                if(vec_item_con_movimiento.get(i).getY()>=310 || vec_item_con_movimiento.get(i).getX()<=-16 || vec_item_con_movimiento.get(i).borrar){
-                    Motor_Fisico.getInstance().borrar_animado(vec_item_con_movimiento.get(i) );
-                    vec_item_con_movimiento.remove(i);
-                }else*/
-                    vec_item_con_movimiento.get(i).Actualizar_Objeto_Grafico(timePassed);
-            }
+    public void update(double timePassed){                       
+        //actualizar los item que no se mueven en la aldea
+        for(int i=0;i<vec_item_estaticos.size();i++){
+            /*Eliminar lo que se requiera eliminar del vector 
+            if(vec_item_estaticos.get(i).getY()>=310 || vec_item_estaticos.get(i).getX()<=-300 || vec_item_estaticos.get(i).borrar){
+                //eliminar los enemigos que se caigan
+                Motor_Fisico.getInstance().borrar_animado(vec_item_estaticos.get(i) );
+                vec_item_estaticos.remove(i);
+            }else*/
+                vec_item_estaticos.get(i).Actualizar_Objeto_Grafico(timePassed);
         }
-            //Consultar en la LEF los eventos futuros 
-           e.Consultar_LEF(Motor_Juego.cont/50);
-            
+        //actualizar los item que se mueven en la aldea
+        for(int i=0;i<vec_item_con_movimiento.size();i++){
+            /*Eliminar lo que se requiera eliminar del vector
+            if(vec_item_con_movimiento.get(i).getY()>=310 || vec_item_con_movimiento.get(i).getX()<=-16 || vec_item_con_movimiento.get(i).borrar){
+                Motor_Fisico.getInstance().borrar_animado(vec_item_con_movimiento.get(i) );
+                vec_item_con_movimiento.remove(i);
+            }else*/
+                vec_item_con_movimiento.get(i).Actualizar_Objeto_Grafico(timePassed);
+        }
+      //Consultar en la LEF los eventos futuros 
+       e.Consultar_LEF(Motor_Juego.cont/50);            
     }
     
     public void moveScreen(float dx){
@@ -665,6 +666,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                     System.out.println("Selecciono Cuartel");
                     crear_cuartel_entrenar((Cuartel)dinamico);
                     Ventana_cuartel=true;
+                    cuartel_aux=(Cuartel)dinamico;
                 }else if(dinamico instanceof Torre){
                     System.out.println("Selecciono Torre");
                 }else if(dinamico instanceof Guarnicion){
@@ -694,6 +696,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             if(b.Nombre.equals("X-Cuartel") && (pos_x > dinamico.x && pos_x < dinamico.x + dinamico.Obtener_Ancho()) && (pos_y > dinamico.y && pos_y < dinamico.y + dinamico.Obtener_Alto()))
             {   Ventana_cuartel=false;
                 borrar_tienda();
+                cuartel_aux=null;
             }else if(!b.Nombre.substring(0,2).equals("NO") && (pos_x > dinamico.x && pos_x < dinamico.x + dinamico.Obtener_Ancho()) && (pos_y > dinamico.y && pos_y < dinamico.y + dinamico.Obtener_Alto())){
                 elemento=b.Nombre;  
                 item = Tipo_Item(elemento);
