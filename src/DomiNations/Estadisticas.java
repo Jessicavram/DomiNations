@@ -8,10 +8,8 @@ package DomiNations;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JWindow;
@@ -24,7 +22,8 @@ import javax.swing.ScrollPaneConstants;
  */
 public class Estadisticas extends JWindow
 { 
-    int oro, comida, aldeano;
+    int oro, comida, aldeanos;
+    int oro_total, comida_total,aldeanos_disponibles;
     JPanel panel;
     JLabel et1, et2, et3, titulo1, titulo2;
     int x,y;
@@ -33,12 +32,16 @@ public class Estadisticas extends JWindow
     JScrollPane scroll;
     int pos;
     
-    public Estadisticas(int o, int c, int a)
+    public Estadisticas(int o, int c, int ad,int ot, int ct, int a)
     {
         super();
         oro=o;
         comida=c;
-        aldeano=a;       
+        aldeanos_disponibles=ad; 
+        
+        oro_total=ot;
+        comida_total=ct;
+        aldeanos=a;
     }    
     
     public void mostrar()
@@ -52,19 +55,19 @@ public class Estadisticas extends JWindow
         panel.setBackground(Color.DARK_GRAY);
         panel.setLayout(null);
         
-        et1 = new JLabel("Oro: "+oro);
+        et1 = new JLabel("Oro: "+oro+"/"+oro_total);
         et1.setFont(new Font("Arial",Font.BOLD, 16));
         et1.setBounds(5,45,210,40);
         et1.setForeground(Color.WHITE);
         et1.setVisible(true);
         
-        et2 = new JLabel("Comida: "+comida);
+        et2 = new JLabel("Comida: "+comida+"/"+comida_total);
         et2.setFont(new Font("Arial",Font.BOLD, 16));
         et2.setBounds(5,85,210,40);
         et2.setForeground(Color.WHITE);
         et2.setVisible(true);
         
-        et3 = new JLabel("Aldeanos: "+aldeano);
+        et3 = new JLabel("Aldeanos: "+aldeanos_disponibles+"/"+aldeanos);
         et3.setFont(new Font("Arial",Font.BOLD, 16));
         et3.setBounds(5,125,210,40);
         et3.setForeground(Color.WHITE);
@@ -139,21 +142,40 @@ public class Estadisticas extends JWindow
     public void setOro(int o)
     {
         oro=o;
-        et1.setText("Oro: "+oro);
+        et1.setText("Oro: "+oro+"/"+oro_total);
     }
     
     public void setAldeanos(int a)
     {
-        aldeano=a;
-        et3.setText("Aledeano: "+aldeano);
+        aldeanos=a;
+        et3.setText("Aldeanos: "+aldeanos_disponibles+"/"+aldeanos);
     }
     
     public void setComida(int c)
     {
         comida=c;
-        et2.setText("Comida: "+comida);
+        et2.setText("Comida: "+comida+"/"+comida_total);
 
     }
+    
+    public void setOroTotal(int ot)
+    {
+        oro_total=ot;
+        et1.setText("Oro: "+oro+"/"+oro_total);
+    }
+    
+    public void setComidaTotal(int ct)
+    {
+        comida_total=ct;
+        et2.setText("Comida: "+comida+"/"+comida_total);
+    }
+    
+    public void setAldeanosDisponibles(int a)
+    {
+        aldeanos_disponibles=a;
+        et3.setText("Aldeanos: "+aldeanos_disponibles+"/"+aldeanos);
+    }
+    
     public void Agregar_evento_al_text_area(LEF aux){
         texto.append("\n"+aux.descripcion+"  |  "+aux.tiempo);
     }
