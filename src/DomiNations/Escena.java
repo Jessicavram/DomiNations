@@ -441,7 +441,10 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         g.drawString( ""+cuartel.soldados_en_cola,395,499);
         g.drawString( ""+cuartel.nro_soldado1_cola,300,553);
         g.drawString( ""+cuartel.nro_soldado2_cola,364,553);
-        g.drawString( ""+cuartel.tiempo_entrenamiento,400,553);        
+        if(cuartel.tiempo_entrenamiento<10)
+            g.drawString( ""+cuartel.tiempo_entrenamiento,465,527);    
+        else
+            g.drawString( ""+cuartel.tiempo_entrenamiento,461,527);   
     }
     public Objetos_Graficos Tipo_Item(String nombre){
         String clase= nombre.substring(0, nombre.length()-1);
