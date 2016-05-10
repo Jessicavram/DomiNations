@@ -615,6 +615,8 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         alde.currentAction="Icaminar";
         alde.Seleccionar_Localizacion(400,430);
         alde.animacion.Seleccionar_Accion(alde.currentAction, true);
+        matriz_logica.imprimir();
+        alde.resuelve(matriz_logica,10,10);
         vec_item_con_movimiento.add(alde);
 
      /*   

@@ -79,23 +79,23 @@ public class Aldeano extends Objetos_Animados{
            return true;
        }
        //Arriba
-       if(m.matriz_logica[y-1][x]=='0'){
-           boolean tmp=resuelve(m,x,y-1);
+       if(m.matriz_logica[x-1][y]=='0'){
+           boolean tmp=resuelve(m,x-1,y);
            if (tmp==true) return true;
        }
        //Abajo
-       if(m.matriz_logica[y+1][x]=='0'){
-           boolean tmp=resuelve(m,x,y+1);
+       if(m.matriz_logica[x+1][y]=='0'){
+           boolean tmp=resuelve(m,x+1,y);
            if(tmp==true) return true;
        }
        //Izquierda
-       if(m.matriz_logica[y][x-1]=='0'){
-           boolean tmp=resuelve(m,x-1,y);
+       if(m.matriz_logica[x][y-1]=='0'){
+           boolean tmp=resuelve(m,x,y-1);
            if(tmp==true) return true;
        }
        //Derecha
-       if(m.matriz_logica[y][x+1]=='0'){
-           boolean tmp=resuelve(m,x+1,y);
+       if(m.matriz_logica[x][y+1]=='0'){
+           boolean tmp=resuelve(m,x,y+1);
            if(tmp==true) return true;
        }
        //El camino no tiene solucion
