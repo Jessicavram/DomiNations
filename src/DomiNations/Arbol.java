@@ -21,18 +21,18 @@ public class Arbol extends Objetos_Animados{
                   0: sin fruta
                   1: con fruta
                   2: cortado eliminamos de la escena no se si eso lo vamos a permitir */
+   
+    boolean estado; 
     Hoja_Sprites map= new Hoja_Sprites();
 
     public Arbol() {
         fruta_max=50; //puede ser mas o menos de acuerdo a nuestro juego
-        map.Añadir_accion("recursoArbol",0,0,65,100,3, true, 1); //Arbol inicial sin fruta 
+        map.Añadir_accion("recursoArbol",0,0,65,100,1, true, 1); //Arbol inicial sin fruta 
         map.Añadir_accion("recursoArbolConFruta",65,0,129,100,1,true, 1); //empieza a salir la fruta
         map.Añadir_accion("recursoArbolCon+Fruta",129,0,194,100,1, true, 1); //lista la fruta para ser recolectada
-        animacion = new Animacion(map, "recursoArbol", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.ARBOL).getImage());
-        
+        animacion = new Animacion(map, "recursoArbol", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.ARBOL).getImage());   
     }
-    
-  
+   
     @Override
     public void OnCollide_animada(Objetos_Animados objeto_colision, int lado) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

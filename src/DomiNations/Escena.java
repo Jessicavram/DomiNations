@@ -441,7 +441,10 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         g.drawString( ""+cuartel.soldados_en_cola,395,499);
         g.drawString( ""+cuartel.nro_soldado1_cola,300,553);
         g.drawString( ""+cuartel.nro_soldado2_cola,364,553);
-        g.drawString( ""+cuartel.tiempo_entrenamiento,400,553);        
+        if(cuartel.tiempo_entrenamiento<10)
+            g.drawString( ""+cuartel.tiempo_entrenamiento,465,527);    
+        else
+            g.drawString( ""+cuartel.tiempo_entrenamiento,461,527);   
     }
     public Objetos_Graficos Tipo_Item(String nombre){
         String clase= nombre.substring(0, nombre.length()-1);
@@ -604,6 +607,10 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
          vec_item_estaticos.add(arb[i]); 
         }
         
+        Boton npp=new Boton(true);
+            npp.Seleccionar_Localizacion(300,300);
+        vec_item_estaticos.add(npp); 
+        
         //insertando Mina
         
         Mina min =new Mina();
@@ -699,6 +706,22 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
        e = new Estadisticas(aldea.oro_Actual,aldea.comida_Actual,aldea.nro_aldeanos_disponibles,aldea.total_oro,aldea.total_comida,aldea.nro_aldeanos);    
     }
     
+    public void RecolectarRecursos(Objetos_Graficos objg){
+            
+            Boton npp=new Boton(true);
+            
+            
+            if(objg instanceof Mina)
+            npp.Seleccionar_Localizacion((int)(objg.getX()+50),(int)(objg.getY()+50));
+             if(objg instanceof Arbol)
+            npp.Seleccionar_Localizacion((int)(objg.getX())+10,(int)(objg.getY()+100));
+            if(objg.isBoton_recolectar()==false){
+                vec_item_estaticos.add(npp);
+            }
+            objg.setBoton_recolectar(true);
+            
+    }
+    
     @Override
     public void mouseClicked(MouseEvent evento) {
         //Motor_Fisico.getInstance().mouse(e.getX(), e.getY());
@@ -728,8 +751,32 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                     System.out.println("Selecciono Mercado");
                 }else if(dinamico instanceof Granja){
                     System.out.println("Selecciono Granaja");
+                }else if(dinamico instanceof Mina){
+                    System.out.println("Selecciono mina");
+                    RecolectarRecursos(dinamico);
+                }else if(dinamico instanceof Arbol){
+                    RecolectarRecursos(dinamico);
+                    System.out.println("Selecciono arbol");
+                }else if(dinamico instanceof Boton){
+                    System.out.println("Selecciono Boton");
+                    dinamico.Borrar();
                 }
+                
+                /*if(dinamico.isBoton_recolectar()==true){
+                    
+                    if(dinamico instanceof Boton){
+                       //debo revisar a que clase pertenece esto
+                        //sumo a la lef 
+                        //escondo el boton
+                        System.out.println("Selecciono Boton");
+                    }
+                }*/
+                
+                
             }
+            
+            
+            
         }
         
         if(agregar_elemento==true){            
@@ -785,17 +832,19 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
     @Override
     public void mousePressed(MouseEvent e) {
         
+      
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
+       
+        
         
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-      //  System.out.println("El mouse esta sobre la pantalla en la posicion X= "+e.getX());
-      //Este evento solo detecta cuando el mouse entra a la escena    
+     
     }
 
     @Override
@@ -813,6 +862,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         float pos_x = me.getX();
         float pos_y = me.getY();
         Objetos_Graficos obj;
+       
         Recuadro cuadro;
         for(int i=0;i<vec_item_estaticos.size();i++){
             obj=vec_item_estaticos.get(i);
@@ -837,7 +887,16 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             borrar_botones();
             Ventana_tienda=false;
         }
+        
+        
+       
+        
+        
+        
+        
     }
+    
+    
     
     
 

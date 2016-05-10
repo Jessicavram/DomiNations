@@ -29,6 +29,7 @@ public abstract class Objetos_Graficos {
     /**Nivel actual del item (ej: 1,2,3,...)*/
     int nivel;
     /***/
+    boolean boton_recolectar;
     Animacion animacion;
 
     /**Constructor*/
@@ -43,6 +44,7 @@ public abstract class Objetos_Graficos {
         tiempo=0;
         nro_aldeanos_requeridos=0;
         nivel=1;
+        boton_recolectar=false;
     }
     /**Metodo para obtener o cargar una imagen dada una posicion en el vector
      * @param  vida_maxima numero que define la cantidad de vida maxima del item
@@ -127,6 +129,15 @@ public abstract class Objetos_Graficos {
     public int getNro_aldeanos_requeridos() {
         return nro_aldeanos_requeridos;
     }
+
+    public boolean isBoton_recolectar() {
+        return boton_recolectar;
+    }
+
+    public void setBoton_recolectar(boolean boton_recolectar) {
+        this.boton_recolectar = boton_recolectar;
+    }
+   
     
     /**Metodos set*/
      public void setX(float x) {

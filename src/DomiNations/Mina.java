@@ -15,18 +15,26 @@ import sprites.Hoja_Sprites;
  */
 public class Mina extends Objetos_Animados{
 
-    int estado;
+    boolean estado;
+    boolean boton_activo;
     int oro_maximo;
     int oro_actual;
     
+   
+    
     Hoja_Sprites map= new Hoja_Sprites();
     public Mina(){
-         oro_maximo=100; //puede ser mas o menos de acuerdo a nuestro juego
-        map.Añadir_accion("MinaVacia",0,0,59,100,2, true, 1); //mina vacia 
+        
+        boton_activo=false;
+        oro_maximo=100;  
+        map.Añadir_accion("MinaVacia",0,0,59,100,1, true, 1); //mina vacia 
         map.Añadir_accion("MinaConOro",59,0,118,100,1,true, 1); //Minallena
-        
-        
-        animacion = new Animacion(map, "MinaVacia", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.MINA).getImage());
+       
+        animacion = new Animacion(map, "MinaConOro", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.MINA).getImage());
+    }
+    
+    public void ActualizarOro(){
+    
     }
     @Override
     public void OnCollide_animada(Objetos_Animados objeto_colision, int lado) {
