@@ -158,4 +158,9 @@ public abstract class Objetos_Graficos {
     public void setNro_aldeanos_requeridos(int nro_aldeanos_requeridos) {
         this.nro_aldeanos_requeridos = nro_aldeanos_requeridos;
     }
+    public void Verificar_camino(Matriz_Logica m,int x_inicial, int y_inicial){
+        
+       // System.out.println("Posi en matriz logica  col "+m.coordenaX_a_Columna((int)x, x_inicial)+"fil "+m.coordenadaY_a_Fila((int)y, y_inicial)); 
+    
+    }
 }

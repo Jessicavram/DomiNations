@@ -523,6 +523,18 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 vec_item_con_movimiento.remove(i);
             }else*/
                 vec_item_con_movimiento.get(i).Actualizar_Objeto_Grafico(timePassed);
+                
+              //averiguando en que posicion de la matriz logica se encuentra el ALDEANO
+                
+                if(vec_item_con_movimiento.get(i) instanceof Aldeano){
+                    Aldeano aldeano;
+                    aldeano=(Aldeano)vec_item_con_movimiento.get(i);
+                    aldeano.Actualizar_Aldeano(timePassed, matriz_logica, x_inicial, y_inicial);
+                    vec_item_con_movimiento.set(i, aldeano);
+                 
+                } 
+                
+                //System.out.println("Posicion en x "+vec_item_con_movimiento.get(i).x);
         }
       //Consultar en la LEF los eventos futuros 
        e.Consultar_LEF(Motor_Juego.cont/50); 
@@ -605,7 +617,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         alde.animacion.Seleccionar_Accion(alde.currentAction, true);
         vec_item_con_movimiento.add(alde);
 
-        
+     /*   
         alde= new Aldeano();
         alde.currentAction="Dcaminar";
         alde.Seleccionar_Localizacion(400,460);
@@ -681,7 +693,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         alde.Seleccionar_Localizacion(460,400);
         alde.animacion.Seleccionar_Accion(alde.currentAction, true);
         vec_item_con_movimiento.add(alde);
-       
+       */
        e = new Estadisticas(aldea.oro_Actual,aldea.comida_Actual,aldea.nro_aldeanos_disponibles,aldea.total_oro,aldea.total_comida,aldea.nro_aldeanos);    
     }
     
