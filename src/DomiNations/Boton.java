@@ -18,6 +18,12 @@ public class Boton extends Objetos_Animados{
     public String Nombre;
     public Boton(){}
     
+    public Boton(boolean recolecta){
+        Hoja_Sprites map= new Hoja_Sprites();
+        
+        map.Añadir_accion("recolectar",0,0,59,100,1, true, 1); //mina vacia 
+        animacion = new Animacion(map, "recolectar", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.RECOLECTAR).getImage());
+    }
     public Boton(String nombre){
         Nombre=nombre;
         Hoja_Sprites map= new Hoja_Sprites();
