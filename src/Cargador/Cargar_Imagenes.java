@@ -12,7 +12,7 @@ public class Cargar_Imagenes {
     protected ImageIcon vec_imagenes[];
     /**Constante que nos indica el total de imagenes a cargar, que seria la suma de cada una de las constantes*/
 
-    protected static final int TOTAL_IMAGENES=35;
+    protected static final int TOTAL_IMAGENES=38;
 
     /**Constante para conocer el nombre de la imagen que contiene la animacion de los enemigos*/
     public static final int ENEMIGOS=0;
@@ -59,7 +59,7 @@ public class Cargar_Imagenes {
     /**Imagen de fondo para la presentacion incial del juego*/
     public static final int FONDO_INICIAL=21;
     /**Imagen de todos los soldados*/
-    public static final int SOLDADOS=22; 
+    public static final int SOLDADO1=22; 
     /**Imagen del mercado**/
     public static final int MERCADO=23;
     /**Imagen de la Torre **/
@@ -85,15 +85,21 @@ public class Cargar_Imagenes {
      public static final int ALDEANO=33;
     /**Imagen con el fondo de cuartel*/
     public static final int ENTRENAR=34;
+    /**Solda 2*/
+    public static final int SOLDADO2=35;
+    /**Solda 3*/
+    public static final int SOLDADO3=36;
+    /**Solda 4*/
+    public static final int SOLDADO4=37;
     /**Constructor de la clase, privado para usar la instancia y solo poder crearse un objeto de la clase, es usado para cargar
     /* el vector de imagenes a travez de la dirreccion url de cada una de las imagenes con ayuda de las constantes */
     private Cargar_Imagenes() {
         URL direccion;
         String nombres_imagenes[] = new String[]{"Enemigos","Inanimados","Mario","Mundo_1","planta_carnivora","Castillo","Mario_inc","Nuevo_juego","Salir","estrella","Mundo_2","Inanimados_2","Instrucciones","instrucciones_static"
 
-        ,"bowser","fuego","creditos","creditos_img","fondo_aldea","cuartel","centro","fondo1","soldado",
+        ,"bowser","fuego","creditos","creditos_img","fondo_aldea","cuartel","centro","fondo1","soldado1",
         "mercado","torre","guarnicion","almacen","casa","granja","boton","recuadro","arboles","mina","aldeano",
-        "Cuartel_Entrenar"};
+        "Cuartel_Entrenar","soldado2","soldado3","soldado4"};
         vec_imagenes = new ImageIcon[TOTAL_IMAGENES];
         for(int i=0;i<TOTAL_IMAGENES;i++){
             try {
