@@ -71,31 +71,37 @@ public class Aldeano extends Objetos_Animados{
         Actualizar_PosicionY();
         Verificar_camino(m,x_inicial,y_inicial);
     }
-   public static boolean resuelve(Matriz_Logica m,int x,int y){
+   public static boolean resuelve(Matriz_Logica m,int x,int y,int xdest,int ydest){
        m.matriz_logica[x][y]='.';
-       if(x==0||y==0||x==m.matriz_logica[0].length-1||y==m.matriz_logica.length-1){
+       /*
+       if(x==0||y==1||x==m.matriz_logica[0].length-1||y==m.matriz_logica.length-1){
+           System.out.println("Encontrada la solución: ");
+           m.imprimir();
+           return true;
+       }*/
+       if(x==0||y==0){
            System.out.println("Encontrada la solución: ");
            m.imprimir();
            return true;
        }
        //Arriba
        if(m.matriz_logica[x-1][y]=='0'){
-           boolean tmp=resuelve(m,x-1,y);
+           boolean tmp=resuelve(m,x-1,y,xdest,ydest);
            if (tmp==true) return true;
        }
        //Abajo
        if(m.matriz_logica[x+1][y]=='0'){
-           boolean tmp=resuelve(m,x+1,y);
+           boolean tmp=resuelve(m,x+1,y,xdest,ydest);
            if(tmp==true) return true;
        }
        //Izquierda
        if(m.matriz_logica[x][y-1]=='0'){
-           boolean tmp=resuelve(m,x,y-1);
+           boolean tmp=resuelve(m,x,y-1,xdest,ydest);
            if(tmp==true) return true;
        }
        //Derecha
        if(m.matriz_logica[x][y+1]=='0'){
-           boolean tmp=resuelve(m,x,y+1);
+           boolean tmp=resuelve(m,x,y+1,xdest,ydest);
            if(tmp==true) return true;
        }
        //El camino no tiene solucion
