@@ -851,13 +851,15 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         
         if(agregar_elemento==true){        
             
-            for(int i=0;i<vec_item_estaticos.size();i++){
-                dinamico=vec_item_estaticos.get(i);
-                if(dinamico instanceof Recuadro){
-                    vec_item_estaticos.remove(i);
-                } 
-            }  
-            Cargar_Sonidos.obtener_instancia().Reproducir_pistas(Cargar_Sonidos.INICIAR_CONSTRUCCION, false, false);
+            
+            for(int i=0;i<vec_item_estaticos.size();i++){//
+                dinamico=vec_item_estaticos.get(i);//
+                if(dinamico instanceof Recuadro){//
+                    vec_item_estaticos.remove(i);//
+                } //
+            }  //
+            Cargar_Sonidos.obtener_instancia().Reproducir_pistas(Cargar_Sonidos.INICIAR_CONSTRUCCION, false, false);//
+            
             AgregarElementosAldea(evento.getX(),evento.getY());
             agregar_elemento=false;        
         }
