@@ -37,6 +37,8 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
     ArrayList<Objetos_Graficos> vec_item_con_movimiento;
     /**Vector para guardar los botones*/
     ArrayList<Objetos_Graficos> vec_botones;
+    /**Vector para guardar los soldados*/
+    ArrayList<Objetos_Graficos> vec_soldados;
     /** guarda el elemento seleccionado para construir en la aldea*/
     String elemento="";
     /* Registra el item a contruir**/
@@ -75,16 +77,19 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         vec_objetos_fondo = new ArrayList<Objetos_Graficos>();
         vec_item_estaticos = new ArrayList<Objetos_Graficos>();
         vec_item_con_movimiento= new ArrayList<Objetos_Graficos>();        
-        vec_botones= new ArrayList<Objetos_Graficos>();        
+        vec_botones= new ArrayList<Objetos_Graficos>();
+        vec_soldados= new ArrayList<Objetos_Graficos>();             
         //Crear la lista de requerimientos
         Requerimiento = new Lista_de_Requerimientos();
         matriz_logica=new Matriz_Logica();
+        System.out.println("Tamaño incial: "+vec_item_estaticos.size()+"Linea 85");
     }
     
     public void AgregarElementosAldea(float x,float y){
         
         int t_construc=0;
         int pos = vec_item_estaticos.size();
+        System.out.println("Pos a Guardar:"+pos+" -LINEA 91");
         if(elemento.compareTo("Centro0")==0){
             Centro cen = new Centro();
             Requerimientos r = Requerimiento.buscar_requerimiento("Centro",0);
@@ -147,7 +152,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                  t_construc=(Motor_Juego.cont/50)+alm.tiempo;
                 System.out.println("Tiempo Actual "+Motor_Juego.cont/50+" Tiempo de construccion "+t_construc);        
                 e.insertar_LEF(new LEF("Almacen",t_construc,pos));
-                e.panel.repaint();
+                e.panel.repaint();                
             }
        
         }else if(elemento.compareTo("Torre0")==0){
@@ -542,6 +547,10 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         for(int i=1;i<vec_botones.size() && (Ventana_tienda || Ventana_cuartel);i++){ 
                 vec_botones.get(i).Dibujar(g);
         }
+        
+        for(int i=0;i<vec_soldados.size();i++){            
+            vec_soldados.get(i).Dibujar(g);
+        }
         //Pintar el personaje
         g.setColor(Color.BLACK);
         g.fillRect(0,0,80,15);
@@ -572,6 +581,14 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 vec_item_con_movimiento.remove(i);
             }else*/
                 vec_item_con_movimiento.get(i).Actualizar_Objeto_Grafico(timePassed);
+        }
+        for(int i=0;i<vec_soldados.size();i++){
+            /*Eliminar lo que se requiera eliminar del vector
+            if(vec_item_con_movimiento.get(i).getY()>=310 || vec_item_con_movimiento.get(i).getX()<=-16 || vec_item_con_movimiento.get(i).borrar){
+                Motor_Fisico.getInstance().borrar_animado(vec_item_con_movimiento.get(i) );
+                vec_item_con_movimiento.remove(i);
+            }else*/
+                vec_soldados.get(i).Actualizar_Objeto_Grafico(timePassed);
                 
               //averiguando en que posicion de la matriz logica se encuentra el ALDEANO
                 
@@ -586,11 +603,12 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 //System.out.println("Posicion en x "+vec_item_con_movimiento.get(i).x);
         }
       //Consultar en la LEF los eventos futuros 
-      int pos_obj=e.Consultar_LEF(Motor_Juego.cont/50); 
+       int pos_obj=e.Consultar_LEF(Motor_Juego.cont/50); 
        if (Motor_Juego.cont%50==0){
            actualizar_tiempos_cuartel();
        }
-       if(pos_obj>=0)
+       if(pos_obj!=-1)System.out.println("Pos:"+pos_obj+"Tam: "+vec_item_estaticos.size()+"LINEA 610");
+       if(pos_obj>=0 && pos_obj<vec_item_estaticos.size())
        {
            actualizar_valores(vec_item_estaticos.get(pos_obj));
        }
@@ -641,14 +659,14 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         //Insertando soldado
         Soldado sol = new Soldado();
         sol.Seleccionar_Localizacion(250, 300);
-        vec_item_con_movimiento.add(sol);
+        vec_soldados.add(sol);
         
 //Insertando soldado
         Soldado2 a= new Soldado2();
         a.Seleccionar_Localizacion(300, 300);
         vec_item_con_movimiento.add(a); 
         
-        //Insertando Varios Arboles 
+        /*/Insertando Varios Arboles 
         Arbol arb[]=new Arbol[5];
         for(int i=0;i<5;i++){
            
@@ -675,7 +693,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         matriz_logica.imprimir();
         alde.resuelve(matriz_logica,10,10,0,1);
         vec_item_con_movimiento.add(alde);
-
+*/
      /*   
         alde= new Aldeano();
         alde.currentAction="Dcaminar";
@@ -778,11 +796,13 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         float pos_x = evento.getX();
         float pos_y = evento.getY();
         Objetos_Graficos dinamico;
+        Soldado soldado1;
         Boton b=new Boton();      
-        
+                
         for(int i=0;i<vec_item_estaticos.size() && !Ventana_tienda;i++){
             dinamico = vec_item_estaticos.get(i); 
             if((pos_x > dinamico.x && pos_x < dinamico.x + dinamico.Obtener_Ancho()) && (pos_y > dinamico.y && pos_y < dinamico.y + dinamico.Obtener_Alto())){
+                               
                 if(dinamico instanceof Cuartel){
                     crear_cuartel_entrenar((Cuartel)dinamico);
                     Ventana_cuartel=true;
@@ -829,7 +849,15 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             
         }
         
-        if(agregar_elemento==true){            
+        if(agregar_elemento==true){        
+            
+            for(int i=0;i<vec_item_estaticos.size();i++){
+                dinamico=vec_item_estaticos.get(i);
+                if(dinamico instanceof Recuadro){
+                    vec_item_estaticos.remove(i);
+                } 
+            }  
+            Cargar_Sonidos.obtener_instancia().Reproducir_pistas(Cargar_Sonidos.INICIAR_CONSTRUCCION, false, false);
             AgregarElementosAldea(evento.getX(),evento.getY());
             agregar_elemento=false;        
         }

@@ -22,7 +22,7 @@ public class Granja extends Objetos_Animados{
     int tiempo_por_produccion;
     
     public Granja(){
-        super(800,3,2,5,2);
+        super(800,3,2,10,2);
         Hoja_Sprites map = new Hoja_Sprites();
         //Definir las acciones en la hoja de sprites
         //Son 10 imagenes pero coloco 9 porque como no repite el coloca la imagen 9+1
