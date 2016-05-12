@@ -19,6 +19,20 @@ public class Centro extends Objetos_Animados{
     /**Capacidad de almacenar comida dentro del centro de la ciudad*/
     int capacidad_comida;
     
+    int max_torres;
+    
+    int max_casas;
+    
+    int max_almacenes;
+    
+    int max_mercados;
+    
+    int max_cuarteles;
+    
+    int max_guarniciones;
+    
+    int max_granjas;
+    
     public Centro(){
         super(1000,5,6,10,4);
         Hoja_Sprites map = new Hoja_Sprites();
@@ -30,6 +44,13 @@ public class Centro extends Objetos_Animados{
         //Crear la hoja de sprites
         animacion = new Animacion(map, "Construir1", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.CENTRO).getImage());
         
+        max_casas=4;
+        max_almacenes=2;
+        max_cuarteles=2;
+        max_guarniciones=2;
+        max_mercados=2;
+        max_torres=2;
+        max_granjas=2;
     }
     
 

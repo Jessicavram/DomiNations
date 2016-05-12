@@ -95,7 +95,9 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             Requerimientos r = Requerimiento.buscar_requerimiento("Centro",0);
            if(aldea.comida_Actual>=r.costo_comida && aldea.oro_Actual>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
            {
-                cen.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna((int)x, x_inicial)*25, (y_inicial+matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)*25)-(cen.Obtener_Alto()-(cen.alto*25)));
+               aldea.centro=true;       
+               
+               cen.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna((int)x, x_inicial)*25, (y_inicial+matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)*25)-(cen.Obtener_Alto()-(cen.alto*25)));
                 vec_item_estaticos.add(cen);
                 matriz_logica.colocar_edificio(matriz_logica.coordenadaY_a_Fila((int)y, y_inicial),matriz_logica.coordenaX_a_Columna((int)x, x_inicial),item.ancho,item.alto);
                 
@@ -116,7 +118,9 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
            Requerimientos r = Requerimiento.buscar_requerimiento("Cuartel",0);
            if(aldea.comida_Actual>=r.costo_comida && aldea.oro_Actual>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
            {
-                cua.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna((int)x, x_inicial)*25, (y_inicial+matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)*25)-(cua.Obtener_Alto()-(cua.alto*25)));
+               aldea.cuarteles_construidas++; 
+               
+               cua.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna((int)x, x_inicial)*25, (y_inicial+matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)*25)-(cua.Obtener_Alto()-(cua.alto*25)));
                 vec_item_estaticos.add(cua);
                 matriz_logica.colocar_edificio(matriz_logica.coordenadaY_a_Fila((int)y, y_inicial),matriz_logica.coordenaX_a_Columna((int)x, x_inicial),item.ancho,item.alto);
                 
@@ -138,6 +142,8 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
            Requerimientos r = Requerimiento.buscar_requerimiento("Almacen",0);
            if(aldea.comida_Actual>=r.costo_comida && aldea.oro_Actual>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
             {
+                aldea.almacenes_construidos++;
+                
                 alm.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna((int)x, x_inicial)*25, (y_inicial+matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)*25)-(alm.Obtener_Alto()-(alm.alto*25)));
                 vec_item_estaticos.add(alm);
                 matriz_logica.colocar_edificio(matriz_logica.coordenadaY_a_Fila((int)y, y_inicial),matriz_logica.coordenaX_a_Columna((int)x, x_inicial),item.ancho,item.alto);
@@ -161,6 +167,8 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             Requerimientos r = Requerimiento.buscar_requerimiento("Torre",0);
             if(aldea.comida_Actual>=r.costo_comida && aldea.oro_Actual>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
             {
+                aldea.torres_creadas++;
+                
                 tor.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna((int)x, x_inicial)*25, (y_inicial+matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)*25)-(tor.Obtener_Alto()-(tor.alto*25)));
                 vec_item_estaticos.add(tor);
                 matriz_logica.colocar_edificio(matriz_logica.coordenadaY_a_Fila((int)y, y_inicial),matriz_logica.coordenaX_a_Columna((int)x, x_inicial),item.ancho,item.alto);
@@ -184,6 +192,8 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             Requerimientos r = Requerimiento.buscar_requerimiento("Mercado",0);
             if(aldea.comida_Actual>=r.costo_comida && aldea.oro_Actual>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
             {
+                aldea.mercados_construidas++;
+                
                 mer.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna((int)x, x_inicial)*25, (y_inicial+matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)*25)-(mer.Obtener_Alto()-(mer.alto*25)));
                 vec_item_estaticos.add(mer);
                 matriz_logica.colocar_edificio(matriz_logica.coordenadaY_a_Fila((int)y, y_inicial),matriz_logica.coordenaX_a_Columna((int)x, x_inicial),item.ancho,item.alto);
@@ -209,6 +219,8 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             Requerimientos r = Requerimiento.buscar_requerimiento("Guarnicion",0);
             if(aldea.comida_Actual>=r.costo_comida && aldea.oro_Actual>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
             {
+                aldea.guarnicion_construidas++;
+                
                 guar.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna((int)x, x_inicial)*25, (y_inicial+matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)*25)-(guar.Obtener_Alto()-(guar.alto*25)));
                 vec_item_estaticos.add(guar);
                 matriz_logica.colocar_edificio(matriz_logica.coordenadaY_a_Fila((int)y, y_inicial),matriz_logica.coordenaX_a_Columna((int)x, x_inicial),item.ancho,item.alto);
@@ -234,6 +246,8 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             Requerimientos r = Requerimiento.buscar_requerimiento("Casa",0);
             if(aldea.comida_Actual>=r.costo_comida && aldea.oro_Actual>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
             {
+                aldea.casas_construidas++;
+                
                 casa.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna((int)x, x_inicial)*25, (y_inicial+matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)*25)-(casa.Obtener_Alto()-(casa.alto*25)));
                 vec_item_estaticos.add(casa);
                 matriz_logica.colocar_edificio(matriz_logica.coordenadaY_a_Fila((int)y, y_inicial),matriz_logica.coordenaX_a_Columna((int)x, x_inicial),item.ancho,item.alto);
@@ -256,6 +270,8 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             Requerimientos r = Requerimiento.buscar_requerimiento("Granja",0);
             if(aldea.comida_Actual>=r.costo_comida && aldea.oro_Actual>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
             {
+                aldea.granjas_construidas++;
+                
                 granja.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna((int)x, x_inicial)*25, (y_inicial+matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)*25)-(granja.Obtener_Alto()-(granja.alto*25)));
                 vec_item_estaticos.add(granja);
                 matriz_logica.colocar_edificio(matriz_logica.coordenadaY_a_Fila((int)y, y_inicial),matriz_logica.coordenaX_a_Columna((int)x, x_inicial),item.ancho,item.alto);
@@ -288,6 +304,13 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             e.setComidaTotal(aldea.total_comida);
             aldea.total_oro+=cen.capcidad_oro;
             e.setOroTotal(aldea.total_oro);
+            aldea.casas_permitidas=cen.max_casas;
+            aldea.almacenes_permitidos=cen.max_almacenes;
+            aldea.cuarteles_permitidas=cen.max_cuarteles;
+            aldea.granjas_permitidas=cen.max_granjas;
+            aldea.guarnicion_permitidas=cen.max_guarniciones;
+            aldea.mercados_permitidas=cen.max_mercados;
+            aldea.torres_permitidas=cen.max_torres;
         }
         if(obj instanceof Almacen)
         {
@@ -341,7 +364,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         Boton boton;
         Centro Centro=new Centro();
         r = Requerimiento.buscar_requerimiento("Centro",0);
-        if(aldea.comida_Actual>=r.costo_comida && aldea.oro_Actual>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
+        if(aldea.comida_Actual>=r.costo_comida && aldea.oro_Actual>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos && !aldea.centro)
             boton = new Boton("Centro0");
         else
             boton = new Boton("NO-Centro0");
@@ -351,7 +374,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         //Precio Torre
         Torre tor=new Torre();
         r = Requerimiento.buscar_requerimiento("Torre",0);
-        if(aldea.comida_Actual>=r.costo_comida && aldea.oro_Actual>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
+        if(aldea.comida_Actual>=r.costo_comida && aldea.oro_Actual>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos && aldea.torres_creadas<aldea.torres_permitidas)
             boton = new Boton("Torre0");
         else
             boton = new Boton("NO-Torre0");
@@ -361,7 +384,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
 //Precio Mercado
         Mercado mer=new Mercado();
         r = Requerimiento.buscar_requerimiento("Mercado",0);
-        if(aldea.comida_Actual>=r.costo_comida && aldea.oro_Actual>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
+        if(aldea.comida_Actual>=r.costo_comida && aldea.oro_Actual>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos && aldea.mercados_construidas<aldea.mercados_permitidas)
             boton = new Boton("Mercado0");
         else
             boton = new Boton("NO-Mercado0");
@@ -372,7 +395,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         //Precio Guarnicion
         Guarnicion guar=new Guarnicion();
         r = Requerimiento.buscar_requerimiento("Guarnicion",0);
-        if(aldea.comida_Actual>=r.costo_comida && aldea.oro_Actual>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
+        if(aldea.comida_Actual>=r.costo_comida && aldea.oro_Actual>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos && aldea.guarnicion_construidas<aldea.guarnicion_permitidas)
                boton = new Boton("Guarnicion0");
         else
                 boton = new Boton("NO-Guarnicion0");
@@ -382,7 +405,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         //Precio Almacen        
         Almacen alm= new Almacen();
         r = Requerimiento.buscar_requerimiento("Almacen",0);
-        if(aldea.comida_Actual>=r.costo_comida && aldea.oro_Actual>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
+        if(aldea.comida_Actual>=r.costo_comida && aldea.oro_Actual>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos && aldea.almacenes_construidos<aldea.almacenes_permitidos)
             boton = new Boton("Almacen0");
         else 
             boton = new Boton("NO-Almacen0");
@@ -392,7 +415,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         //Precio Cuartel
         Cuartel cua=new Cuartel();
         r = Requerimiento.buscar_requerimiento("Cuartel",cua.nivel);
-        if(aldea.comida_Actual>=r.costo_comida && aldea.oro_Actual>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
+        if(aldea.comida_Actual>=r.costo_comida && aldea.oro_Actual>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos && aldea.cuarteles_construidas<aldea.cuarteles_permitidas)
             boton = new Boton("Cuartel0");
         else
             boton = new Boton("NO-Cuartel0");
@@ -402,7 +425,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         //Precio Casa
         Casa casa=new Casa();
         r = Requerimiento.buscar_requerimiento("Casa",cua.nivel);
-        if(aldea.comida_Actual>=r.costo_comida && aldea.oro_Actual>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
+        if(aldea.comida_Actual>=r.costo_comida && aldea.oro_Actual>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos && aldea.casas_construidas<aldea.casas_permitidas)
             boton = new Boton("Casa");
         else
             boton = new Boton("NO-Casa");
@@ -412,7 +435,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         //Precio Granja
        Granja granja =new Granja();
         r = Requerimiento.buscar_requerimiento("Granja0",cua.nivel);
-        if(aldea.comida_Actual>=r.costo_comida && aldea.oro_Actual>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
+        if(aldea.comida_Actual>=r.costo_comida && aldea.oro_Actual>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos && aldea.granjas_construidas<aldea.granjas_permitidas)
             boton = new Boton("Granja0");
         else
             boton = new Boton("NO-Granja0");
