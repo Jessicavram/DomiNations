@@ -304,13 +304,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             e.setComidaTotal(aldea.total_comida);
             aldea.total_oro+=cen.capcidad_oro;
             e.setOroTotal(aldea.total_oro);
-            aldea.casas_permitidas=cen.max_casas;
-            aldea.almacenes_permitidos=cen.max_almacenes;
-            aldea.cuarteles_permitidas=cen.max_cuarteles;
-            aldea.granjas_permitidas=cen.max_granjas;
-            aldea.guarnicion_permitidas=cen.max_guarniciones;
-            aldea.mercados_permitidas=cen.max_mercados;
-            aldea.torres_permitidas=cen.max_torres;
+            cen.avanzar(aldea);
         }
         if(obj instanceof Almacen)
         {
