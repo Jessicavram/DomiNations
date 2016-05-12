@@ -57,8 +57,12 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
     Batalla batalla;
 
     Aldea aldea; 
-    /***/
+
+    Aldeano ald[];
+//    Aldeano ald[]=new Aldeano[aldea.nro_aldeanos];
+
     boolean ventana_batalla=false;
+
     
     /**Estado de la escena*/
     boolean Ventana_tienda=false;
@@ -101,6 +105,18 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         //Crear la lista de requerimientos
         Requerimiento = new Lista_de_Requerimientos();
         matriz_logica=new Matriz_Logica();
+
+        aldea=new Aldea();
+        ald=new Aldeano[100];
+        for(int i=0;i<100;i++){
+              ald[i]=new Aldeano();
+        }
+        System.out.println("Tamaño incial: "+vec_item_estaticos.size()+"Linea 85");
+        
+  //      for (int i = 0; i < aldea.nro_aldeanos; i++) {
+    //        ald[i]=new Aldeano();
+      //  }
+
     }
     
     public void AgregarElementosAldea(float x,float y){
@@ -112,11 +128,14 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             Requerimientos r = Requerimiento.buscar_requerimiento("Centro",0);
            if(aldea.comida_Actual>=r.costo_comida && aldea.oro_Actual>=r.costo_oro && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos)
            {
+
                aldea.centro=true;       
                
                cen.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna((int)x, x_inicial)*25, (y_inicial+matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)*25)-(cen.Obtener_Alto()-(cen.alto*25)));
+
                 vec_item_estaticos.add(cen);
                 matriz_logica.colocar_edificio(matriz_logica.coordenadaY_a_Fila((int)y, y_inicial),matriz_logica.coordenaX_a_Columna((int)x, x_inicial),item.ancho,item.alto);
+                ubicar_aldeanos(x,y,r,pos);
                 
                 aldea.oro_Actual-=r.costo_oro;
                 e.setOro(aldea.oro_Actual);
@@ -140,7 +159,9 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 cua.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna((int)x, x_inicial)*25, (y_inicial+matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)*25)-(cua.Obtener_Alto()-(cua.alto*25)));
                 vec_item_estaticos.add(cua);
                 matriz_logica.colocar_edificio(matriz_logica.coordenadaY_a_Fila((int)y, y_inicial),matriz_logica.coordenaX_a_Columna((int)x, x_inicial),item.ancho,item.alto);
-                
+                //posicionando aldeanos para el cuartel
+                ubicar_aldeanos(x,y,r,pos);
+            
                 aldea.oro_Actual-=r.costo_oro;
                 e.setOro(aldea.oro_Actual);
                 aldea.comida_Actual-=r.costo_comida;
@@ -164,6 +185,8 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 alm.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna((int)x, x_inicial)*25, (y_inicial+matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)*25)-(alm.Obtener_Alto()-(alm.alto*25)));
                 vec_item_estaticos.add(alm);
                 matriz_logica.colocar_edificio(matriz_logica.coordenadaY_a_Fila((int)y, y_inicial),matriz_logica.coordenaX_a_Columna((int)x, x_inicial),item.ancho,item.alto);
+                //posicionando aldeanos 
+                ubicar_aldeanos(x,y,r,pos);
                 
                 aldea.oro_Actual-=r.costo_oro;
                 e.setOro(aldea.oro_Actual);
@@ -189,6 +212,8 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 tor.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna((int)x, x_inicial)*25, (y_inicial+matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)*25)-(tor.Obtener_Alto()-(tor.alto*25)));
                 vec_item_estaticos.add(tor);
                 matriz_logica.colocar_edificio(matriz_logica.coordenadaY_a_Fila((int)y, y_inicial),matriz_logica.coordenaX_a_Columna((int)x, x_inicial),item.ancho,item.alto);
+                 //posicionando aldeanos 
+                ubicar_aldeanos(x,y,r,pos);
                 
                 aldea.oro_Actual-=r.costo_oro;
                 e.setOro(aldea.oro_Actual);
@@ -214,6 +239,9 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 mer.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna((int)x, x_inicial)*25, (y_inicial+matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)*25)-(mer.Obtener_Alto()-(mer.alto*25)));
                 vec_item_estaticos.add(mer);
                 matriz_logica.colocar_edificio(matriz_logica.coordenadaY_a_Fila((int)y, y_inicial),matriz_logica.coordenaX_a_Columna((int)x, x_inicial),item.ancho,item.alto);
+                 //posicionando aldeanos 
+                ubicar_aldeanos(x,y,r,pos);
+                //ald[0].Aparecer_Aldeano(matriz_logica, x_inicial, y_inicial, matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)+2, matriz_logica.coordenaX_a_Columna((int)x, x_inicial)-1);
                 
                 aldea.oro_Actual-=r.costo_oro;
                 e.setOro(aldea.oro_Actual);
@@ -241,6 +269,9 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 guar.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna((int)x, x_inicial)*25, (y_inicial+matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)*25)-(guar.Obtener_Alto()-(guar.alto*25)));
                 vec_item_estaticos.add(guar);
                 matriz_logica.colocar_edificio(matriz_logica.coordenadaY_a_Fila((int)y, y_inicial),matriz_logica.coordenaX_a_Columna((int)x, x_inicial),item.ancho,item.alto);
+                 //posicionando aldeanos 
+                ubicar_aldeanos(x,y,r,pos);
+                
                 
                 aldea.oro_Actual-=r.costo_oro;
                 e.setOro(aldea.oro_Actual);
@@ -268,6 +299,9 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 casa.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna((int)x, x_inicial)*25, (y_inicial+matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)*25)-(casa.Obtener_Alto()-(casa.alto*25)));
                 vec_item_estaticos.add(casa);
                 matriz_logica.colocar_edificio(matriz_logica.coordenadaY_a_Fila((int)y, y_inicial),matriz_logica.coordenaX_a_Columna((int)x, x_inicial),item.ancho,item.alto);
+                 //posicionando aldeanos 
+                ubicar_aldeanos(x,y,r,pos);
+                
                 
                 aldea.oro_Actual-=r.costo_oro;
                 e.setOro(aldea.oro_Actual);
@@ -292,6 +326,8 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 granja.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna((int)x, x_inicial)*25, (y_inicial+matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)*25)-(granja.Obtener_Alto()-(granja.alto*25)));
                 vec_item_estaticos.add(granja);
                 matriz_logica.colocar_edificio(matriz_logica.coordenadaY_a_Fila((int)y, y_inicial),matriz_logica.coordenaX_a_Columna((int)x, x_inicial),item.ancho,item.alto);
+                 //posicionando aldeanos 
+                ubicar_aldeanos(x,y,r,pos);
                 
                 aldea.oro_Actual-=r.costo_oro;
                 e.setOro(aldea.oro_Actual);
@@ -308,6 +344,94 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         }
         
     }
+
+    public void ubicar_aldeanos(float x,float y,Requerimientos r,int pos){
+         //ubica izquierda arriba 
+          int cont=0;
+        
+          for(int i=0;i<aldea.nro_aldeanos_disponibles;i++){
+              if(ald[i].estado==0){
+                    if(matriz_logica.coordenaX_a_Columna((int)x, x_inicial)-1>=0&&matriz_logica.matriz_logica[matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)][matriz_logica.coordenaX_a_Columna((int)x, x_inicial)-1]=='0'){
+                              
+                        ald[i].Aparecer_Aldeano(matriz_logica, x_inicial, y_inicial, matriz_logica.coordenadaY_a_Fila((int)y, y_inicial), matriz_logica.coordenaX_a_Columna((int)x, x_inicial)-1);
+                        ald[i].animacion.Seleccionar_Accion("Dconstruir", true);
+                        matriz_logica.matriz_logica[matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)][matriz_logica.coordenaX_a_Columna((int)x, x_inicial)-1]='1';
+                        ald[i].posicion=pos;
+                        ald[i].estado=1;
+                    }
+                    //ubico en la izquierda
+                    else if(matriz_logica.coordenaX_a_Columna((int)x, x_inicial)-1>=0&&matriz_logica.matriz_logica[matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)+(item.alto-1)][matriz_logica.coordenaX_a_Columna((int)x, x_inicial)-1]=='0'){
+                              
+                        ald[i].Aparecer_Aldeano(matriz_logica, x_inicial, y_inicial, matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)+(item.alto-1), matriz_logica.coordenaX_a_Columna((int)x, x_inicial)-1);
+                        ald[i].animacion.Seleccionar_Accion("Dconstruir", true);
+                        matriz_logica.matriz_logica[matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)+(item.alto-1)][matriz_logica.coordenaX_a_Columna((int)x, x_inicial)-1]='1';
+                        ald[i].posicion=pos;
+                        ald[i].estado=1;
+                    }
+                    //ubica en abajo izquierda
+                    else if(matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)+(item.alto)<18&&matriz_logica.matriz_logica[matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)+(item.alto)][matriz_logica.coordenaX_a_Columna((int)x, x_inicial)]=='0'){
+                        
+                        
+                        ald[i].Aparecer_Aldeano(matriz_logica, x_inicial, y_inicial, matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)+item.alto, matriz_logica.coordenaX_a_Columna((int)x, x_inicial));
+                        ald[i].animacion.Seleccionar_Accion("Arconstruir", true);
+                        matriz_logica.matriz_logica[matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)+(item.alto)][matriz_logica.coordenaX_a_Columna((int)x, x_inicial)]='1';
+                        ald[i].posicion=pos;
+                        ald[i].estado=1;
+                     }
+                    //ubica abajo derecha
+                    else if(matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)+(item.alto)<18&&matriz_logica.matriz_logica[matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)+(item.alto)][matriz_logica.coordenaX_a_Columna((int)x, x_inicial)+1]=='0'){
+                        
+                        
+                        ald[i].Aparecer_Aldeano(matriz_logica, x_inicial, y_inicial, matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)+item.alto, matriz_logica.coordenaX_a_Columna((int)x, x_inicial)+1);
+                        ald[i].animacion.Seleccionar_Accion("Arconstruir", true);
+                        matriz_logica.matriz_logica[matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)+(item.alto)][matriz_logica.coordenaX_a_Columna((int)x, x_inicial)+1]='1';
+                        ald[i].posicion=pos;
+                        ald[i].estado=1;
+                    }
+                    //ubica derecha 
+                    else if(matriz_logica.coordenaX_a_Columna((int)x, x_inicial)+(item.ancho)<22&&matriz_logica.matriz_logica[matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)+1][matriz_logica.coordenaX_a_Columna((int)x, x_inicial)+(item.ancho)]=='0'){
+                     
+                        
+                        ald[i].Aparecer_Aldeano(matriz_logica, x_inicial, y_inicial, matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)+1, matriz_logica.coordenaX_a_Columna((int)x, x_inicial)+item.ancho);
+                        ald[i].animacion.Seleccionar_Accion("Iconstruir", true);
+                        matriz_logica.matriz_logica[matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)+1][matriz_logica.coordenaX_a_Columna((int)x, x_inicial)+(item.ancho)]='1';
+                        ald[i].posicion=pos;
+                        ald[i].estado=1;
+                    }
+                    //ubica derecha arriba
+                    else if(matriz_logica.coordenaX_a_Columna((int)x, x_inicial)+(item.ancho)<22&&matriz_logica.matriz_logica[matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)][matriz_logica.coordenaX_a_Columna((int)x, x_inicial)+(item.ancho)]=='0'){
+                        
+                        ald[i].Aparecer_Aldeano(matriz_logica, x_inicial, y_inicial, matriz_logica.coordenadaY_a_Fila((int)y, y_inicial), matriz_logica.coordenaX_a_Columna((int)x, x_inicial)+item.ancho);
+                        ald[i].animacion.Seleccionar_Accion("Iconstruir", true);
+                        matriz_logica.matriz_logica[matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)][matriz_logica.coordenaX_a_Columna((int)x, x_inicial)+(item.ancho)]='1';
+                        ald[i].posicion=pos;
+                        ald[i].estado=1;
+                    }
+                    //ubicca arriba derecha
+                    else if(matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)-1>=0&&matriz_logica.matriz_logica[matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)-1][matriz_logica.coordenaX_a_Columna((int)x, x_inicial)+(item.ancho-1)]=='0'){
+                        
+                        ald[i].Aparecer_Aldeano(matriz_logica, x_inicial, y_inicial, matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)-1, matriz_logica.coordenaX_a_Columna((int)x, x_inicial)+(item.ancho-1));
+                        ald[i].animacion.Seleccionar_Accion("Abconstruir", true);
+                        matriz_logica.matriz_logica[matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)-1][matriz_logica.coordenaX_a_Columna((int)x, x_inicial)+(item.ancho-1)]='1';
+                        ald[i].posicion=pos;
+                        ald[i].estado=1;
+                    }
+                    else if(matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)-1>=0&&matriz_logica.matriz_logica[matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)-1][matriz_logica.coordenaX_a_Columna((int)x, x_inicial)+(item.ancho-2)]=='0'){
+                        
+                        ald[i].Aparecer_Aldeano(matriz_logica, x_inicial, y_inicial, matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)-1, matriz_logica.coordenaX_a_Columna((int)x, x_inicial)+(item.ancho-2));
+                        ald[i].animacion.Seleccionar_Accion("Abconstruir", true);
+                        matriz_logica.matriz_logica[matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)-1][matriz_logica.coordenaX_a_Columna((int)x, x_inicial)+(item.ancho-2)]='1';
+                        ald[i].posicion=pos;
+                        ald[i].estado=1;
+                    }
+                    cont++;
+                    if(cont==r.nro_aldeanos_requeridos)
+                        break;
+              }
+          }
+    }
+    
+
     public void actualizar_valores_cuartel(Objetos_Graficos obj, String tipo){
         if(obj instanceof Cuartel)
         {
@@ -319,6 +443,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 cuartel.nro_soldado2++;            
         }
     }
+
     public void actualizar_valores(Objetos_Graficos obj)
     {
         if(obj instanceof Centro)
@@ -703,6 +828,17 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 vec_item_con_movimiento.remove(i);
             }else*/
                 vec_item_con_movimiento.get(i).Actualizar_Objeto_Grafico(timePassed);
+                 if(vec_item_con_movimiento.get(i) instanceof Aldeano){
+                     
+                    Aldeano aldeano;
+                    aldeano=(Aldeano)vec_item_con_movimiento.get(i);
+                    
+               
+                    
+                    aldeano.Actualizar_Aldeano(timePassed, matriz_logica, x_inicial, y_inicial);
+                    vec_item_con_movimiento.set(i, aldeano);
+                 
+                } 
         }
         for(int i=0;i<vec_soldados.size();i++){
             /*Eliminar lo que se requiera eliminar del vector
@@ -744,6 +880,18 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
        if(pos_obj>=0 && pos_obj<vec_item_estaticos.size())
        {
            actualizar_valores(vec_item_estaticos.get(pos_obj));
+           
+//liberar aldeanos
+           for(int i=0;i<ald.length;i++){
+               if(ald[i].posicion==pos_obj){
+                   System.out.println("Posicion aldeano "+ald[i].posicion+"Posicion objeto "+pos_obj);
+                   System.out.println("Libero aldeano "+i);
+                   ald[i].estado=0;
+                   ald[i].posicion=-1;
+                   ald[i].animacion.Seleccionar_Accion("Abcaminar",true);
+                   ald[i].Seleccionar_Localizacion(ald[i].cordxi, ald[i].cordyi);
+               }
+           }
        }
       
     }
@@ -770,13 +918,15 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         //aldea
         
         
-        aldea = new Aldea();
+     
         aldea.oro_Actual=2000;
         aldea.total_oro=3000;
         aldea.comida_Actual=3000;
         aldea.total_comida=4000;
         aldea.nro_aldeanos=20;
+
         aldea.nro_aldeanos_disponibles=20;
+
         //NIVEL 1
         
         //Imagen de Fondo
@@ -787,10 +937,57 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         //Agregar boton tienda
         Boton boton = new Boton("Tienda");
         boton.Seleccionar_Localizacion(692, 542);
-        vec_botones.add(boton);        
+
+        vec_botones.add(boton);
+        
+        //Insertando soldado
+        Soldado sol = new Soldado();
+        sol.Seleccionar_Localizacion(250, 300);
+        vec_soldados.add(sol);
+        
+//Insertando soldado
+        Soldado2 a= new Soldado2();
+        a.Seleccionar_Localizacion(300, 300);
+        vec_item_con_movimiento.add(a); 
+        
+     /*   Aldeano alde= new Aldeano();
+        alde.currentAction="Icaminar";
+        alde.Seleccionar_Localizacion(400,430);
+        alde.animacion.Seleccionar_Accion(alde.currentAction, true);
+        alde.Aparecer_Aldeano(matriz_logica, x_inicial, y_inicial,17,21);
+        vec_item_con_movimiento.add(alde);
+       */ 
+        System.out.println("nro de aldeanos disp "+aldea.nro_aldeanos_disponibles);
+        for(int i=0;i<aldea.nro_aldeanos_disponibles;i++){
+            ald[i]=new Aldeano();
+            ald[i].currentAction="Abcaminar";
+            ald[i].Seleccionar_Localizacion(110+i*25, 50);
+            
+            ald[i].cordxi=110+i*25;
+            ald[i].cordyi=50;
+            
+            ald[i].animacion.Seleccionar_Accion(ald[i].currentAction, true);
+           
+            vec_item_con_movimiento.add(ald[i]);
+        }
+        /*/Insertando Varios Arboles 
+        Arbol arb[]=new Arbol[5];
+        for(int i=0;i<5;i++){
+           
+         arb[i]=new Arbol();
+         arb[i].Seleccionar_Localizacion(110+i*67, 90);
+         vec_item_estaticos.add(arb[i]); 
+        }
+        
+        Boton npp=new Boton(true);
+            npp.Seleccionar_Localizacion(300,300);
+        vec_item_estaticos.add(npp); 
+        
+        //insertando Mina
+
         
         
-       
+       */
         AgregarRecursosAldea();
         /*
         Aldeano alde= new Aldeano();
@@ -801,7 +998,6 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         alde.resuelve(matriz_logica,10,10,0,1);
         vec_item_con_movimiento.add(alde);
 
-        
         alde= new Aldeano();
         alde.currentAction="Dcaminar";
         alde.Seleccionar_Localizacion(400,460);
@@ -1308,6 +1504,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         
     }
 
+
     @Override
     public void mouseEntered(MouseEvent e) {
     //    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -1347,6 +1544,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         }
         
     }
+
 }
 
 

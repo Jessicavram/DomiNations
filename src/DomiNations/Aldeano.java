@@ -19,6 +19,11 @@ public class Aldeano extends Objetos_Animados{
     double cont;
     /**estado actual del aldeano (caminar, construir)*/
     public int estado=0;
+    public int posicion=-1;
+    public int cordxi=0;
+    public int cordyi=0;
+    /*si el estado es 1 el aldeano se encuentra construyendo*/
+    
     /**Constructor donde se añaden las acciones del objeto y se da una por defecto*/
     public Aldeano(){        
         Hoja_Sprites map = new Hoja_Sprites();       
@@ -65,11 +70,19 @@ public class Aldeano extends Objetos_Animados{
     
     public void Actualizar_Aldeano(double timePassed,Matriz_Logica m, int x_inicial,int y_inicial){
         
-        vx=1;
+       /* vx=1;
         dirx=1;
         Actualizar_PosicionX();
         Actualizar_PosicionY();
         Verificar_camino(m,x_inicial,y_inicial);
+        */
+    }
+    public void Aparecer_Aldeano( Matriz_Logica m, int x_inicial, int y_inicial,int fila,int columna){
+            
+            x=m.Columna_a_CoordenadaX(columna, x_inicial);
+            y=m.Fila_a_CoordenadaY(fila, y_inicial);
+            //x=200;
+            //y=200;
     }
    public static boolean resuelve(Matriz_Logica m,int x,int y,int xdest,int ydest){
        m.matriz_logica[x][y]='.';

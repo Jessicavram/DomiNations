@@ -64,8 +64,8 @@ public class Aldea {
         oro_Actual =0;
         total_comida =0;
         comida_Actual =0;
-        nro_aldeanos =0;
-        nro_aldeanos_disponibles =0;
+        nro_aldeanos =7;
+        nro_aldeanos_disponibles =7;
         centro =false;
         torres_permitidas =0;
         torres_creadas =0;
