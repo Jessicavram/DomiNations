@@ -29,7 +29,7 @@ public class Mina extends Objetos_Animados{
         botonre_activo=false;
         oro_maximo=100;
         bloquear=false;
-        map.Añadir_accion("MinaVacia",0,0,50,50,3,false,1); //mina vacia 
+        map.Añadir_accion("MinaVacia",0,0,49,50,3,false,1); //mina vacia 
         map.Añadir_accion("MinaConOro",59,0,118,100,1,true, 1); //Minallena
        
         animacion = new Animacion(map, "MinaVacia", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.MINA).getImage());

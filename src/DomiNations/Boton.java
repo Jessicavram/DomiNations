@@ -38,6 +38,9 @@ public class Boton extends Objetos_Animados{
         //Definir las acciones en la hoja de sprites
         if(Nombre.compareTo("Tienda")==0){
             map.Añadir_accion(Nombre, 0, 0, 75, 50, 1, true, 1); 
+        }else if(Nombre.compareTo("MINA")==0||Nombre.compareTo("ARBOL")==0){
+            map.Añadir_accion(this.Nombre,0,0,59,100,1, true, 1);
+        
         }else if(Nombre.compareTo("X-Cuartel")==0){
             map.Añadir_accion(Nombre, 248, 181, 273, 206, 1, true, 1); 
         }else if(Nombre.compareTo("X-Batalla")==0){

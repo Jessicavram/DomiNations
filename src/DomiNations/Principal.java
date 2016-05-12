@@ -89,7 +89,8 @@ public class Principal extends JFrame {
             setVisible(true);
             getContentPane().add(escena_menu);
             pack();
-            setLocationRelativeTo(null);
+            //setLocationRelativeTo(null);
+            setLocation(0, 0);
         }
     
     class Eventos_de_Tecla extends KeyAdapter{

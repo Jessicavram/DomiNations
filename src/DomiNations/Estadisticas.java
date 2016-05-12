@@ -218,6 +218,18 @@ public class Estadisticas extends JWindow
         et2.setText("Comida: "+comida+"/"+comida_total);
     }
     
+    public void setOro_Actual(int ot)
+    {
+        oro=ot;
+        et1.setText("Oro: "+oro+"/"+oro_total);
+    }
+    
+    public void setComida_Actual(int ct)
+    {
+        comida=ct;
+        et2.setText("Comida: "+comida+"/"+comida_total);
+    }
+    
     public void setAldeanosDisponibles(int a)
     {
         aldeanos_disponibles=a;

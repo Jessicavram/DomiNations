@@ -49,7 +49,8 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
     Objetos_Graficos item;
 
     
-    boolean edoElemento=false;
+    boolean edoElemento=false,boton_arbol=false,boton_oro=false;
+    
     /** Tiempo de la proxima batalla*/
     int proxima_batalla;
     /**Batalla*/
@@ -63,7 +64,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
     boolean Ventana_tienda=false;
     boolean Ventana_cuartel=false;
     boolean agregar_elemento=false;
-    int posicion_Cuartel=-1;
+    int posicion_Cuartel=-1,posicion_arbol=-1,posicion_mina=-1;
     /**Lista de requerimientos para crear o mejor item*/
     Lista_de_Requerimientos Requerimiento;
     
@@ -371,9 +372,23 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             aldea.total_comida+=granja.capacidad_comida;
             e.setComidaTotal(aldea.total_comida);
         }
-        if (obj instanceof Boton)
+        if (obj instanceof Arbol)
         {
-            System.out.println("NAdscnsdjnck");
+            Arbol arbol = (Arbol)obj;
+            Requerimientos r = Requerimiento.buscar_requerimiento("Arbol",0);
+            aldea.nro_aldeanos_disponibles+=r.nro_aldeanos_requeridos;
+            e.setAldeanosDisponibles(aldea.nro_aldeanos_disponibles);  
+            aldea.comida_Actual+=arbol.fruta_max;
+            e.setComida_Actual(aldea.comida_Actual);
+        }
+        if (obj instanceof Mina)
+        {
+            Mina mina = (Mina)obj;
+            Requerimientos r = Requerimiento.buscar_requerimiento("Mina",0);
+            aldea.nro_aldeanos_disponibles+=r.nro_aldeanos_requeridos;
+            e.setAldeanosDisponibles(aldea.nro_aldeanos_disponibles);  
+            aldea.oro_Actual+=mina.oro_maximo;
+            e.setOro_Actual(aldea.oro_Actual);
         }
        
         if(obj instanceof Torre)
@@ -640,7 +655,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         //pintar boton tienda 
         if(!Ventana_tienda && !ventana_batalla)vec_botones.get(0).Dibujar(g);
         
-        for(int i=1;i<vec_botones.size() && (Ventana_tienda || Ventana_cuartel) && !ventana_batalla;i++){ 
+        for(int i=1;i<vec_botones.size() && (Ventana_tienda || Ventana_cuartel || boton_oro || boton_arbol) && !ventana_batalla;i++){ 
                 vec_botones.get(i).Dibujar(g);
         }
         
@@ -768,17 +783,8 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         //Agregar boton tienda
         Boton boton = new Boton("Tienda");
         boton.Seleccionar_Localizacion(692, 542);
-        vec_botones.add(boton);
+        vec_botones.add(boton);        
         
-        //Insertando soldado
-        Soldado sol = new Soldado();
-        sol.Seleccionar_Localizacion(250, 300);
-        vec_soldados.add(sol);
-        
-//Insertando soldado
-        Soldado2 a= new Soldado2();
-        a.Seleccionar_Localizacion(300, 300);
-        vec_item_con_movimiento.add(a); 
         
        
         AgregarRecursosAldea();
@@ -1034,13 +1040,17 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                         System.out.println("Selecciono Mercado");
                     }else if(dinamico instanceof Granja){
                         System.out.println("Selecciono Granaja");
-                    }else if(dinamico instanceof Mina){
+                    }else if(dinamico instanceof Mina && !boton_oro){
                         System.out.println("Selecciono mina");
-                        RecolectarRecursos(dinamico);
-                    }else if(dinamico instanceof Arbol){
-                        RecolectarRecursos(dinamico);
+                        //RecolectarRecursos(dinamico);
+                        posicionar_boton_recolectar(dinamico);
+                        posicion_mina=i;
+                    }else if(dinamico instanceof Arbol && !boton_arbol){
+                        //RecolectarRecursos(dinamico);
                         System.out.println("Selecciono arbol");
-                    }else if(dinamico instanceof Boton){            
+                        posicionar_boton_recolectar(dinamico);
+                        posicion_arbol=i;
+                    }/*else if(dinamico instanceof Boton){            
                         b=(Boton)dinamico;
                         if(b.Nombre.compareTo("MINA")==0){                      
                             System.out.println("Selecciono Boton Mina");
@@ -1077,7 +1087,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
 
                             }   
                         }    
-                    }
+                    }*/
                 }
             }
 
@@ -1092,8 +1102,19 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 AgregarElementosAldea(evento.getX(),evento.getY());
                 agregar_elemento=false;        
             }
-
-            for(int i=2;i<vec_botones.size() && (Ventana_tienda || Ventana_cuartel);i++){
+            if(edoElemento==true){ 
+                if(boton_arbol){
+                    agregar_recurso_lef(vec_item_estaticos.get(posicion_arbol));
+                    edoElemento=false;
+                }else if(boton_oro){
+                    agregar_recurso_lef(vec_item_estaticos.get(posicion_mina));
+                    edoElemento=false;
+                }
+            }
+            int qw;
+            if(Ventana_tienda || Ventana_cuartel)qw=2;
+            else qw=1;
+            for(int i=qw;i<vec_botones.size() && (Ventana_tienda || Ventana_cuartel || boton_arbol || boton_oro);i++){
                 dinamico = vec_botones.get(i);
                 b=(Boton)vec_botones.get(i);
                 if((pos_x > dinamico.x && pos_x < dinamico.x + dinamico.Obtener_Ancho()) && (pos_y > dinamico.y && pos_y < dinamico.y + dinamico.Obtener_Alto()))
@@ -1126,7 +1147,13 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                             vec_item_estaticos.set(posicion_Cuartel, aux);
                             borrar_botones();
                             crear_cuartel_entrenar(aux);
-                    }else if(!b.Nombre.substring(0,2).equals("NO")){
+                    }else if(b.Nombre.equals("ARBOL") ){
+                        edoElemento=true;
+                            
+                    }else if(b.Nombre.equals("MINA") ){
+                         edoElemento=true;
+                    }
+                    else if(!b.Nombre.substring(0,2).equals("NO")){
                         elemento=b.Nombre;  
                         item = Tipo_Item(elemento);
                         System.out.println(b.Nombre);
@@ -1261,9 +1288,8 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
     }
        
     public void tiempo_proxima_batalla(){
-        proxima_batalla= (int)(aldea.aleatorio(60, 150));
-        //proxima_batalla=(int) ((Motor_Juego.cont/50)+aldea.aleatorio(60, 150));
-        proxima_batalla=10;
+        //proxima_batalla= (int)(aldea.aleatorio(60, 150));
+        proxima_batalla=(int) ((Motor_Juego.cont/50)+aldea.aleatorio(60, 150));
         e.insertar_LEF(new LEF("Batalla",(int)((Motor_Juego.cont/50)+proxima_batalla) ,-5));
         proxima_batalla++;
         //e.insertar_LEF(new LEF("Batalla",proxima_batalla ,-5));
@@ -1283,7 +1309,40 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
     //    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
  
-
+    public void posicionar_boton_recolectar(Objetos_Graficos x){
+        borrar_botones();  
+        Requerimientos r;
+        Boton boton;
+        if(x instanceof Mina){
+            boton =new Boton(true,"MINA");
+            boton_oro=true;
+            edoElemento=false;
+        }else{
+            boton =new Boton(true,"ARBOL");            
+            boton_arbol=true;
+            edoElemento=false;
+        }
+        boton.Seleccionar_Localizacion((int)(x.getX()),(int)(x.getY()));
+        vec_botones.add(boton);        
+    }
+    public void agregar_recurso_lef(Objetos_Graficos a){
+        Requerimientos r = Requerimiento.buscar_requerimiento("Arbol",0);
+        if(a instanceof Arbol && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos){
+            aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
+            e.setAldeanosDisponibles(aldea.nro_aldeanos_disponibles);
+            e.insertar_LEF(new LEF("+Comida",((Motor_Juego.cont/50)+r.tiempo),posicion_arbol));
+            e.panel.repaint(); 
+            boton_arbol=false;
+            
+        }else if(a instanceof Mina && aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos){
+            aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
+            e.setAldeanosDisponibles(aldea.nro_aldeanos_disponibles);
+            e.insertar_LEF(new LEF("+Oro",((Motor_Juego.cont/50)+r.tiempo),posicion_mina));
+            e.panel.repaint(); 
+            boton_oro=false;
+        }
+        
+    }
 }
 
 
