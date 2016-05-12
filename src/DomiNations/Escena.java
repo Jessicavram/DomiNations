@@ -531,13 +531,17 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                             cuartel.nro_soldado1_cola--;
                             cuartel.nro_soldado1++;
                             aldea.soldados_tipo_1++;
+                            Soldado s1 = new Soldado();
+                            s1.Seleccionar_Localizacion((int)(cuartel.x+50+(cuartel.nro_soldado1*23)), (int)(cuartel.y)+5);//
+                            vec_soldados.add(s1);
                         }else if(cuartel.nro_soldado2_cola>0){
                             cuartel.nro_soldado2_cola--;
                             cuartel.nro_soldado2++;
                             aldea.soldados_tipo_2++;
-                            
+                            Soldado2 s2 = new Soldado2();
+                            s2.Seleccionar_Localizacion((int)(cuartel.x+50+(cuartel.nro_soldado2*23)), (int)(cuartel.y)+40);//
+                            vec_soldados.add(s2);
                         }
-                        System.out.println("CUARTEL: S1:"+cuartel.nro_soldado1+" S2:"+cuartel.nro_soldado2+"Linea 522 esce");
                     }
                     cuartel.tiempo_entrenamiento--;
                     vec_item_estaticos.set(i, cuartel);                   
@@ -709,7 +713,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 vec_soldados.get(i).Actualizar_Objeto_Grafico(timePassed);
                 
               //averiguando en que posicion de la matriz logica se encuentra el ALDEANO
-                
+                /*
                 if(vec_item_con_movimiento.get(i) instanceof Aldeano){
                     Aldeano aldeano;
                     aldeano=(Aldeano)vec_item_con_movimiento.get(i);
@@ -717,7 +721,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                     vec_item_con_movimiento.set(i, aldeano);
                  
                 } 
-                
+                */
                 //System.out.println("Posicion en x "+vec_item_con_movimiento.get(i).x);
         }
       //Consultar en la LEF los eventos futuros 
