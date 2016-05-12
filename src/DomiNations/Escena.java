@@ -37,6 +37,8 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
     ArrayList<Objetos_Graficos> vec_item_con_movimiento;
     /**Vector para guardar los botones*/
     ArrayList<Objetos_Graficos> vec_botones;
+    /**Vector para guardar los soldados*/
+    ArrayList<Objetos_Graficos> vec_soldados;
     /** guarda el elemento seleccionado para construir en la aldea*/
     String elemento="";
     /* Registra el item a contruir**/
@@ -75,15 +77,19 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         vec_objetos_fondo = new ArrayList<Objetos_Graficos>();
         vec_item_estaticos = new ArrayList<Objetos_Graficos>();
         vec_item_con_movimiento= new ArrayList<Objetos_Graficos>();        
-        vec_botones= new ArrayList<Objetos_Graficos>();        
+        vec_botones= new ArrayList<Objetos_Graficos>();
+        vec_soldados= new ArrayList<Objetos_Graficos>();             
         //Crear la lista de requerimientos
         Requerimiento = new Lista_de_Requerimientos();
         matriz_logica=new Matriz_Logica();
+        System.out.println("Tamaño incial: "+vec_item_estaticos.size()+"Linea 85");
     }
     
     public void AgregarElementosAldea(float x,float y){
         
-        int t_construc=0; 
+        int t_construc=0;
+        int pos = vec_item_estaticos.size();
+        System.out.println("Pos a Guardar:"+pos+" -LINEA 91");
         if(elemento.compareTo("Centro0")==0){
             Centro cen = new Centro();
             Requerimientos r = Requerimiento.buscar_requerimiento("Centro",0);
@@ -99,14 +105,10 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 e.setComida(aldea.comida_Actual);
                 aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
                 e.setAldeanosDisponibles(aldea.nro_aldeanos_disponibles);
-                aldea.total_comida+=cen.capacidad_comida;
-                e.setComidaTotal(aldea.total_comida);
-                aldea.total_oro+=cen.capcidad_oro;
-                e.setOroTotal(aldea.total_oro);
                  
                  t_construc=(Motor_Juego.cont/50)+cen.tiempo;
                 System.out.println("Tiempo Actual "+Motor_Juego.cont/50+" Tiempo de construccion "+t_construc);        
-                e.insertar_LEF(new LEF("Centro",t_construc,e.pos));
+                e.insertar_LEF(new LEF("Centro",t_construc,pos));
                 e.panel.repaint();
            }
         }else if(elemento.compareTo("Cuartel0")==0){
@@ -127,7 +129,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 
                  t_construc=(Motor_Juego.cont/50)+cua.tiempo;
                 System.out.println("Tiempo Actual "+Motor_Juego.cont/50+" Tiempo de construccion "+t_construc);        
-                e.insertar_LEF(new LEF("Cuartel",t_construc,e.pos));
+                e.insertar_LEF(new LEF("Cuartel",t_construc,pos));
                 e.panel.repaint();
            }
         }else if(elemento.compareTo("Almacen0")==0){
@@ -146,13 +148,11 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 e.setComida(aldea.comida_Actual);
                 aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
                 e.setAldeanosDisponibles(aldea.nro_aldeanos_disponibles);
-                aldea.total_comida+=alm.capacidad_almacenamiento_comida;
-                e.setComidaTotal(aldea.total_comida);
                 
                  t_construc=(Motor_Juego.cont/50)+alm.tiempo;
                 System.out.println("Tiempo Actual "+Motor_Juego.cont/50+" Tiempo de construccion "+t_construc);        
-                e.insertar_LEF(new LEF("Almacen",t_construc,e.pos));
-                e.panel.repaint();
+                e.insertar_LEF(new LEF("Almacen",t_construc,pos));
+                e.panel.repaint();                
             }
        
         }else if(elemento.compareTo("Torre0")==0){
@@ -174,7 +174,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 
                  t_construc=(Motor_Juego.cont/50)+tor.tiempo;
                 System.out.println("Tiempo Actual "+Motor_Juego.cont/50+" Tiempo de construccion "+t_construc);        
-                e.insertar_LEF(new LEF("Torre",t_construc,e.pos));
+                e.insertar_LEF(new LEF("Torre",t_construc,pos));
                 e.panel.repaint();
             }
             
@@ -194,12 +194,10 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 e.setComida(aldea.comida_Actual);
                 aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
                 e.setAldeanosDisponibles(aldea.nro_aldeanos_disponibles);
-                aldea.total_oro+=mer.capacidad_almacenamiento_oro;
-                e.setOroTotal(aldea.total_oro);
                 
                 t_construc=(Motor_Juego.cont/50)+mer.tiempo;
                 System.out.println("Tiempo Actual "+Motor_Juego.cont/50+" Tiempo de construccion "+t_construc);        
-                e.insertar_LEF(new LEF("Mercado",t_construc,e.pos));
+                e.insertar_LEF(new LEF("Mercado",t_construc,pos));
               
                  e.panel.repaint();   
                 
@@ -224,7 +222,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             
                 t_construc=(Motor_Juego.cont/50)+guar.tiempo;
                 System.out.println("Tiempo Actual "+Motor_Juego.cont/50+" Tiempo de construccion "+t_construc);
-                e.insertar_LEF(new LEF("Guarnicion",t_construc,e.pos));
+                e.insertar_LEF(new LEF("Guarnicion",t_construc,pos));
                 
                // System.out.println(e.listaLEF.get(e.pos-1).descripcion+" "+e.listaLEF.get(e.pos-1).tiempo+" "+e.listaLEF.get(e.pos-1).posicion);
                 //System.out.println(e.listaLEF.get(e.pos-1).getLinea());
@@ -239,19 +237,17 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 casa.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna((int)x, x_inicial)*25, (y_inicial+matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)*25)-(casa.Obtener_Alto()-(casa.alto*25)));
                 vec_item_estaticos.add(casa);
                 matriz_logica.colocar_edificio(matriz_logica.coordenadaY_a_Fila((int)y, y_inicial),matriz_logica.coordenaX_a_Columna((int)x, x_inicial),item.ancho,item.alto);
+                
                 aldea.oro_Actual-=r.costo_oro;
                 e.setOro(aldea.oro_Actual);
                 aldea.comida_Actual-=r.costo_comida;
                 e.setComida(aldea.comida_Actual);
                 aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
                 e.setAldeanosDisponibles(aldea.nro_aldeanos_disponibles);
-                aldea.total_comida+=casa.capacidad_almacenamiento_comida;
-                e.setComidaTotal(aldea.total_comida);
-                aldea.total_oro+=casa.capacidad_almacenamiento_oro;
-                e.setOroTotal(aldea.total_oro);
+                
                 t_construc=(Motor_Juego.cont/50)+casa.tiempo;
                 System.out.println("Tiempo Actual "+Motor_Juego.cont/50+" Tiempo de construccion "+t_construc);
-                e.insertar_LEF(new LEF("Casa",t_construc,e.pos));
+                e.insertar_LEF(new LEF("Casa",t_construc,pos));
                 e.panel.repaint();
             }
             
@@ -263,21 +259,76 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 granja.Seleccionar_Localizacion(x_inicial+matriz_logica.coordenaX_a_Columna((int)x, x_inicial)*25, (y_inicial+matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)*25)-(granja.Obtener_Alto()-(granja.alto*25)));
                 vec_item_estaticos.add(granja);
                 matriz_logica.colocar_edificio(matriz_logica.coordenadaY_a_Fila((int)y, y_inicial),matriz_logica.coordenaX_a_Columna((int)x, x_inicial),item.ancho,item.alto);
+                
                 aldea.oro_Actual-=r.costo_oro;
                 e.setOro(aldea.oro_Actual);
                 aldea.comida_Actual-=r.costo_comida;
                 e.setComida(aldea.comida_Actual);
                 aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
                 e.setAldeanosDisponibles(aldea.nro_aldeanos_disponibles);  
-                aldea.total_comida+=granja.capacidad_comida;
-                e.setComidaTotal(aldea.total_comida);
+                
                 t_construc=(Motor_Juego.cont/50)+granja.tiempo;
                 System.out.println("Tiempo Actual "+Motor_Juego.cont/50+" Tiempo de construccion "+t_construc);
-                e.insertar_LEF(new LEF("Granja",t_construc,e.pos));
+                e.insertar_LEF(new LEF("Granja",t_construc,pos));
                 e.panel.repaint();
             }
         }
         
+    }
+    
+    public void actualizar_valores(Objetos_Graficos obj)
+    {
+        if(obj instanceof Centro)
+        {
+            Centro cen = (Centro)obj;
+            Requerimientos r = Requerimiento.buscar_requerimiento("Centro",0);
+            aldea.nro_aldeanos_disponibles+=r.nro_aldeanos_requeridos;
+            e.setAldeanosDisponibles(aldea.nro_aldeanos_disponibles);
+            aldea.total_comida+=cen.capacidad_comida;
+            e.setComidaTotal(aldea.total_comida);
+            aldea.total_oro+=cen.capcidad_oro;
+            e.setOroTotal(aldea.total_oro);
+        }
+        if(obj instanceof Almacen)
+        {
+            Almacen alm = (Almacen)obj;
+            Requerimientos r = Requerimiento.buscar_requerimiento("Almacen",0);
+            aldea.nro_aldeanos_disponibles+=r.nro_aldeanos_requeridos;
+            e.setAldeanosDisponibles(aldea.nro_aldeanos_disponibles);
+            aldea.total_comida+=alm.capacidad_almacenamiento_comida;
+            e.setComidaTotal(aldea.total_comida);
+            
+        }
+        if(obj instanceof Mercado)
+        {
+            Mercado mer = (Mercado)obj;
+            Requerimientos r = Requerimiento.buscar_requerimiento("Mercado",0);
+            aldea.nro_aldeanos_disponibles+=r.nro_aldeanos_requeridos;
+            e.setAldeanosDisponibles(aldea.nro_aldeanos_disponibles);
+            aldea.total_oro+=mer.capacidad_almacenamiento_oro;
+            e.setOroTotal(aldea.total_oro);
+        }
+        if(obj instanceof Casa)
+        {
+            Casa casa = (Casa)obj;
+            Requerimientos r = Requerimiento.buscar_requerimiento("Casa",0);
+            aldea.nro_aldeanos_disponibles+=r.nro_aldeanos_requeridos;
+            e.setAldeanosDisponibles(aldea.nro_aldeanos_disponibles);
+            aldea.total_comida+=casa.capacidad_almacenamiento_comida;
+            e.setComidaTotal(aldea.total_comida);
+            aldea.total_oro+=casa.capacidad_almacenamiento_oro;
+            e.setOroTotal(aldea.total_oro);
+        }
+        if(obj instanceof Granja)
+        {
+            Granja granja = (Granja)obj;
+            Requerimientos r = Requerimiento.buscar_requerimiento("Granja",0);
+            aldea.nro_aldeanos_disponibles+=r.nro_aldeanos_requeridos;
+            e.setAldeanosDisponibles(aldea.nro_aldeanos_disponibles);  
+            aldea.total_comida+=granja.capacidad_comida;
+            e.setComidaTotal(aldea.total_comida);
+        }
+        e.panel.repaint();
     }
     
     public void crear_tienda(){        
@@ -496,6 +547,10 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         for(int i=1;i<vec_botones.size() && (Ventana_tienda || Ventana_cuartel);i++){ 
                 vec_botones.get(i).Dibujar(g);
         }
+        
+        for(int i=0;i<vec_soldados.size();i++){            
+            vec_soldados.get(i).Dibujar(g);
+        }
         //Pintar el personaje
         g.setColor(Color.BLACK);
         g.fillRect(0,0,80,15);
@@ -526,6 +581,14 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 vec_item_con_movimiento.remove(i);
             }else*/
                 vec_item_con_movimiento.get(i).Actualizar_Objeto_Grafico(timePassed);
+        }
+        for(int i=0;i<vec_soldados.size();i++){
+            /*Eliminar lo que se requiera eliminar del vector
+            if(vec_item_con_movimiento.get(i).getY()>=310 || vec_item_con_movimiento.get(i).getX()<=-16 || vec_item_con_movimiento.get(i).borrar){
+                Motor_Fisico.getInstance().borrar_animado(vec_item_con_movimiento.get(i) );
+                vec_item_con_movimiento.remove(i);
+            }else*/
+                vec_soldados.get(i).Actualizar_Objeto_Grafico(timePassed);
                 
               //averiguando en que posicion de la matriz logica se encuentra el ALDEANO
                 
@@ -540,9 +603,14 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 //System.out.println("Posicion en x "+vec_item_con_movimiento.get(i).x);
         }
       //Consultar en la LEF los eventos futuros 
-       e.Consultar_LEF(Motor_Juego.cont/50); 
+       int pos_obj=e.Consultar_LEF(Motor_Juego.cont/50); 
        if (Motor_Juego.cont%50==0){
            actualizar_tiempos_cuartel();
+       }
+       if(pos_obj!=-1)System.out.println("Pos:"+pos_obj+"Tam: "+vec_item_estaticos.size()+"LINEA 610");
+       if(pos_obj>=0 && pos_obj<vec_item_estaticos.size())
+       {
+           actualizar_valores(vec_item_estaticos.get(pos_obj));
        }
     }
     
@@ -591,14 +659,14 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         //Insertando soldado
         Soldado sol = new Soldado();
         sol.Seleccionar_Localizacion(250, 300);
-        vec_item_con_movimiento.add(sol);
+        vec_soldados.add(sol);
         
 //Insertando soldado
         Soldado2 a= new Soldado2();
         a.Seleccionar_Localizacion(300, 300);
         vec_item_con_movimiento.add(a); 
         
-        //Insertando Varios Arboles 
+        /*/Insertando Varios Arboles 
         Arbol arb[]=new Arbol[5];
         for(int i=0;i<5;i++){
            
@@ -625,8 +693,13 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         matriz_logica.imprimir();
         alde.resuelve(matriz_logica,10,10,0,1);
         vec_item_con_movimiento.add(alde);
+<<<<<<< HEAD
 
      /* 
+=======
+*/
+     /*   
+>>>>>>> fd0536ae9d67a14cd3da30e8c4b3f198792affde
         alde= new Aldeano();
         alde.currentAction="Dcaminar";
         alde.Seleccionar_Localizacion(400,460);
@@ -728,11 +801,13 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         float pos_x = evento.getX();
         float pos_y = evento.getY();
         Objetos_Graficos dinamico;
+        Soldado soldado1;
         Boton b=new Boton();      
-        
+                
         for(int i=0;i<vec_item_estaticos.size() && !Ventana_tienda;i++){
             dinamico = vec_item_estaticos.get(i); 
             if((pos_x > dinamico.x && pos_x < dinamico.x + dinamico.Obtener_Ancho()) && (pos_y > dinamico.y && pos_y < dinamico.y + dinamico.Obtener_Alto())){
+                               
                 if(dinamico instanceof Cuartel){
                     crear_cuartel_entrenar((Cuartel)dinamico);
                     Ventana_cuartel=true;
@@ -779,7 +854,17 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             
         }
         
-        if(agregar_elemento==true){            
+        if(agregar_elemento==true){        
+            
+            
+            for(int i=0;i<vec_item_estaticos.size();i++){//
+                dinamico=vec_item_estaticos.get(i);//
+                if(dinamico instanceof Recuadro){//
+                    vec_item_estaticos.remove(i);//
+                } //
+            }  //
+            Cargar_Sonidos.obtener_instancia().Reproducir_pistas(Cargar_Sonidos.INICIAR_CONSTRUCCION, false, false);//
+            
             AgregarElementosAldea(evento.getX(),evento.getY());
             agregar_elemento=false;        
         }
