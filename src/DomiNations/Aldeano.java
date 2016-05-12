@@ -66,7 +66,7 @@ public class Aldeano extends Objetos_Animados{
     public void Actualizar_Aldeano(double timePassed,Matriz_Logica m, int x_inicial,int y_inicial){
         
         vx=1;
-        dirx=1;
+        dirx=0;
         Actualizar_PosicionX();
         Actualizar_PosicionY();
         Verificar_camino(m,x_inicial,y_inicial);

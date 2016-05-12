@@ -626,7 +626,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         alde.resuelve(matriz_logica,10,10,0,1);
         vec_item_con_movimiento.add(alde);
 
-     /*   
+     /* 
         alde= new Aldeano();
         alde.currentAction="Dcaminar";
         alde.Seleccionar_Localizacion(400,460);
