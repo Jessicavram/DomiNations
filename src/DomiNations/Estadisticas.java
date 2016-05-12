@@ -32,6 +32,10 @@ public class Estadisticas extends JWindow
     JScrollPane scroll;
     int pos;
     
+    public Estadisticas(){
+    
+    }
+    
     public Estadisticas(int o, int c, int ad,int ot, int ct, int a)
     {
         super();
@@ -125,18 +129,59 @@ public class Estadisticas extends JWindow
             texto.append(l.getLinea());
         }
     }
-    public void Consultar_LEF(int tiempo){
+    public int Consultar_LEF(int tiempo){
         for (LEF l : listaLEF)
         {
            if(l.tiempo==tiempo ){
                if(l.evento_ocurrio==0){
-               System.out.println("Ocurrio el evento "+l.descripcion);
+               System.out.println("Ocurrio el evento "+l.descripcion);   
+               
                l.evento_ocurrio=1;
-               break;
+               return l.posicion;
                
                }
            }
         }
+        return -1;
+     
+    }
+    
+    public Estadisticas ConsultarRecursos_LEF(int tiempo, Estadisticas e){
+     
+        for (LEF l : listaLEF)
+        {
+           if(l.tiempo==tiempo ){
+               if(l.evento_ocurrio==0){
+               System.out.println("Ocurrio el evento "+l.descripcion);   
+               if(l.descripcion.compareTo("Mina")==0){
+                   System.out.println("AQUIIII");
+               }
+              
+               l.evento_ocurrio=1;
+               return e;
+               
+               }
+           }
+        }
+        return null;
+    }
+    
+    
+    
+    
+      public int ConsultarTiempoEvento_LEF(String descripcion){
+        for (LEF l : listaLEF)
+        {
+           if(l.descripcion.compareTo(descripcion)==0){
+               if(l.evento_ocurrio==0){
+               System.out.println("Ocurrio el evento "+l.descripcion);               
+               l.evento_ocurrio=1;
+               return l.tiempo;
+               
+               }
+           }
+        }
+        return -1;
      
     }
     

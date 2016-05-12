@@ -28,6 +28,10 @@ public abstract class Objetos_Graficos {
     int nro_aldeanos_requeridos;
     /**Nivel actual del item (ej: 1,2,3,...)*/
     int nivel;
+    
+    Boton Actualizar;
+    
+    boolean botonActt_activo;
     /***/
     boolean boton_recolectar;
     Animacion animacion;
@@ -45,6 +49,7 @@ public abstract class Objetos_Graficos {
         nro_aldeanos_requeridos=0;
         nivel=1;
         boton_recolectar=false;
+        botonActt_activo=false;
     }
     /**Metodo para obtener o cargar una imagen dada una posicion en el vector
      * @param  vida_maxima numero que define la cantidad de vida maxima del item
@@ -58,6 +63,14 @@ public abstract class Objetos_Graficos {
     public void Seleccionar_Localizacion(int x, int y){
         this.x = x;
         this.y = y;
+    }
+    
+    public Boton HabilitarBotonActualizacion(Objetos_Graficos objg){
+        Actualizar=new Boton(true,"TORREA");
+        Actualizar.Seleccionar_Localizacion((int)(objg.getX()+20),(int)(objg.getY()+20));
+        botonActt_activo=true;
+        
+        return Actualizar;
     }
         
     public void Mover(float dx, float dy){
@@ -168,5 +181,10 @@ public abstract class Objetos_Graficos {
 
     public void setNro_aldeanos_requeridos(int nro_aldeanos_requeridos) {
         this.nro_aldeanos_requeridos = nro_aldeanos_requeridos;
+    }
+    public void Verificar_camino(Matriz_Logica m,int x_inicial, int y_inicial){
+        
+       // System.out.println("Posi en matriz logica  col "+m.coordenaX_a_Columna((int)x, x_inicial)+"fil "+m.coordenadaY_a_Fila((int)y, y_inicial)); 
+    
     }
 }

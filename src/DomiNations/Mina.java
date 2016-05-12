@@ -16,17 +16,19 @@ import sprites.Hoja_Sprites;
 public class Mina extends Objetos_Animados{
 
     boolean estado;
-    boolean botonre_activo;
+    boolean botonre_activo; //El boton de recoleccion esta activo
     int oro_maximo;
     int oro_actual;
     Boton recolectaM;
+    boolean bloquear;
     
     Hoja_Sprites map= new Hoja_Sprites();
     public Mina(){
         
         super(370,2,2,10,1);
         botonre_activo=false;
-        oro_maximo=100;  
+        oro_maximo=100;
+        bloquear=false;
         map.Añadir_accion("MinaVacia",0,0,50,50,3,false,1); //mina vacia 
         map.Añadir_accion("MinaConOro",59,0,118,100,1,true, 1); //Minallena
        
@@ -40,6 +42,8 @@ public class Mina extends Objetos_Animados{
         
         return recolectaM;
     }
+    
+    
     
     
     

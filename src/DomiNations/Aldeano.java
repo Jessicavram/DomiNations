@@ -50,10 +50,65 @@ public class Aldeano extends Objetos_Animados{
     }
     @Override
     public void Actualizar_Objeto_Grafico(double timePassed){
+        
+       /* vx=1;
+        //vy=1;
+        dirx=1;
+        //diry=-1;
         Actualizar_PosicionX();
         Actualizar_PosicionY();
+        */
         super.Actualizar_Objeto_Grafico(timePassed);
+     
     }
+    
+    
+    public void Actualizar_Aldeano(double timePassed,Matriz_Logica m, int x_inicial,int y_inicial){
+        
+        vx=1;
+        dirx=1;
+        Actualizar_PosicionX();
+        Actualizar_PosicionY();
+        Verificar_camino(m,x_inicial,y_inicial);
+    }
+   public static boolean resuelve(Matriz_Logica m,int x,int y,int xdest,int ydest){
+       m.matriz_logica[x][y]='.';
+       /*
+       if(x==0||y==1||x==m.matriz_logica[0].length-1||y==m.matriz_logica.length-1){
+           System.out.println("Encontrada la solución: ");
+           m.imprimir();
+           return true;
+       }*/
+       if(x==0||y==0){
+           System.out.println("Encontrada la solución: ");
+           m.imprimir();
+           return true;
+       }
+       //Arriba
+       if(m.matriz_logica[x-1][y]=='0'){
+           boolean tmp=resuelve(m,x-1,y,xdest,ydest);
+           if (tmp==true) return true;
+       }
+       //Abajo
+       if(m.matriz_logica[x+1][y]=='0'){
+           boolean tmp=resuelve(m,x+1,y,xdest,ydest);
+           if(tmp==true) return true;
+       }
+       //Izquierda
+       if(m.matriz_logica[x][y-1]=='0'){
+           boolean tmp=resuelve(m,x,y-1,xdest,ydest);
+           if(tmp==true) return true;
+       }
+       //Derecha
+       if(m.matriz_logica[x][y+1]=='0'){
+           boolean tmp=resuelve(m,x,y+1,xdest,ydest);
+           if(tmp==true) return true;
+       }
+       //El camino no tiene solucion
+       m.matriz_logica[x][y]='0';
+       return false;
+   }
+    
     /*
     @Override
    

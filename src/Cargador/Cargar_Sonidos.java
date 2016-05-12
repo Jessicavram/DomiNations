@@ -21,7 +21,7 @@ public class Cargar_Sonidos {
     /**Vector de sonidos en donde cargaremos todas las pistas del juego*/
     private Clip[] vec_sonidos;
     /**Constante que nos indica el total de pistas a cargar, que seria la suma de cada una de las constantes*/
-    public static final int TOTAL_SONIDOS = 18;
+    public static final int TOTAL_SONIDOS = 20;
     /**Constante para identificar la pista de saltar*/
     public static final int SALTO = 0;
     /**Constante para identificar la pista de pausa */
@@ -58,6 +58,10 @@ public class Cargar_Sonidos {
     public static final int CASTILLO= 16;
     /**Constant para identificar la pista de mato flor*/
     public static final int MUNDO_2= 17;
+    /**Inciar construccion*/
+    public static final int INICIAR_CONSTRUCCION= 18;
+    /**Inciar construccion*/
+    public static final int CONSTRUIR= 19;
     
     
 
@@ -67,7 +71,7 @@ public class Cargar_Sonidos {
         URL direccion;
         String nombre_pistas[] = new String[]{"salto.mp3","Pause.wav","PowerDown.wav","Powerup.wav","bloque_estatico.wav","espichar_enemigo.wav","moneda.wav"
                                     ,"salir_hongo.wav","muerte.wav","mundo1.wav","fin_pista.wav","fondo_menu.wav","mato_bowser.wav","disparo.wav","flor.wav"
-                                    ,"mato_fuego.wav","Castillo.wav","Mundo2.wav"};
+                                    ,"mato_fuego.wav","Castillo.wav","Mundo2.wav","iniciar_construir.mp3","construir.mp3"};
         vec_sonidos = new Clip[TOTAL_SONIDOS];
             for(int i=0;i<TOTAL_SONIDOS;i++){
             /*Crear la ruta hacia el sonido*/
