@@ -32,6 +32,8 @@ public class Boton extends Objetos_Animados{
             map.Añadir_accion(Nombre, 0, 0, 75, 50, 1, true, 1); 
         }else if(Nombre.compareTo("X-Cuartel")==0){
             map.Añadir_accion(Nombre, 248, 181, 273, 206, 1, true, 1); 
+        }else if(Nombre.compareTo("X-Batalla")==0){
+            map.Añadir_accion(Nombre, 248, 181, 273, 206, 1, true, 1); 
         }
         if(Nombre.compareTo("Cuartel0")==0){
             map.Añadir_accion(Nombre, 44, 149, 88, 169, 1, true, 1);

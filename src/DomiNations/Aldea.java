@@ -92,8 +92,8 @@ public class Aldea {
         float r = ((ran.nextInt(h-d+1)+d)/n);
         return r; 
     }
-    public void mostrar(){
-        System.out.println("+++++++++++++++");
+    public void mostrar(String x){
+        System.out.println("++++++    "+x+"   +++++++++");
         System.out.println("+ To: "+torres_creadas);
         System.out.println("+ Al: "+almacenes_construidos);
         System.out.println("+ Cu: "+cuarteles_construidas);
