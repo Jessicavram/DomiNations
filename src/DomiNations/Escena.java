@@ -347,8 +347,10 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
 
     public void ubicar_aldeanos(float x,float y,Requerimientos r,int pos){
          //ubica izquierda arriba 
-                    
-          for(int i=0;i<r.nro_aldeanos_requeridos;i++){
+          int cont=0;
+        
+          for(int i=0;i<aldea.nro_aldeanos_disponibles;i++){
+              if(ald[i].estado==0){
                     if(matriz_logica.coordenaX_a_Columna((int)x, x_inicial)-1>=0&&matriz_logica.matriz_logica[matriz_logica.coordenadaY_a_Fila((int)y, y_inicial)][matriz_logica.coordenaX_a_Columna((int)x, x_inicial)-1]=='0'){
                               
                         ald[i].Aparecer_Aldeano(matriz_logica, x_inicial, y_inicial, matriz_logica.coordenadaY_a_Fila((int)y, y_inicial), matriz_logica.coordenaX_a_Columna((int)x, x_inicial)-1);
@@ -422,6 +424,10 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                         ald[i].posicion=pos;
                         ald[i].estado=1;
                     }
+                    cont++;
+                    if(cont==r.nro_aldeanos_requeridos)
+                        break;
+              }
           }
     }
     
