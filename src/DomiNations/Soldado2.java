@@ -36,7 +36,7 @@ public class Soldado2 extends Objetos_Animados{
         map.Añadir_accion("DispararI", 100, 170, 124, 201, 2, true, 4);
         map.Añadir_accion("DispararD", 150, 170, 174, 201, 2, true, 4);
         //Crear la hoja de sprites
-        animacion = new Animacion(map, "CaminarD", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.SOLDADO2).getImage());
+        animacion = new Animacion(map, "Quieto", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.SOLDADO2).getImage());
         dano=25;
         alcance=3;
         secuencia_ataque=2;

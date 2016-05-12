@@ -31,7 +31,7 @@ public class Lista_de_Requerimientos {
         PreCondiciones.add(aux_reRequerimientos);
         
         //Centro
-        aux_reRequerimientos = new Requerimientos("Centro","Construir",0,100,10,4,0);
+        aux_reRequerimientos = new Requerimientos("Centro","Construir",0,100,1,4,0);
         PreCondiciones.add(aux_reRequerimientos);
         aux_reRequerimientos = new Requerimientos("Centro","Mejorar2",0,1000,20,4,1);
         PreCondiciones.add(aux_reRequerimientos);
