@@ -85,7 +85,10 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         Requerimiento = new Lista_de_Requerimientos();
         matriz_logica=new Matriz_Logica();
         aldea=new Aldea();
-        ald=new Aldeano[aldea.nro_aldeanos];
+        ald=new Aldeano[100];
+        for(int i=0;i<100;i++){
+              ald[i]=new Aldeano();
+        }
         System.out.println("Tamaño incial: "+vec_item_estaticos.size()+"Linea 85");
         
   //      for (int i = 0; i < aldea.nro_aldeanos; i++) {
@@ -765,7 +768,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         aldea.comida_Actual=3000;
         aldea.total_comida=4000;
         aldea.nro_aldeanos=20;
-        aldea.nro_aldeanos_disponibles=5;
+    
 
         //NIVEL 1
         
@@ -796,7 +799,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         alde.Aparecer_Aldeano(matriz_logica, x_inicial, y_inicial,17,21);
         vec_item_con_movimiento.add(alde);
        */ 
-   
+        System.out.println("nro de aldeanos disp "+aldea.nro_aldeanos_disponibles);
         for(int i=0;i<aldea.nro_aldeanos_disponibles;i++){
             ald[i]=new Aldeano();
             ald[i].currentAction="Abcaminar";
