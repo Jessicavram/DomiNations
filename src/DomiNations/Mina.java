@@ -16,22 +16,36 @@ import sprites.Hoja_Sprites;
 public class Mina extends Objetos_Animados{
 
     boolean estado;
-    boolean boton_activo;
+    boolean botonre_activo; //El boton de recoleccion esta activo
     int oro_maximo;
     int oro_actual;
-    
-   
+    Boton recolectaM;
+    boolean bloquear;
     
     Hoja_Sprites map= new Hoja_Sprites();
     public Mina(){
         
-        boton_activo=false;
-        oro_maximo=100;  
-        map.Añadir_accion("MinaVacia",0,0,59,100,1, true, 1); //mina vacia 
+        super(370,2,2,10,1);
+        botonre_activo=false;
+        oro_maximo=100;
+        bloquear=false;
+        map.Añadir_accion("MinaVacia",0,0,49,50,3,false,1); //mina vacia 
         map.Añadir_accion("MinaConOro",59,0,118,100,1,true, 1); //Minallena
        
-        animacion = new Animacion(map, "MinaConOro", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.MINA).getImage());
+        animacion = new Animacion(map, "MinaVacia", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.MINA).getImage());
     }
+    
+    public Boton HabilitarBotonRecoleccion(Objetos_Graficos objg){
+        recolectaM=new Boton(true,"MINA");
+        recolectaM.Seleccionar_Localizacion((int)(objg.getX()+20),(int)(objg.getY()+20));
+        botonre_activo=true;
+        
+        return recolectaM;
+    }
+    
+    
+    
+    
     
     public void ActualizarOro(){
     
@@ -45,5 +59,14 @@ public class Mina extends Objetos_Animados{
     public void OnCollide(Objetos_Graficos objeto_colision, int lado) {
        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public Boton getRecolectaM() {
+        return recolectaM;
+    }
+
+    public void setRecolectaM(Boton recolectaM) {
+        this.recolectaM = recolectaM;
+    }
+    
     
 }

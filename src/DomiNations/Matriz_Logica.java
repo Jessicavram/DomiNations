@@ -62,7 +62,7 @@ public class Matriz_Logica {
         if(ocupado==0){
             for (int x=fila; x < fila+alto; x++) {
                 for (int y=columna; y < columna+ancho; y++) {                 
-                    if(matriz_logica[x][y]=='1'){
+                    if(matriz_logica[x][y]=='1'||matriz_logica[x][y]=='3'){
                      //hay un obstaculo posicion ocupada para el edificio
                         ocupado=1;
                     }   
@@ -82,6 +82,12 @@ public class Matriz_Logica {
             for (int y=columna; y < columna+ancho; y++)
                 matriz_logica[x][y]='1';
     }
+    public void colocar_Recurso(int fila,int columna,int ancho,int alto){
+        for (int x=fila; x < fila+alto; x++) 
+            for (int y=columna; y < columna+ancho; y++)
+                matriz_logica[x][y]='3';
+    }
+    
     /**Transforma un coordena yx de punto, a una posicion de fila en la matriz logica 
      *@param pos_x coordenada en xx del punto 
      *@param x_inicio valor a descontar hasta donde comienza la matiz logica en la imagen */

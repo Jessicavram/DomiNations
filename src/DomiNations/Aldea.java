@@ -5,6 +5,7 @@
  */
 package DomiNations;
 
+import java.util.Random;
 import java.util.logging.Logger;
 
 public class Aldea {
@@ -82,6 +83,23 @@ public class Aldea {
         granjas_construidas =0;
         soldados_tipo_1 =0;
         soldados_tipo_2 =0;
+    }
+    public float aleatorio(double desde, double hasta){
+        Random ran = new Random();
+        float n = 100000;
+        int d = (int)(desde * n);
+        int h = (int)(hasta * n);
+        float r = ((ran.nextInt(h-d+1)+d)/n);
+        return r; 
+    }
+    public void mostrar(String x){
+        System.out.println("++++++    "+x+"   +++++++++");
+        System.out.println("+ To: "+torres_creadas);
+        System.out.println("+ Al: "+almacenes_construidos);
+        System.out.println("+ Cu: "+cuarteles_construidas);
+        System.out.println("+ Gr: "+granjas_construidas);
+        System.out.println("+ Gu: "+guarnicion_construidas);
+        System.out.println("+ Me: "+mercados_construidas);
     }
     
 }

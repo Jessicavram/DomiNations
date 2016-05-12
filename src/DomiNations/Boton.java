@@ -18,19 +18,32 @@ public class Boton extends Objetos_Animados{
     public String Nombre;
     public Boton(){}
     
-    public Boton(boolean recolecta){
+    /*un constructor que me permite crear un boton para recolectar y para actualizar*/
+    public Boton(boolean recolecta,String Nombre){
+        this.Nombre=Nombre;
         Hoja_Sprites map= new Hoja_Sprites();
         
-        map.Añadir_accion("recolectar",0,0,59,100,1, true, 1); //mina vacia 
-        animacion = new Animacion(map, "recolectar", Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.RECOLECTAR).getImage());
-    }
+        if(this.Nombre.compareTo("MINA")==0||this.Nombre.compareTo("ARBOL")==0){
+        map.Añadir_accion(this.Nombre,0,0,59,100,1, true, 1); //mina vacia 
+        animacion = new Animacion(map, this.Nombre, Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.RECOLECTAR).getImage());
+        }
+        if(this.Nombre.compareTo("TORREA")==0){
+        map.Añadir_accion(this.Nombre,0,0,59,100,1, true, 1); //mina vacia 
+        animacion = new Animacion(map, this.Nombre, Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.ACTUALIZAR).getImage());
+        }
+      }
     public Boton(String nombre){
         Nombre=nombre;
         Hoja_Sprites map= new Hoja_Sprites();
         //Definir las acciones en la hoja de sprites
         if(Nombre.compareTo("Tienda")==0){
             map.Añadir_accion(Nombre, 0, 0, 75, 50, 1, true, 1); 
+        }else if(Nombre.compareTo("MINA")==0||Nombre.compareTo("ARBOL")==0){
+            map.Añadir_accion(this.Nombre,0,0,59,100,1, true, 1);
+        
         }else if(Nombre.compareTo("X-Cuartel")==0){
+            map.Añadir_accion(Nombre, 248, 181, 273, 206, 1, true, 1); 
+        }else if(Nombre.compareTo("X-Batalla")==0){
             map.Añadir_accion(Nombre, 248, 181, 273, 206, 1, true, 1); 
         }
         if(Nombre.compareTo("Cuartel0")==0){

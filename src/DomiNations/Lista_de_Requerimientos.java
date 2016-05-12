@@ -102,6 +102,15 @@ public class Lista_de_Requerimientos {
         aux_reRequerimientos = new Requerimientos("Soldado2","Mejorar3",0,1000,30,0,2);
         PreCondiciones.add(aux_reRequerimientos);
         
+        //Mina
+        aux_reRequerimientos = new Requerimientos("Mina","Recolectar",0,0,10,1,0);
+        PreCondiciones.add(aux_reRequerimientos);
+        
+        //Arbol
+        aux_reRequerimientos = new Requerimientos("Arbol","Recolectar",0,0,5,1,0);
+        PreCondiciones.add(aux_reRequerimientos);
+        
+        
     }
     public Requerimientos buscar_requerimiento(String nom_item, int nivel){
         Requerimientos obj = null;

@@ -32,6 +32,10 @@ public class Estadisticas extends JWindow
     JScrollPane scroll;
     int pos;
     
+    public Estadisticas(){
+    
+    }
+    
     public Estadisticas(int o, int c, int ad,int ot, int ct, int a)
     {
         super();
@@ -130,7 +134,8 @@ public class Estadisticas extends JWindow
         {
            if(l.tiempo==tiempo ){
                if(l.evento_ocurrio==0){
-               System.out.println("Ocurrio el evento "+l.descripcion);               
+               System.out.println("Ocurrio el evento "+l.descripcion);   
+               
                l.evento_ocurrio=1;
                return l.posicion;
                
@@ -140,6 +145,48 @@ public class Estadisticas extends JWindow
         return -1;
      
     }
+    
+    public Estadisticas ConsultarRecursos_LEF(int tiempo, Estadisticas e){
+     
+        for (LEF l : listaLEF)
+        {
+           if(l.tiempo==tiempo ){
+               if(l.evento_ocurrio==0){
+               System.out.println("Ocurrio el evento "+l.descripcion);   
+               if(l.descripcion.compareTo("Mina")==0){
+                   System.out.println("AQUIIII");
+               }
+              
+               l.evento_ocurrio=1;
+               return e;
+               
+               }
+           }
+        }
+        return null;
+    }
+    
+    
+    
+    
+      public int ConsultarTiempoEvento_LEF(String descripcion){
+        for (LEF l : listaLEF)
+        {
+           if(l.descripcion.compareTo(descripcion)==0){
+               if(l.evento_ocurrio==0){
+               System.out.println("Ocurrio el evento "+l.descripcion);               
+               l.evento_ocurrio=1;
+               return l.tiempo;
+               
+               }
+           }
+        }
+        return -1;
+     
+    }
+    
+  
+    
     public void setOro(int o)
     {
         oro=o;
@@ -168,6 +215,18 @@ public class Estadisticas extends JWindow
     public void setComidaTotal(int ct)
     {
         comida_total=ct;
+        et2.setText("Comida: "+comida+"/"+comida_total);
+    }
+    
+    public void setOro_Actual(int ot)
+    {
+        oro=ot;
+        et1.setText("Oro: "+oro+"/"+oro_total);
+    }
+    
+    public void setComida_Actual(int ct)
+    {
+        comida=ct;
         et2.setText("Comida: "+comida+"/"+comida_total);
     }
     

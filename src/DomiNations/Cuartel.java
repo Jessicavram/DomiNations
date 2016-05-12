@@ -34,7 +34,7 @@ public class Cuartel extends Objetos_Animados{
     int tiempo_entrenamiento;
     
     public Cuartel(){              
-        super(1000, 3, 2, 10, 4); 
+        super(1000, 6, 2, 10, 4); 
         //Definir las acciones en la hoja de sprites
         //Son 10 imagenes pero coloco 9 porque como no repite el coloca la imagen 9+1
         map.Añadir_accion("Construir1", 0,0,75,67, 9, false, 1);
