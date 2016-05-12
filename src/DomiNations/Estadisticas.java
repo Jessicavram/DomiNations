@@ -139,6 +139,9 @@ public class Estadisticas extends JWindow
         }
      
     }
+    
+  
+    
     public void setOro(int o)
     {
         oro=o;

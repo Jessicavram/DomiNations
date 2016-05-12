@@ -18,7 +18,9 @@ public class Boton extends Objetos_Animados{
     public String Nombre;
     public Boton(){}
     
-    public Boton(boolean recolecta){
+    /*un constructor que me permite crear un boton para recolectar*/
+    public Boton(boolean recolecta,String Nombre){
+        this.Nombre=Nombre;
         Hoja_Sprites map= new Hoja_Sprites();
         
         map.Añadir_accion("recolectar",0,0,59,100,1, true, 1); //mina vacia 
