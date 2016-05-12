@@ -43,8 +43,11 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
     String elemento="";
     /* Registra el item a contruir**/
     Objetos_Graficos item;
-     boolean edoElemento=false;
-     
+    boolean edoElemento=false;
+    /** Tiempo de la proxima batalla*/
+    int proxima_batalla;
+    /**Batalla*/
+    Batalla batalla;
     Aldea aldea; 
     
     /**Estado de la escena*/
@@ -137,6 +140,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                 e.panel.repaint();
            }
         }else if(elemento.compareTo("Almacen0")==0){
+            tiempo_proxima_batalla();
                 //Insertando almacen
            Almacen alm= new Almacen();
            Requerimientos r = Requerimiento.buscar_requerimiento("Almacen",0);
@@ -345,6 +349,30 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             aldea.total_comida+=granja.capacidad_comida;
             e.setComidaTotal(aldea.total_comida);
         }
+        if(obj instanceof Torre)
+        {
+            Torre torre = (Torre)obj;
+            Requerimientos r = Requerimiento.buscar_requerimiento("Torre",0);
+            aldea.nro_aldeanos_disponibles+=r.nro_aldeanos_requeridos;
+            e.setAldeanosDisponibles(aldea.nro_aldeanos_disponibles);  
+            e.setComidaTotal(aldea.total_comida);
+        }
+        else if(obj instanceof Cuartel)
+        {
+            Cuartel cuartel = (Cuartel)obj;
+            Requerimientos r = Requerimiento.buscar_requerimiento("Cuartel",0);
+            aldea.nro_aldeanos_disponibles+=r.nro_aldeanos_requeridos;
+            e.setAldeanosDisponibles(aldea.nro_aldeanos_disponibles);  
+            e.setComidaTotal(aldea.total_comida);
+        }else if(obj instanceof Guarnicion)
+        {
+            Guarnicion guar = (Guarnicion)obj;
+            Requerimientos r = Requerimiento.buscar_requerimiento("Guarnicion",0);
+            aldea.nro_aldeanos_disponibles+=r.nro_aldeanos_requeridos;
+            e.setAldeanosDisponibles(aldea.nro_aldeanos_disponibles);  
+            e.setComidaTotal(aldea.total_comida);
+        }
+        
         e.panel.repaint();
     }
     
@@ -624,7 +652,12 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
        if (Motor_Juego.cont%50==0){
            actualizar_tiempos_cuartel();
        }
-       if(pos_obj!=-1)System.out.println("Pos:"+pos_obj+"Tam: "+vec_item_estaticos.size()+"LINEA 610");
+       //Es tiempo de una batalla
+       if(pos_obj==-5){
+           //batalla = new Batalla(aldea);
+           //batalla.aldea.mostrar();
+           aldea.mostrar();
+       }
        if(pos_obj>=0 && pos_obj<vec_item_estaticos.size())
        {
            actualizar_valores(vec_item_estaticos.get(pos_obj));
@@ -994,7 +1027,11 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
     }
     
     
-    
+    public void tiempo_proxima_batalla(){
+        //e.insertar_LEF(new LEF("Batalla", (int) ((Motor_Juego.cont/50)+aldea.aleatorio(60, 150)),-1));
+        e.insertar_LEF(new LEF("Batalla", (int) ((Motor_Juego.cont/50)+10),-5));
+        aldea.mostrar();
+    }
     
 
 }

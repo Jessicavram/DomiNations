@@ -37,7 +37,7 @@ public class Batalla {
         aldea= ald;
         total_soldados_aldea= aldea.soldados_tipo_1 + aldea.soldados_tipo_2;
         //Generar el tiempo de batalla
-        tiempo_batalla= (int)aleatorio(30,150);
+        tiempo_batalla= (int)aldea.aleatorio(30,150);
 
         //Sumatoria de unidades de batalla
         unidades_de_defensa = aldea.torres_creadas + (aldea.guarnicion_construidas*4*((int)(tiempo_batalla/20)))+total_soldados_aldea;
@@ -45,7 +45,7 @@ public class Batalla {
         //Sumatoria de edificios
         sumatoria_edificios = aldea.torres_creadas + aldea.guarnicion_construidas + aldea.almacenes_construidos + aldea.cuarteles_construidas + aldea.granjas_construidas + aldea.mercados_construidas;
         //Generar el ejercito atacante
-        total_soldados_generados = (int)(aleatorio(0,1)*unidades_de_defensa);
+        total_soldados_generados = (int)(aldea.aleatorio(0.1,1)*unidades_de_defensa);
 
         //Condicional para generar destruccion
         if(total_soldados_generados/total_soldados_aldea >= 5){
@@ -57,54 +57,47 @@ public class Batalla {
 
         }else if (4 <= total_soldados_generados/total_soldados_aldea && total_soldados_generados/total_soldados_aldea <5) {
             nivel_destruccion = "Destrucción Media";
-            unidades_destruidas = (int)(sumatoria_edificios * aleatorio(.6,.9));
+            unidades_destruidas = (int)(sumatoria_edificios * aldea.aleatorio(.6,.9));
             soldados_aniquilados = total_soldados_aldea;
             oro_robado = (int)(aldea.oro_Actual/3);
             comida_robada = (int)(aldea.comida_Actual/3);
 
         }else if (2 <= total_soldados_generados/total_soldados_aldea && total_soldados_generados/total_soldados_aldea <4) {
             nivel_destruccion = "Destrucción Baja";
-            unidades_destruidas = (int)(sumatoria_edificios * aleatorio(.5,.8));
+            unidades_destruidas = (int)(sumatoria_edificios * aldea.aleatorio(.5,.8));
             soldados_aniquilados = total_soldados_aldea;
             oro_robado = (int)(aldea.oro_Actual/4);
             comida_robada = (int)(aldea.comida_Actual/4);
 
         }else if (1.5 <= total_soldados_generados/total_soldados_aldea && total_soldados_generados/total_soldados_aldea < 2) {
             nivel_destruccion = "Victoria con grandes perdidas";
-            unidades_destruidas = (int)(sumatoria_edificios * aleatorio(.2,.4));
+            unidades_destruidas = (int)(sumatoria_edificios * aldea.aleatorio(.2,.4));
             soldados_aniquilados = total_soldados_aldea;
             oro_robado = (int)(aldea.oro_Actual/5);
             comida_robada = (int)(aldea.comida_Actual/5);
 
         }else if (0.9 <= total_soldados_generados/total_soldados_aldea && total_soldados_generados/total_soldados_aldea< 1.5) {
             nivel_destruccion = "Victoria forzada";
-            unidades_destruidas = (int)(sumatoria_edificios * aleatorio(.05,.4));
-            soldados_aniquilados = (int)(total_soldados_aldea * aleatorio(.8,1));
+            unidades_destruidas = (int)(sumatoria_edificios * aldea.aleatorio(.05,.4));
+            soldados_aniquilados = (int)(total_soldados_aldea * aldea.aleatorio(.8,1));
             oro_robado = (int)(aldea.oro_Actual/6);
             comida_robada = (int)(aldea.comida_Actual/6);
 
         }else if (0.4 <= total_soldados_generados/total_soldados_aldea && total_soldados_generados/total_soldados_aldea<0.9){
             nivel_destruccion = "Victoria con pequeños daños";
-            unidades_destruidas = (int)(sumatoria_edificios * aleatorio(.4,.7));
-            soldados_aniquilados = (int)(total_soldados_aldea * aleatorio(.6,1));
+            unidades_destruidas = (int)(sumatoria_edificios * aldea.aleatorio(.4,.7));
+            soldados_aniquilados = (int)(total_soldados_aldea * aldea.aleatorio(.6,1));
             oro_robado = (int)(aldea.oro_Actual/7);
             comida_robada = (int)(aldea.comida_Actual/7);
         }else{
             nivel_destruccion = "Victoria aplastante";
-            unidades_destruidas = (int)(sumatoria_edificios * aleatorio(.0,.1));
-            soldados_aniquilados = (int)(total_soldados_aldea * aleatorio(.2,.6));
+            unidades_destruidas = (int)(sumatoria_edificios * aldea.aleatorio(.0,.1));
+            soldados_aniquilados = (int)(total_soldados_aldea * aldea.aleatorio(.2,.6));
             oro_robado = 0;
             comida_robada = 0;
         }
     }
-    public float aleatorio(double desde, double hasta){
-        Random ran = new Random();
-        float n = 100000;
-        int d = (int)(desde * n);
-        int h = (int)(hasta * n);
-        float r = ((ran.nextInt(h-d+1)+d)/n);
-        return r; 
-    }
+    
     public void descontar_edificios_destruidos(int cantidad){
         Random ran = new Random();
         if (cantidad >= aldea.torres_creadas) {
