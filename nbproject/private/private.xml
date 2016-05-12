@@ -2,6 +2,15 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group/>
+=======
+        <group>
+            <file>file:/C:/Users/Jessica/Documents/NetBeansProjects/dominations/DomiNations/src/DomiNations/Estadisticas.java</file>
+            <file>file:/C:/Users/Jessica/Documents/NetBeansProjects/dominations/DomiNations/src/DomiNations/Aldea.java</file>
+            <file>file:/C:/Users/Jessica/Documents/NetBeansProjects/dominations/DomiNations/src/DomiNations/Escena.java</file>
+            <file>file:/C:/Users/Jessica/Documents/NetBeansProjects/dominations/DomiNations/src/DomiNations/Centro.java</file>
+        </group>
+>>>>>>> f6d8d200bb2691460b955c247afb02e158a7068a
     </open-files>
 </project-private>

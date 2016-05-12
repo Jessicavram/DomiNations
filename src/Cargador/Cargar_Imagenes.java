@@ -12,7 +12,7 @@ public class Cargar_Imagenes {
     protected ImageIcon vec_imagenes[];
     /**Constante que nos indica el total de imagenes a cargar, que seria la suma de cada una de las constantes*/
 
-    protected static final int TOTAL_IMAGENES=40;
+    protected static final int TOTAL_IMAGENES=41;
 
     /**Constante para conocer el nombre de la imagen que contiene la animacion de los enemigos*/
     public static final int ENEMIGOS=0;
@@ -95,6 +95,9 @@ public class Cargar_Imagenes {
     public static final int RECOLECTAR=38;
     
      public static final int ACTUALIZAR=39;
+
+    public static final int BATALLA=40;
+
     /**Constructor de la clase, privado para usar la instancia y solo poder crearse un objeto de la clase, es usado para cargar
     /* el vector de imagenes a travez de la dirreccion url de cada una de las imagenes con ayuda de las constantes */
     private Cargar_Imagenes() {
@@ -103,7 +106,10 @@ public class Cargar_Imagenes {
 
         ,"bowser","fuego","creditos","creditos_img","fondo_aldea","cuartel","centro","fondo1","soldado1",
         "mercado","torre","guarnicion","almacen","casa","granja","boton","recuadro","arboles","mina","aldeano",
-        "Cuartel_Entrenar","soldado2","soldado3","soldado4","recolectar","actualizar.png"};
+
+        "Cuartel_Entrenar","soldado2","soldado3","soldado4","recolectar","actualizar.png","batalla"};
+
+
         vec_imagenes = new ImageIcon[TOTAL_IMAGENES];
         for(int i=0;i<TOTAL_IMAGENES;i++){
             try {
