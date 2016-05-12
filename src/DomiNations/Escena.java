@@ -634,11 +634,13 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         g.fillRect(0,0,80,15);
         g.setColor(Color.RED);
         g.drawString( "Tiempo: "+(Motor_Juego.cont/50) , 0, 10);
-        g.setColor(Color.black);
-        g.fillRect(550,0,780,30);
-        g.setColor(Color.white);
-        g.drawString( "Tiempo Proxim Batalla: "+proxima_batalla , 600, 15);
         
+        if(proxima_batalla>0){
+            g.setColor(Color.black);
+            g.fillRect(550,0,780,30);
+            g.setColor(Color.white);
+            g.drawString( "Tiempo Proxim Batalla: "+proxima_batalla , 600, 15);
+        }
         if(Ventana_cuartel){
             actualizar_cuartel_entrenar(vec_item_estaticos.get(posicion_Cuartel), g);
         }
@@ -992,139 +994,135 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         Mina m=new Mina();
         Arbol a=new Arbol();
         Soldado soldado1;
+        if(!ventana_batalla){
+            for(int i=0;i<vec_item_estaticos.size() && !Ventana_tienda;i++){
+                dinamico = vec_item_estaticos.get(i); 
+                if((pos_x > dinamico.x && pos_x < dinamico.x + dinamico.Obtener_Ancho()) && (pos_y > dinamico.y && pos_y < dinamico.y + dinamico.Obtener_Alto())){
 
-        for(int i=0;i<vec_item_estaticos.size() && !Ventana_tienda;i++){
-            dinamico = vec_item_estaticos.get(i); 
-            if((pos_x > dinamico.x && pos_x < dinamico.x + dinamico.Obtener_Ancho()) && (pos_y > dinamico.y && pos_y < dinamico.y + dinamico.Obtener_Alto())){
-                               
-                if(dinamico instanceof Cuartel){
-                    crear_cuartel_entrenar((Cuartel)dinamico);
-                    Ventana_cuartel=true;
-                    posicion_Cuartel=i;
-                }else if(dinamico instanceof Torre){
-                    System.out.println("Selecciono Torre");
-                    RecolectarRecursos(dinamico);
-                }else if(dinamico instanceof Guarnicion){
-                    System.out.println("Selecciono Guarnicion");
-                }else if(dinamico instanceof Almacen){
-                    System.out.println("Selecciono Almacen");
-                }else if(dinamico instanceof Casa){
-                    System.out.println("Selecciono Casa");
-                }else if(dinamico instanceof Centro){
-                    System.out.println("Selecciono Centro");
-                }else if(dinamico instanceof Mercado){
-                    System.out.println("Selecciono Mercado");
-                }else if(dinamico instanceof Granja){
-                    System.out.println("Selecciono Granaja");
-                }else if(dinamico instanceof Mina){
-                    System.out.println("Selecciono mina");
-                    RecolectarRecursos(dinamico);
-                }else if(dinamico instanceof Arbol){
-                    RecolectarRecursos(dinamico);
-                    System.out.println("Selecciono arbol");
-                }else if(dinamico instanceof Boton){            
-                    b=(Boton)dinamico;
-                   if(b.Nombre.compareTo("MINA")==0){
-                      
-                       System.out.println("Selecciono Boton Mina");
-                           m=BuscarMina();                    
-                           Requerimientos r = Requerimiento.buscar_requerimiento("Mina",0);
-                           if(aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos){
-                            aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
-                            e.setAldeanosDisponibles(aldea.nro_aldeanos_disponibles);
-                              int t_obtencionRecursoM=(Motor_Juego.cont/50)+m.tiempo;
-                               e.insertar_LEF(new LEF("mas ORO", t_obtencionRecursoM,e.pos));
-                              Motor_Fisico.getInstance().borrar_animado(BuscarMina().recolectaM);
-                              vec_item_estaticos.remove(BuscarMina().recolectaM);
-                              m.botonre_activo=false;
-                              m.bloquear=true;
-                              
-                           //   ActualizarRecursosLEF(t_obtencionRecursoM,(Objetos_Graficos)(Objetos_Animados)m);
-                             e.panel.repaint();
-                         
-                         }
-                     
-                   }else if(b.Nombre.compareTo("ARBOL")==0){
-                       System.out.println("Selecciono Boton Arbol");
-                       
-                           a=BuscarArbol();
-                          
-                           Requerimientos r = Requerimiento.buscar_requerimiento("Arbol",0);
-                           if(aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos){
-                            aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
-                            e.setAldeanosDisponibles(aldea.nro_aldeanos_disponibles);
-                            
-                            
-                              int t_obtencionRecursoA=(Motor_Juego.cont/50)+a.tiempo;
-                
-                             e.insertar_LEF(new LEF("mas COMIDA", t_obtencionRecursoA,e.pos));
-                             
-                              Motor_Fisico.getInstance().borrar_animado(BuscarArbol().recolectarA);
-                              
-                              vec_item_estaticos.remove(BuscarArbol().recolectarA);
-                              a.botonre_activo=false;
-                              
-                         //     ActualizarRecursosLEF(t_obtencionRecursoA,(Objetos_Graficos)(Objetos_Animados)a);
-                       
-                   }
-                    
-                    
+                    if(dinamico instanceof Cuartel){
+                        crear_cuartel_entrenar((Cuartel)dinamico);
+                        Ventana_cuartel=true;
+                        posicion_Cuartel=i;
+                    }else if(dinamico instanceof Torre){
+                        System.out.println("Selecciono Torre");
+                        RecolectarRecursos(dinamico);
+                    }else if(dinamico instanceof Guarnicion){
+                        System.out.println("Selecciono Guarnicion");
+                    }else if(dinamico instanceof Almacen){
+                        System.out.println("Selecciono Almacen");
+                    }else if(dinamico instanceof Casa){
+                        System.out.println("Selecciono Casa");
+                    }else if(dinamico instanceof Centro){
+                        System.out.println("Selecciono Centro");
+                    }else if(dinamico instanceof Mercado){
+                        System.out.println("Selecciono Mercado");
+                    }else if(dinamico instanceof Granja){
+                        System.out.println("Selecciono Granaja");
+                    }else if(dinamico instanceof Mina){
+                        System.out.println("Selecciono mina");
+                        RecolectarRecursos(dinamico);
+                    }else if(dinamico instanceof Arbol){
+                        RecolectarRecursos(dinamico);
+                        System.out.println("Selecciono arbol");
+                    }else if(dinamico instanceof Boton){            
+                        b=(Boton)dinamico;
+                        if(b.Nombre.compareTo("MINA")==0){                      
+                            System.out.println("Selecciono Boton Mina");
+                            m=BuscarMina();                    
+                            Requerimientos r = Requerimiento.buscar_requerimiento("Mina",0);
+                            if(aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos){
+                                aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
+                                e.setAldeanosDisponibles(aldea.nro_aldeanos_disponibles);
+                                int t_obtencionRecursoM=(Motor_Juego.cont/50)+m.tiempo;
+                                e.insertar_LEF(new LEF("mas ORO", t_obtencionRecursoM,e.pos));
+                                Motor_Fisico.getInstance().borrar_animado(BuscarMina().recolectaM);
+                                vec_item_estaticos.remove(BuscarMina().recolectaM);
+                                m.botonre_activo=false;
+                                m.bloquear=true;
+
+                                //ActualizarRecursosLEF(t_obtencionRecursoM,(Objetos_Graficos)(Objetos_Animados)m);
+                                e.panel.repaint();                        
+                            }
+
+                       }else if(b.Nombre.compareTo("ARBOL")==0){
+                            System.out.println("Selecciono Boton Arbol");                       
+                            a=BuscarArbol();                          
+                            Requerimientos r = Requerimiento.buscar_requerimiento("Arbol",0);
+                            if(aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos){
+                                aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
+                                e.setAldeanosDisponibles(aldea.nro_aldeanos_disponibles);
+                                int t_obtencionRecursoA=(Motor_Juego.cont/50)+a.tiempo;
+                                e.insertar_LEF(new LEF("mas COMIDA", t_obtencionRecursoA,e.pos));
+                                Motor_Fisico.getInstance().borrar_animado(BuscarArbol().recolectarA);
+                                vec_item_estaticos.remove(BuscarArbol().recolectarA);
+                                a.botonre_activo=false;                              
+                             //     ActualizarRecursosLEF(t_obtencionRecursoA,(Objetos_Graficos)(Objetos_Animados)a);
+
+                            }   
+                        }    
+                    }
                 }
-                
-              
             }
-            
-            
+
+            if(agregar_elemento==true){      
+                for(int i=0;i<vec_item_estaticos.size();i++){
+                    dinamico=vec_item_estaticos.get(i);
+                    if(dinamico instanceof Recuadro){
+                        vec_item_estaticos.remove(i);
+                    } 
+                } 
+                Cargar_Sonidos.obtener_instancia().Reproducir_pistas(Cargar_Sonidos.INICIAR_CONSTRUCCION, false, false);//
+                AgregarElementosAldea(evento.getX(),evento.getY());
+                agregar_elemento=false;        
             }
-        }
-        
-     if(agregar_elemento==true){        
-            
-            
-            for(int i=0;i<vec_item_estaticos.size();i++){//
-                dinamico=vec_item_estaticos.get(i);//
-                if(dinamico instanceof Recuadro){//
-                    vec_item_estaticos.remove(i);//
-                } //
-            }  //
-            Cargar_Sonidos.obtener_instancia().Reproducir_pistas(Cargar_Sonidos.INICIAR_CONSTRUCCION, false, false);//
-            
-            AgregarElementosAldea(evento.getX(),evento.getY());
-            agregar_elemento=false;        
-        }
-        
-        for(int i=2;i<vec_botones.size() && (Ventana_tienda || Ventana_cuartel);i++){
-            dinamico = vec_botones.get(i);
-            b=(Boton)vec_botones.get(i);
-            if((pos_x > dinamico.x && pos_x < dinamico.x + dinamico.Obtener_Ancho()) && (pos_y > dinamico.y && pos_y < dinamico.y + dinamico.Obtener_Alto()))
-            {    if(b.Nombre.equals("X-Cuartel"))
-                {   Ventana_cuartel=false;
-                    borrar_botones();
-                }else if(!b.Nombre.substring(0,2).equals("NO") && b.Nombre.length()>7 && b.Nombre.substring(0,7).equals("Soldado")){
-                    Cuartel aux = (Cuartel)vec_item_estaticos.get(posicion_Cuartel);    
-                    Requerimientos r;                    
-                        if (b.Nombre.equals("Soldado1")) {
-                            aux.nro_soldado1_cola++;                            
-                            Soldado sol1 = new Soldado();
-                            aux.tiempo_entrenamiento+=sol1.tiempo;
-                            r = Requerimiento.buscar_requerimiento("Soldado1",0);
-                            aldea.comida_Actual-=r.costo_comida;
-                            e.setComida(aldea.comida_Actual);
-                            e.insertar_LEF(new LEF("Soldado",((Motor_Juego.cont/50)+aux.tiempo_entrenamiento),e.pos));
-                            e.panel.repaint();
-                        }else{
-                            aux.nro_soldado2_cola++;
-                            Soldado2 sol2 = new Soldado2();
-                            aux.tiempo_entrenamiento+=sol2.tiempo;
-                            r = Requerimiento.buscar_requerimiento("Soldado2",0);
-                            aldea.comida_Actual-=r.costo_comida;
-                            e.setComida(aldea.comida_Actual);
-                            e.insertar_LEF(new LEF("Artillero",((Motor_Juego.cont/50)+aux.tiempo_entrenamiento),e.pos));
-                            e.panel.repaint();
-        
-        
-    }
+
+            for(int i=2;i<vec_botones.size() && (Ventana_tienda || Ventana_cuartel);i++){
+                dinamico = vec_botones.get(i);
+                b=(Boton)vec_botones.get(i);
+                if((pos_x > dinamico.x && pos_x < dinamico.x + dinamico.Obtener_Ancho()) && (pos_y > dinamico.y && pos_y < dinamico.y + dinamico.Obtener_Alto()))
+                {    if(b.Nombre.equals("X-Cuartel"))
+                    {   Ventana_cuartel=false;
+                        borrar_botones();
+                    }else if(!b.Nombre.substring(0,2).equals("NO") && b.Nombre.length()>7 && b.Nombre.substring(0,7).equals("Soldado")){
+                        Cuartel aux = (Cuartel)vec_item_estaticos.get(posicion_Cuartel);    
+                        Requerimientos r;                    
+                            if (b.Nombre.equals("Soldado1")) {
+                                aux.nro_soldado1_cola++;                            
+                                Soldado sol1 = new Soldado();
+                                aux.tiempo_entrenamiento+=sol1.tiempo;
+                                r = Requerimiento.buscar_requerimiento("Soldado1",0);
+                                aldea.comida_Actual-=r.costo_comida;
+                                e.setComida(aldea.comida_Actual);
+                                e.insertar_LEF(new LEF("Soldado",((Motor_Juego.cont/50)+aux.tiempo_entrenamiento),e.pos));
+                                e.panel.repaint();
+                            }else{
+                                aux.nro_soldado2_cola++;
+                                Soldado2 sol2 = new Soldado2();
+                                aux.tiempo_entrenamiento+=sol2.tiempo;
+                                r = Requerimiento.buscar_requerimiento("Soldado2",0);
+                                aldea.comida_Actual-=r.costo_comida;
+                                e.setComida(aldea.comida_Actual);
+                                e.insertar_LEF(new LEF("Artillero",((Motor_Juego.cont/50)+aux.tiempo_entrenamiento),e.pos));
+                                e.panel.repaint(); 
+                            }
+                            aux.soldados_en_cola= (aux.nro_soldado1_cola+aux.nro_soldado2_cola==0 ? 0 : (aux.nro_soldado1_cola+aux.nro_soldado2_cola-1));
+                            vec_item_estaticos.set(posicion_Cuartel, aux);
+                            borrar_botones();
+                            crear_cuartel_entrenar(aux);
+                    }else if(!b.Nombre.substring(0,2).equals("NO")){
+                        elemento=b.Nombre;  
+                        item = Tipo_Item(elemento);
+                        System.out.println(b.Nombre);
+                        agregar_elemento=true;
+                        Ventana_tienda=false; 
+                    }
                 }
+            }
+        }else{
+            if(evento.getX()>=675 && evento.getX()<=702 && (evento.getY()>=30 && evento.getY()<=63)){
+                ventana_batalla=false;
+                vec_objetos_fondo.remove(vec_objetos_fondo.size()-1);
+                tiempo_proxima_batalla();
             }
         }
     }
@@ -1246,9 +1244,11 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
     }
        
     public void tiempo_proxima_batalla(){
-        proxima_batalla=(int) ((Motor_Juego.cont/50)+aldea.aleatorio(60, 150));
-        e.insertar_LEF(new LEF("Batalla",proxima_batalla ,-1));
-        //proxima_batalla=(int) ((Motor_Juego.cont/50)+1);
+        proxima_batalla= (int)(aldea.aleatorio(60, 150));
+        //proxima_batalla=(int) ((Motor_Juego.cont/50)+aldea.aleatorio(60, 150));
+        proxima_batalla=10;
+        e.insertar_LEF(new LEF("Batalla",(int)((Motor_Juego.cont/50)+proxima_batalla) ,-5));
+        proxima_batalla++;
         //e.insertar_LEF(new LEF("Batalla",proxima_batalla ,-5));
     }
     public void mostrar_estadistica_batalla(){
