@@ -307,7 +307,17 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         }
         
     }
-    
+    public void actualizar_valores_cuartel(Objetos_Graficos obj, String tipo){
+        if(obj instanceof Cuartel)
+        {
+            
+            Cuartel cuartel = (Cuartel)obj;
+            if(tipo.equals("Soldado"))
+                cuartel.nro_soldado1++;
+            else if(tipo.equals("Artillero"))
+                cuartel.nro_soldado2++;            
+        }
+    }
     public void actualizar_valores(Objetos_Graficos obj)
     {
         if(obj instanceof Centro)
@@ -505,10 +515,14 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                         if(cuartel.nro_soldado1_cola>0){
                             cuartel.nro_soldado1_cola--;
                             cuartel.nro_soldado1++;
+                            aldea.soldados_tipo_1++;
                         }else if(cuartel.nro_soldado2_cola>0){
                             cuartel.nro_soldado2_cola--;
                             cuartel.nro_soldado2++;
+                            aldea.soldados_tipo_2++;
+                            
                         }
+                        System.out.println("CUARTEL: S1:"+cuartel.nro_soldado1+" S2:"+cuartel.nro_soldado2+"Linea 522 esce");
                     }
                     cuartel.tiempo_entrenamiento--;
                     vec_item_estaticos.set(i, cuartel);                   
@@ -552,6 +566,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
     }
     public void actualizar_cuartel_entrenar(Objetos_Graficos aux, Graphics g){        
         Cuartel cuartel= (Cuartel)(aux);
+        g.setColor(Color.black);
         g.drawString( ""+cuartel.soldados_en_cola,395,499);
         g.drawString( ""+cuartel.nro_soldado1_cola,300,553);
         g.drawString( ""+cuartel.nro_soldado2_cola,364,553);
@@ -561,18 +576,21 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
             g.drawString( ""+cuartel.tiempo_entrenamiento,461,527);   
     }
     public void actualizar_estadistica_batalla(Graphics g){ 
-        g.drawString( ""+batalla.aldea_batalla.almacenes_construidos,155,140);
-        g.drawString( ""+batalla.aldea_batalla.guarnicion_construidas,300,140);
-        g.drawString( ""+batalla.aldea_batalla.cuarteles_construidas,155,252);
-        g.drawString( ""+batalla.aldea_batalla.mercados_construidas,300,252);
-        g.drawString( ""+batalla.aldea_batalla.granjas_construidas,155,366);
-        g.drawString( ""+batalla.aldea_batalla.torres_creadas,300,366);
-        g.drawString( ""+batalla.aldea_batalla.soldados_tipo_1,155,476);
-        g.drawString( ""+batalla.aldea_batalla.soldados_tipo_2,300,476);        
-        g.drawString( ""+batalla.oro_robado,500,275);
-        g.drawString( ""+batalla.comida_robada,660,275);
-        g.drawString( ""+batalla.tiempo_batalla,585,430);
-        
+        g.drawString( ""+(aldea.almacenes_construidos-batalla.nro_almacenes),155,140);
+        g.drawString( ""+(aldea.guarnicion_construidas-batalla.nro_guarniciones),300,140);
+        g.drawString( ""+(aldea.cuarteles_construidas-batalla.nro_cuarteles),155,252);
+        g.drawString( ""+(aldea.mercados_construidas-batalla.nro_mercados),300,252);
+        g.drawString( ""+(aldea.granjas_construidas-batalla.nro_granjas),155,366);
+        g.drawString( ""+(aldea.torres_creadas-batalla.nro_torres),300,366);
+        g.drawString( ""+(aldea.soldados_tipo_1-batalla.soldado_1),155,476);
+        g.drawString( ""+(aldea.soldados_tipo_2-batalla.soldado_2),300,476);        
+        g.drawString( ""+(batalla.oro_robado),500,275);
+        g.drawString( ""+(batalla.comida_robada),660,275);        
+        g.drawString( ""+(batalla.tiempo_batalla),585,430);
+        /*
+        aldea.oro_Actual-=batalla.oro_robado;
+        aldea.comida_Actual-=batalla.comida_robada;
+        */
     }
     public Objetos_Graficos Tipo_Item(String nombre){
         String clase= nombre.substring(0, nombre.length()-1);
@@ -619,7 +637,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         for(int i=0;i<vec_item_con_movimiento.size() && !ventana_batalla;i++){            
             vec_item_con_movimiento.get(i).Dibujar(g);
         }
-        //pintan los item que tienen movimiento por la aldea_batalla 
+        //pintar boton tienda 
         if(!Ventana_tienda && !ventana_batalla)vec_botones.get(0).Dibujar(g);
         
         for(int i=1;i<vec_botones.size() && (Ventana_tienda || Ventana_cuartel) && !ventana_batalla;i++){ 
@@ -698,14 +716,12 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
            System.out.println("A-S1:"+aldea.soldados_tipo_1+" A-S2:"+aldea.soldados_tipo_2+"linea 669");
            batalla = new Batalla();
            batalla.generar(aldea);
-           batalla.aldea_batalla.mostrar("Batalla");
+           batalla.mostrar();
            aldea.mostrar("Aldea");
            System.out.println("Creadas: "+batalla.total_soldados_generados+" "+batalla.nivel_destruccion+" linea 668");
            System.out.println("A-S1:"+aldea.soldados_tipo_1+" A-S2:"+aldea.soldados_tipo_2+"linea 669");
            mostrar_estadistica_batalla();
-       }     
-       if(pos_obj!=-1)System.out.println("Pos:"+pos_obj+"Tam: "+vec_item_estaticos.size()+"LINEA 610");
-
+       }
        if(pos_obj>=0 && pos_obj<vec_item_estaticos.size())
        {
            actualizar_valores(vec_item_estaticos.get(pos_obj));
@@ -1049,6 +1065,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                             a=BuscarArbol();                          
                             Requerimientos r = Requerimiento.buscar_requerimiento("Arbol",0);
                             if(aldea.nro_aldeanos_disponibles>=r.nro_aldeanos_requeridos){
+                                System.out.println("entro seleccion");
                                 aldea.nro_aldeanos_disponibles-=r.nro_aldeanos_requeridos;
                                 e.setAldeanosDisponibles(aldea.nro_aldeanos_disponibles);
                                 int t_obtencionRecursoA=(Motor_Juego.cont/50)+a.tiempo;
@@ -1102,7 +1119,7 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
                                 r = Requerimiento.buscar_requerimiento("Soldado2",0);
                                 aldea.comida_Actual-=r.costo_comida;
                                 e.setComida(aldea.comida_Actual);
-                                e.insertar_LEF(new LEF("Artillero",((Motor_Juego.cont/50)+aux.tiempo_entrenamiento),e.pos));
+                                e.insertar_LEF(new LEF("Artillero",((Motor_Juego.cont/50)+aux.tiempo_entrenamiento),posicion_Cuartel));
                                 e.panel.repaint(); 
                             }
                             aux.soldados_en_cola= (aux.nro_soldado1_cola+aux.nro_soldado2_cola==0 ? 0 : (aux.nro_soldado1_cola+aux.nro_soldado2_cola-1));
@@ -1256,11 +1273,9 @@ public class Escena extends JPanel implements MouseListener,MouseMotionListener{
         Objetos_Inanimados obj = new Objetos_Inanimados(Cargar_Imagenes.obtener_instancia().obtener_imagen(Cargar_Imagenes.BATALLA).getImage(), new Rectangulo(0, 0, 767,592) );
         obj.Seleccionar_Localizacion(0,0);
         vec_objetos_fondo.add(obj); 
-        
-        Boton boton = new Boton("X-Cuartel");
-        boton.Seleccionar_Localizacion(720, 20);
-        vec_botones.add(boton);
         ventana_batalla=true;
+        Ventana_cuartel=false;
+        
     }
 
     @Override
